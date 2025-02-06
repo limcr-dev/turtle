@@ -1,0 +1,187 @@
+package com.spring.turtle_01.service;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.spring.turtle_01.dao.UserDAOImpl;
+import com.spring.turtle_01.dto.UserDTO;
+
+@Service
+public class UserServiceImpl implements UserService {
+	
+	@Autowired
+	private UserDAOImpl dao;
+	
+	// ID 중복확인 처리
+	@Override
+	public void idConfirmAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - idConfirmAction()");
+		
+		String userId = request.getParameter("userId");
+		
+		int selectCnt = dao.useridCheck(userId);
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("userId", userId);
+		
+	}
+	
+	// 회원가입처리
+	@Override
+	public void signInAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - signInAction()");
+		
+		UserDTO dto = new UserDTO();
+		dto.setUserId(request.getParameter("userId"));
+		dto.setUserPw(request.getParameter("userPw"));
+		dto.setUserName(request.getParameter("userName"));
+		dto.setUserBirthday(Date.valueOf(request.getParameter("userBirthday")));
+		dto.setUserAddress(request.getParameter("userAddress"));
+		
+		String userHp1 = request.getParameter("userHp1");
+		String userHp2 = request.getParameter("userHp2");
+		String userHp3 = request.getParameter("userHp3");
+		String userHp = "";
+		if(!userHp1.equals("") && !userHp2.equals("") && !userHp3.equals("")) {
+			userHp = userHp1 + "-" + userHp2 + "-" + userHp3;
+		}
+		
+		dto.setUserHp(userHp);
+		
+		String userEmail1 = request.getParameter("userEmail1");
+		String userEmail2 = request.getParameter("userEmail2");
+		String userEmail = userEmail1 + "@" + userEmail2;
+				
+		dto.setUserEmail(userEmail);
+		dto.setUserType(request.getParameter("userType"));	// 회원-U/관리자-A 구분
+		
+		int insertCnt = dao.insertUser(dto);
+		
+		model.addAttribute("insertCnt", insertCnt);
+	}
+	
+	// 로그인처리 (회원정보인증)
+	@Override
+	public void logInAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - logInAction()");
+		
+		String userId = request.getParameter("userId");
+		String userPw = request.getParameter("userPw");
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("userPw", userPw);
+
+		System.out.println("map : " + map);
+		int selectCnt = dao.idPwChk(map);
+		
+		if(selectCnt == 1) {
+			request.getSession().setAttribute("sessionID", userId);
+		}
+		
+		model.addAttribute("sessionID", userId);
+		model.addAttribute("userPw", userPw);
+		
+	}
+	
+	// 회원정보 인증후 상세페이지
+	@Override
+	public void modifyDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - modifyDetailAction()");
+		
+		String userId = (String)request.getSession().getAttribute("sessionID");
+		String userPw = request.getParameter("userPw");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("userPw", userPw);
+		
+		int selectCnt = dao.idPwChk(map);
+		
+		UserDTO dto = null;
+		
+		if(selectCnt == 1) {
+			dto = dao.userDetail(userId);
+		}
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", dto);
+		
+	}
+	
+	// 회원정보 수정 처리
+	@Override
+	public void modifyUserAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - modifyUserAction()");
+		
+		UserDTO dto = new UserDTO();
+		String userId = (String)request.getSession().getAttribute("sessionID");
+		
+		dto.setUserPw(request.getParameter("userPw"));
+		dto.setUserName(request.getParameter("userName"));
+		dto.setUserAddress(request.getParameter("userAddress"));
+		
+		String userHp1 = request.getParameter("userHp1");
+		String userHp2 = request.getParameter("userHp2");
+		String userHp3 = request.getParameter("userHp3");
+		String userHp = "";
+		if(!userHp1.equals("") && !userHp2.equals("") && !userHp3.equals("")) {
+			userHp = userHp1 + "-" + userHp2 + "-" + userHp3;
+		}
+		
+		dto.setUserHp(userHp);
+		
+		String userEmail1 = request.getParameter("userEmail1");
+		String userEmail2 = request.getParameter("userEmail2");
+		String userEmail = userEmail1 + "@" + userEmail2;
+				
+		dto.setUserEmail(userEmail);
+		
+		dto.setUserId(userId);
+		
+		int updateCnt = dao.updateUser(dto);
+		
+		model.addAttribute("updateCnt", updateCnt);
+	}
+	
+	// 회원정보 인증후 탈퇴 처리
+	@Override
+	public void deleteUserAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - deleteUserAction()");
+		
+		String userId = (String)request.getSession().getAttribute("sessionID");
+		String userPw = request.getParameter("userPw");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("userPw", userPw);
+		
+		int selectCnt = dao.idPwChk(map);
+		
+		if(selectCnt ==1 ) {
+			request.getSession().invalidate();
+		}
+		
+		int deleteCnt = dao.deleteUser(userId);
+		
+		model.addAttribute("deleteCnt", deleteCnt);
+		model.addAttribute("selectCnt", selectCnt);
+	}
+
+}
