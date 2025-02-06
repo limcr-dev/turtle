@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>main</title>
+<title>관리자 공지사항 목록</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
