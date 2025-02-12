@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/setting.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>adBoardList</title>
+<link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
+</head>
+<body>
+	<div class="wrap"> <!-- 스타일을 해주려고 class명을 지정함  -->
+		<!-- header 시작 -->
+		<%@include file= "/WEB-INF/views/common/header.jsp"%>
+		<!-- header 끝 -->
+		
+		<!-- 컨텐츠 시작 -->
+		<div id="container">
+			<div id="contents">
+				<!-- 상단 중앙1 시작 -->
+				<div>
+					<hr>
+					<h1 align="center">자유 게시판</h1>
+					<hr>
+				</div>
+				<!-- 상단 중앙1 종료 -->
+				
+				<!-- 상단 중앙2 시작 -->
+				<div id="section2">
+					
+				<!-- 좌측 메뉴 시작 -->               					
+				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
+				<!-- 좌측메뉴 종료 -->
+				<!-- 우측매뉴 시작 -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">작성자</th>
+							<th scope="col">제목</th>
+							<th scope="col">조회수</th>
+							<th scope="col">등록일자</th>
+						</tr>
+					</thead>
+					<tbody class="table-group-divider">
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>운동하기 싫어요</td>
+							<td>1000</td>
+							<td>2024.12.05</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">2</th>
+							<td>Mark</td>
+							<td>운동이 좋아요</td>
+							<td>1</td>
+							<td>2024.11.24</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">3</th>
+							<td>Mark</td>
+							<td>다이어트가 안되네요</td>
+							<td>2</td>
+							<td>2023.04.24</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<br>
+				<!-- 우측메뉴 종료 -->
+				<!-- 상단 중앙2 종료 -->
+			</div>
+			<p align="center">
+			SQL(자유게시판 목록)<br>
+			SELECT *<br>
+			FROM board_tb<br>
+			WHERE boardNo = boardNo<br>
+			AND boardShow = Y<br>
+			AND boardNo >= start<br>
+			AND boardNo <= end
+			</p>
+		</div>
+		<!-- 컨텐츠 끝 -->
+		<hr>
+		</div>
+	</div>
+<!-- footer 시작 -->
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<!-- footer 끝 -->
+</body>
+</html>

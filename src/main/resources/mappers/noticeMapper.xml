@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+     
+<mapper namespace="com.spring.turtle.dao.NoticeDAO">
+
+	<!--  공지사항 목록  -->
+	<select id="noticeList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.NoticeDTO">
+	<![CDATA[ SELECT * FROM notice_tb WHERE noticeShow = 'Y' AND noticeNo >= #{start} AND noticeNo <= #{end} ORDER BY noticeNo DESC ]]>
+	</select>
+	
+	<!--  공지사항 갯수  -->
+	<select id="noticeCnt" resultType="int"> SELECT COUNT(*) AS cnt FROM notice_tb WHERE noticeShow = 'Y' </select>
+	
+	<!--  조회수 증가  -->
+	<update id="plusReadCnt" parameterType="int"> UPDATE notice_tb SET noticeViews = noticeViews + 1 WHERE noticeNo = #{noticeNo} </update>
+	
+	<!--  공지사항 상세페이지  -->
+	<select id="getNoticeDetail" parameterType="int" resultType="com.spring.turtle.dto.NoticeDTO"> SELECT * FROM notice_tb WHERE noticeNo = #{noticeNo} </select>
+	
+	<!--  공지사항 작성  -->
+	<insert id="insertNotice" parameterType="com.spring.turtle.dto.NoticeDTO"> INSERT INTO notice_tb (noticeNo, noticeWriter, noticeTitle, noticeContent) VALUES((SELECT NVL(MAX(noticeNo) + 1, 1)FROM notice_tb), #{noticeWriter}, #{noticeTitle}, #{noticeContent}) </insert>
+	
+	<!--  공지사항 수정  -->
+	<update id="updateNotice" parameterType="com.spring.turtle.dto.NoticeDTO"> UPDATE notice_tb SET noticeWriter = #{noticeWriter}, noticeTitle = #{noticeTitle}, noticeContent = #{noticeContent} WHERE noticeNo = #{noticeNo} </update>
+	
+	<!--  공지사항 삭제  -->
+	<update id="deleteNotice" parameterType="int"> UPDATE notice_tb SET noticeShow = 'N' WHERE noticeNo = #{noticeNo} </update>
+	
+	</mapper>
