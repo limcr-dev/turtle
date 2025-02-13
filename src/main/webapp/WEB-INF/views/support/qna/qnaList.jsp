@@ -59,8 +59,7 @@ td a {
 			
 		<hr>
 		<h3 align="center">1대1 문의</h3>
-		<br>
-		<br>
+		<br><br>
 			
 		<!-- 문의목록 시작 -->
 		<table class="table" style="width:1000px; margin:auto;">
@@ -83,11 +82,13 @@ td a {
 			        <td>${dto.qnaStatus}</td>
 			    </tr>
 			    </c:forEach>
-			    <tr>
-			  		<td colspan="5" class="text-end">
-			  			 <button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaInsert">문의하기</button>
-			  		</td>
-				</tr>
+			    <c:if test="${sessionScope.sessionType != 'admin' && sessionScope.sessionType != 'trainer'}">
+				    <tr>
+				  		<td colspan="5" class="text-end">
+				  			 <button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaInsert">문의하기</button>
+				  		</td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 		
