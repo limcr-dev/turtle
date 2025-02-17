@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+
+  #calendar .fc-daygrid-day-number {
+    color: black; /* 달력의 날짜 숫자 색상 */
+  }
+
+  #calendar .fc-toolbar-title {
+    color: black; /* 달력의 제목 색상 */
+  }
+
+  #calendar .fc-event-title {
+    color: black; /* 일정 제목 색상 */
+  }
+  #calendar .fc-header {
+    color: black; /* 일정 제목 색상 */
+  }
+  
+  #calendar .weekNumbers {
+    color: blue; /* 일정 제목 색상 */
+  }
