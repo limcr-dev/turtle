@@ -124,4 +124,11 @@
 		DELETE qna_comment_tb 
 		  WHERE q_comNo = #{num} 
 	</delete>
+	
+	<!-- 1대1문의 복구 -->
+	<update id="adRestoreQna" parameterType="int">
+		UPDATE qna_tb
+		   SET qnaShow = 'Y'
+		 WHERE qnaNo = #{num}
+	</update>
 </mapper>
