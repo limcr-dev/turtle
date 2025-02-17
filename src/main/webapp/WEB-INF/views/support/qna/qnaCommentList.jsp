@@ -25,8 +25,8 @@ $(document).ready(function() {
 				<form name="CommentList${dto.q_comNo}" action="qnaCommentUpdate.bo" method="post">
 					<table  border="1"cellpadding="10" style="border-radius: 5px; border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
 						<tr style="background-color:#FFCD28">
-							<td>추가문의</td>
-							<td align="right"style="font-size:small; width:10%">
+							<td>추가질문</td>
+							<td align="right"style="font-size:small; width:15%">
 								${dto.q_comRegdate}
 							</td>
 						</tr>
@@ -59,7 +59,9 @@ $(document).ready(function() {
 									    });
 									}); 
 								</script>
-								<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/qnaCommentDelete.bo?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
+								<div style="margin-top:8px">
+									<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/qnaCommentDelete.bo?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
+								</div>
 								<!-- 수정버튼 클릭시 끝 -->
 							</td>
 					 	</tr>
@@ -73,8 +75,8 @@ $(document).ready(function() {
 					<form name="CommentList${dto.q_comNo}" action="qnaCommentUpdate.bo" method="post">
 						<table  border="1"cellpadding="10" style="border-radius: 5px; border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
 							<tr style="background-color:#FFCD28">
-								<td>관리자의답변</td>
-								<td align="right"style="font-size:small; width:10%">
+								<td>작성자:관리자</td>
+								<td align="right"style="font-size:small; width:15%">
 									${dto.q_comRegdate}
 								</td>
 							</tr>
@@ -107,7 +109,9 @@ $(document).ready(function() {
 										    });
 										}); 
 									</script>
-									<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/qnaCommentDelete.bo?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
+									<div style="margin-top:8px">
+										<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/qnaCommentDelete.bo?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
+									</div>
 									<!-- 수정버튼 클릭시 끝 -->
 								</td>
 						 	</tr>
@@ -115,12 +119,13 @@ $(document).ready(function() {
 				   		<br><br>
 					</form>
 				</c:if>
+				<!-- 작성자가 관리자가 아닌경우 -->
 				<c:if test="${dto.q_comWriter != '관리자'}">
 					<form name="CommentList${dto.q_comNo}" action="adQnaCommentUpdate.ad" method="post">
 						<table  border="1" cellpadding="10" style="border-radius: 5px; border-collapse: separate; border-spacing: 0; width: 820px; margin:auto;">
 							<tr style="background-color:#FFCD28">
 								<td style="height: 5px;">추가질문</td>
-								<td colspan="2" align="right"style="font-size:small; width:10%; height: 5px;">
+								<td colspan="2" align="right"style="font-size:small; width:15%; height: 5px;">
 									${dto.q_comRegdate}
 								</td>
 							</tr>
@@ -138,8 +143,8 @@ $(document).ready(function() {
 		   			<form name="CommentList${dto.q_comNo}" action="adQnaCommentUpdate.ad" method="post">
 						<table  border="1" cellpadding="10" style="border-radius: 5px; border-collapse: separate; border-spacing: 0; width: 820px; margin:auto;">
 							<tr style="background-color:#FFCD28">
-								<td style="height: 5px;">관리자의 답변</td>
-								<td colspan="2" align="right"style="font-size:small; width:10%; height: 5px;">
+								<td style="height: 5px;">작성자:관리자</td>
+								<td colspan="2" align="right"style="font-size:small; width:15%; height: 5px;">
 									${dto.q_comRegdate}
 								</td>
 							</tr>

@@ -16,16 +16,16 @@
 		<c:forEach var="dto" items="${list}">
 			<c:if test="${dto.q_comWriter == '관리자'}">
 				<form name="CommentList${dto.q_comNo}" action="adQnaCommentUpdate.ad" method="post">
-					<table  border="1" style="border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
-						<tr>
-							<td style="height: 5px;">관리자의 답변</td>
+					<table  border="1" cellpadding="5" style="border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
+						<tr style="background-color:#BDBDBD">
+							<th>작성자:관리자</th>
 							<td colspan="2" align="right"style="font-size:small; width:20%; height: 5px;">
 								${dto.q_comRegdate}
 							</td>
 						</tr>
 						<!-- 답변내용 -->
 						<tr>
-							<td style="width:80%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; height: 5px; max-width: 700px;">${dto.q_comContent}</td>
+							<td style="text-align:left; width:80%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; height: 5px; max-width: 700px;"><div style="margin:5px">${dto.q_comContent}</div></td>
 					 	</tr>
 					 	<!-- 작성칸 -->
 					 	<tr>
@@ -51,7 +51,9 @@
 									    });
 									}); 
 								</script>
-								<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/adQnaCommentDelete.ad?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
+								<div style="margin-top:8px">
+									<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/adQnaCommentDelete.ad?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
+								</div>
 								<!-- 수정버튼 클릭시 끝 -->
 							</td>
 					 	</tr>
@@ -62,16 +64,16 @@
 	   		
 	   		<c:if test="${dto.q_comWriter != '관리자'}">
 				<form name="CommentList${dto.q_comNo}" action="adQnaCommentUpdate.ad" method="post">
-					<table  border="1" style="border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
-						<tr style="background-color:gray">
-							<td style="height: 5px;">추가문의</td>
+					<table  border="1" cellpadding="5" style="border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
+						<tr style="background-color:#D8D8D8">
+							<th>추가문의</th>
 							<td colspan="2" align="right"style="font-size:small; width:20%; height: 5px;">
 								${dto.q_comRegdate}
 							</td>
 						</tr>
 						<!-- 답변내용 -->
 						<tr>
-							<td style="width:80%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; height: 5px; max-width: 700px;">${dto.q_comContent}</td>
+							<td style="text-align:left; width:80%; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; height: 5px; max-width: 700px;"><div style="margin:5px">${dto.q_comContent}</div></td>
 							<td style="width:10%" align="center">
 								<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/adQnaCommentDelete.ad?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
 							</td>

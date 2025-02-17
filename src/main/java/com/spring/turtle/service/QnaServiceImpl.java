@@ -57,7 +57,6 @@ public class QnaServiceImpl implements QnaService{
 		map.put("start", start);
 		map.put("end", end);
 		
-		System.out.println("sessionType : " + sessionType);
 		if(sessionType.equals("admin") || sessionType.equals("trainer")) {
 			map.put("statusType", "");
 			List<QnaDTO> list = dao.qnaListAdmin(map);
@@ -89,13 +88,11 @@ public class QnaServiceImpl implements QnaService{
 		map.put("statusType", statusType);
 		
 		int total = dao.adQnaCnt(map);
-		System.out.println("total" + total);
 		paging.setTotalCount(total);
 		
 		int start = paging.getStartRow();
 		int end = paging.getEndRow();
 		
-		System.out.println("statusType" + statusType);
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -208,7 +205,6 @@ public class QnaServiceImpl implements QnaService{
 		dto.setQ_comNo(Integer.parseInt(request.getParameter("hidden_q_comNo")));
 		dto.setQnaNo(qnaNo);
 		dto.setQ_comContent(request.getParameter("q_comContent_re"));
-		System.out.println("dto " + dto);
 		dao.updateQnaComment(dto);
 		
 		request.setAttribute("qnaNo", qnaNo);
