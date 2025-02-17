@@ -65,17 +65,15 @@ td a {
 		<table class="table" style="width:1000px; margin:auto;">
 			<thead>
 			    <tr>
-			      <th scope="col" style="width:5%">번호</th>
-			        <th scope="col" style="width:40%">제목</th>
-			        <th scope="col" style="width:15%">작성자</th>
-			        <th scope="col" style="width:15%">날짜</th>
-			        <th scope="col" style="width:10%">처리</th>
+			        <th scope="col" style="width:40%">#제목</th>
+			        <th scope="col" style="width:15%">#작성자</th>
+			        <th scope="col" style="width:15%">#날짜</th>
+			        <th scope="col" style="width:10%">#처리</th>
 			    </tr>
 			</thead>
 		    <tbody>
 			    <c:forEach var="dto" items="${list}" >
 				<tr>
-					<th scope="row" style="text-align:center;">${dto.qnaNo}</th>
 			        <td><a href="${path}/qnaDetailAction.bo?qnaNo=${dto.qnaNo}">${dto.qnaTitle}</a></td>
 			        <td>${dto.qnaWriter}</td>
 			        <td>${dto.qnaRegdate}</td>
@@ -83,7 +81,7 @@ td a {
 			    </tr>
 			    </c:forEach>
 			    <c:if test="${sessionScope.sessionType != 'admin' && sessionScope.sessionType != 'trainer'}">
-				    <tr>
+					<tr>
 				  		<td colspan="5" class="text-end">
 				  			 <button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaInsert">문의하기</button>
 				  		</td>
@@ -111,7 +109,7 @@ td a {
 					<li class="page-item">
 						<c:if test="${paging.endPage < paging.pageCount}">
 						    <a class="page-link" href="${path}/qnaList.bo?pageNum=${paging.next}" aria-label="Next">
-						      <span aria-hidden="true">&raquo;</span>
+								<span aria-hidden="true">&raquo;</span>
 						    </a>
 					    </c:if>
 				    </li>

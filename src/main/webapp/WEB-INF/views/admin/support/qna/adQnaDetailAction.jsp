@@ -135,6 +135,7 @@
 										<h2>${dto.qnaTitle}</h2>
 									</th>
 									<td align="right" style="width:15%"> 
+										작성자 : ${dto.qnaWriter}<br>
 										처리상태 : ${dto.qnaStatus}
 									</td>
 							    </tr>
@@ -166,7 +167,9 @@
 										<div class="row form-group">
 											<textarea style="width:800px; margin:auto;"name="q_comContent" id="q_comContent" rows="3" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
 										</div>
-										<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+										<div style="margin-top:8px">
+											<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+										</div>
 							  		</td>
 								</tr>
 								<!-- 답변 끝 -->

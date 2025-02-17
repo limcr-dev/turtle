@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의글 등록</title>
+<title>문의글 수정</title>
 </head>
 
 <body>
@@ -43,14 +43,11 @@
 			<div id="fh5co-contact">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-2">
-						</div>
+						<div class="col-md-2"></div>
 						<div class="col-md-8 animate-box">
 							<p class="fs-1">문의글 수정</p>
 							<br>
 							<form name="inputform" action="qnaUpdateAction.bo?qnaNo=${dto.qnaNo}" method="post">
-								
-								
 								<div class="row g-3 align-items-center">
 									<div class="col-md-1">
 										<h5>제목</h5>
@@ -62,7 +59,6 @@
 								<br>
 		
 								<div class="row form-group">
-									<!-- <label for="message">Message</label> -->
 									<textarea name="qnaContent" id="qnaContent" cols="30" rows="10" class="form-control form-control-lg" value="${dto.qnaContent}" required>${dto.qnaContent}</textarea>
 								</div>
 								<br>
