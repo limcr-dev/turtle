@@ -44,6 +44,14 @@ public class QnaDAOImpl implements QnaDAO{
 
 		return sqlSession.selectOne("com.spring.turtle.dao.QnaDAO.qnaCnt",map);
 	}
+	
+	// 1대1문의 갯수 구하기 관리자
+	@Override
+	public int adQnaCnt(Map<String, Object> map) {
+		System.out.println("SupportDAOImpl - adQnaCnt()");
+
+		return sqlSession.selectOne("com.spring.turtle.dao.QnaDAO.adQnaCnt",map);
+	}
 
 	// 1대1문의 상세페이지
 	@Override
