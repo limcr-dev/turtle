@@ -1,7 +1,6 @@
 package com.spring.turtle.service;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +41,6 @@ public class QnaServiceImpl implements QnaService{
 		if(request.getSession().getAttribute("sessionType") != null) {
 			
 			sessionType = (String) request.getSession().getAttribute("sessionType");
-			
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -51,8 +49,6 @@ public class QnaServiceImpl implements QnaService{
 		
 		int total = dao.qnaCnt(map);
 		
-		System.out.println("total => " + total);
-		
 		paging.setTotalCount(total);
 		
 		int start = paging.getStartRow();
@@ -60,8 +56,10 @@ public class QnaServiceImpl implements QnaService{
 		
 		map.put("start", start);
 		map.put("end", end);
+		
 		System.out.println("sessionType : " + sessionType);
 		if(sessionType.equals("admin") || sessionType.equals("trainer")) {
+			map.put("statusType", "");
 			List<QnaDTO> list = dao.qnaListAdmin(map);
 			model.addAttribute("list", list);
 		}
@@ -72,6 +70,42 @@ public class QnaServiceImpl implements QnaService{
 		model.addAttribute("paging", paging);
 	}
 
+	// 1대1문의 목록 관리자
+	@Override
+	public void adQnaListAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("SupportServiceImpl - qnaListAction()");
+		
+		String pageNum = request.getParameter("pageNum");
+		Paging10 paging = new Paging10(pageNum);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		String statusType = "";
+		if(request.getParameter("statusType") != null) {
+			statusType = request.getParameter("statusType");
+		}
+		map.put("statusType", statusType);
+		
+		int total = dao.adQnaCnt(map);
+		System.out.println("total" + total);
+		paging.setTotalCount(total);
+		
+		int start = paging.getStartRow();
+		int end = paging.getEndRow();
+		
+		System.out.println("statusType" + statusType);
+		map.put("start", start);
+		map.put("end", end);
+		
+		
+		List<QnaDTO> list = dao.qnaListAdmin(map);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		model.addAttribute("statusType", statusType);
+	}
 	// 1대1문의 상세페이지
 	@Override
 	public void qnaDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -152,11 +186,12 @@ public class QnaServiceImpl implements QnaService{
 		map.put("num",Integer.parseInt(request.getParameter("qnaNo")));
 		
 		if(sessionType.equals("admin") || sessionType.equals("trainer")){
-			map.put("qnaStatus", "완료");
+			map.put("qnaStatus", "답변완료");
+			dto.setQ_comWriter("관리자");
 			dao.changeQnaCommentStatus(map);
 		}
 		if(sessionType.equals("user")){
-			map.put("qnaStatus", "진행중");
+			map.put("qnaStatus", "추가질문");
 			dao.changeQnaCommentStatus(map);
 		}
 		dao.insertQnaComment(dto);
@@ -173,7 +208,7 @@ public class QnaServiceImpl implements QnaService{
 		dto.setQ_comNo(Integer.parseInt(request.getParameter("hidden_q_comNo")));
 		dto.setQnaNo(qnaNo);
 		dto.setQ_comContent(request.getParameter("q_comContent_re"));
-		
+		System.out.println("dto " + dto);
 		dao.updateQnaComment(dto);
 		
 		request.setAttribute("qnaNo", qnaNo);
@@ -194,8 +229,8 @@ public class QnaServiceImpl implements QnaService{
 			String sessionID = ((String) request.getSession().getAttribute("sessionID"));
 			String q_comWriter = request.getParameter("q_comWriter");
 			
-			// 자신의 댓글 삭제시에만
-			if(sessionID.equals(q_comWriter)) {
+			// 관리자 댓글 삭제시에만
+			if(q_comWriter.equals("관리자")) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("num",Integer.parseInt(request.getParameter("qnaNo")));
 				map.put("qnaStatus", "진행중");

@@ -12,7 +12,11 @@ public interface QnaService {
 	// 1대1문의 목록
 	public void qnaListAction(HttpServletRequest request, HttpServletResponse response, Model model)
 		throws ServletException, IOException;
-		
+	
+	// 1대1문의 목록
+	public void adQnaListAction(HttpServletRequest request, HttpServletResponse response, Model model)
+		throws ServletException, IOException;
+			
 	// 1대1문의 상세페이지
 	public void qnaDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;

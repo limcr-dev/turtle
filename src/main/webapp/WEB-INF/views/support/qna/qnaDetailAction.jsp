@@ -41,12 +41,12 @@
 			"q_comContent" : $('#q_comContent').val()
 		}
 		$.ajax({
-			url: '${path}/qnaCommentInsert.bo',	// 컨트롤러로 이동 3번
+			url: '${path}/qnaCommentInsert.bo',
 			type: 'POST',
 			data: param,
-			success: function(){	// 콜백함수 6번 => 댓글쓰기가 완료되면 서버에서 콜백함수 호출
+			success: function(){	
 				$('#q_comContent').val('');
-				comment_list();		// 댓글목록 새로고침 7번			
+				location.reload(true);	// 현재 페이지 새로고침
 			},
 			error: function(){
 				comment_list();
@@ -58,12 +58,12 @@
 	// 댓글 목록
 	function comment_list(){ 
 		$.ajax({
-			url: '${path}/qnaCommentList.bo',	// 컨트롤러로 이동(9번)
+			url: '${path}/qnaCommentList.bo',
 			type: 'POST',
 			data: 'qnaNo=${dto.qnaNo}',
 			// 
-			success: function(result){	//  13번 콜백함수 => result는 comment_list.jsp(컨트롤러에서 넘긴)
-				$('#commentList').html(result);		// div id가 commentList인 자리에 댓글 리스트페이지를 출력			
+			success: function(result){
+				$('#commentList').html(result);			
 			},
 			error: function(){
 				alert('comment_list() 오류');
@@ -159,7 +159,7 @@
 			</tr>
 			    <tr>
 					<th colspan="5" style="width:5%">
-						<h4>${dto.qnaTitle}</h4>
+						<h2>${dto.qnaTitle}</h2>
 					</th>
 					<td align="right" colspan="5" style="width:5%"> 
 						처리상태 : ${dto.qnaStatus}
@@ -175,7 +175,6 @@
 			    <!-- 댓글 목록 시작 -->
 			    <tr>
 				    <td colspan="7" >
-				    	
 				    	<div id="commentList" align="center">
 							<!-- 댓글 들어가는 부분 -->
 						</div>
