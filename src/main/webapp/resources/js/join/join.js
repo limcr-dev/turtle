@@ -44,7 +44,7 @@ function confirmId(){
 	}
 	
 	// 중복확인 버튼 클릭시 컨트롤러로 url을 전달, 컨트롤러에 추가
-	let url = "/turtle_01/idConfirmAction.do?userId=" + document.inputform.userId.value;
+	let url = "/turtle/idConfirmAction.do?userId=" + document.inputform.userId.value;
 	window.open(url, "confirm", "menubar=no, width=500, height=400");
 }
 
@@ -99,4 +99,5 @@ function setUserid(userId){
 	opener.document.inputform.hiddenUserid.value= "1";
 	self.close();
 }
+
 

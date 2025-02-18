@@ -5,7 +5,7 @@
 	bottom: 0;
 	width: 100%;
 	height: auto;
-	background-color: black;
+	background-color: ff8200;
 	opacity: 0.88;
 	align-items: fixed-end;
 	margin-top: 100px;
@@ -22,15 +22,15 @@
 
 .footer_link li a {
 	text-decoration: none;	/* 밑줄제거 */
-	color: white;
+	color: black;
 }
 
 .footer_info_customer {
-	background-color: black;
+	background-color: ff8200;
 	opacity: 0.88;
-	color: white;
+	color: black;
 }
 
 .footer_info_company {
-	color: grey;
+	color: black;
 }

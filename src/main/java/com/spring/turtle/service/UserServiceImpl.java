@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
 		dto.setUserId(request.getParameter("userId"));
 		dto.setUserPw(request.getParameter("userPw"));
 		dto.setUserName(request.getParameter("userName"));
+		dto.setUserGender(request.getParameter("userGender"));
 		dto.setUserBirthday(Date.valueOf(request.getParameter("userBirthday")));
 		System.out.println(request.getParameter("userBirthday"));
 		dto.setUserAddress(request.getParameter("userAddress"));

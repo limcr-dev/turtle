@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 body {
-   width: 100%;
-   height: 100%;
    margin: 0;
 }
 
@@ -11,6 +9,11 @@ body {
    height: auto;
    margin: 0;
    min-height: 100%;
+}
+
+
+.wrap {
+   margin: 0;
 }
 
 a {
@@ -29,16 +32,17 @@ div #right a {
    display: flex;  /* 한줄(수평) 배치 */
    justify-content: space-between;  /* 시작과 끝은 기준선에 맞추고, 사이사이 space 동일 */
    align-items: center;   /* 수평-가운데 정렬 */
-   background-color: black;
+   background-color: ff8200;
    opacity: 0.88;
    padding: 8px 12px;
    border-style: none;
+   position: relative;
+   z-index: 1000;
 }
 
 .navbar_title {
 	margin: 10;
 	list-style: none;   /* 리스트 불릿 없앰 */
-	color: #d49466;
 	display: flex; /* 한줄(수평) 배치 */
 	padding-left: 10px;
 }
@@ -53,7 +57,7 @@ div #right a {
 	display: flex;  /* 한줄(수평) 배치 */
 	list-style: none;   /* 리스트 불릿 없앰 */
 	padding-left: 0px;
-	font-size: 18px;
+	font-size: 25;
 	vertical-align: middle;
 }
 
@@ -73,6 +77,14 @@ div #right a {
    padding: 8px 15px;   
 }
 
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; /* 부트스트랩 기본값보다 크게 설정 */
+    background-color: white; /* 배경색을 지정하여 더 명확하게 보이도록 설정 */
+}
+
+
 /* navbar 종료 -------------------------------- */
 
 /* 반응형웹 - (2) 햄버거 아이콘을 맨 오른쪽에 배치 */
@@ -82,7 +94,7 @@ div #right a {
 	right: 32px; /* 오른쪽 32px 떨어진 곳에 배치 */
 	top: 25px;
 	font-size: 24px;
-	color: #ff8000;
+	color: black;
 }
 
 /* 반응형웹 - (3) 미디어쿼리 */
@@ -106,6 +118,8 @@ div #right a {
 	.navbar_menu li { 
 		width: 100%;
 		text-align: center;
+		font-size: 25; 
+		font-weight: bolder; 
 	}
    
 	/* 트위터, 페이스북, 기타 아이콘 가운데 정렬 */
