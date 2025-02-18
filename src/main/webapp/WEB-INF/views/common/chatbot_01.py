@@ -5,7 +5,8 @@ import streamlit as st
 
 st.title("Turtle Gym chatbot")
 
-st.button("회원가입", url="http://localhost/turtle_01/main.do")
+st.button("회원 가입", url="http://localhost/turtle/main.do")
+st.button("상담 예약", url="http://localhost/turtle/Consult.do")
 
 # turtlegym_info 파일 경로
 file_path = "turtlegym_info.csv"

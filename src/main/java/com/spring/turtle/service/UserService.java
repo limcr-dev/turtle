@@ -13,6 +13,15 @@ public interface UserService {
 	// ID 중복확인 처리
 	public void idConfirmAction(HttpServletRequest request, HttpServletResponse response, Model model)
 		throws ServletException, IOException;
+	
+	// Email 중복확인 처리
+	public void emailConfirmAction(HttpServletRequest request, HttpServletResponse response, Model model)
+		throws ServletException, IOException;
+
+	// Email 중복확인 처리
+	public void emailConfirmAction2(HttpServletRequest request, HttpServletResponse response, Model model)
+		throws ServletException, IOException;
+	
 		
 	// 회원가입처리
 	public void signInAction(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -36,6 +45,6 @@ public interface UserService {
 	
 	// 회원정보 인증후 탈퇴 처리
 	public void deleteUserAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
+			throws ServletException, IOException;	
 
 }

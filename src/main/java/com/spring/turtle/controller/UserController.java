@@ -207,6 +207,27 @@ public class UserController {
         return "admin/test"; 
     }
 	
+	// 이메일중복확인
+	@RequestMapping("/emailConfirmAction.do")
+    public String emailConfirmAction(HttpServletRequest request, HttpServletResponse response, Model model)
+    		throws ServletException, IOException{
+		logger.info("<<< url ==>  /emailConfirmAction.do >>>");
+		
+		service.emailConfirmAction(request, response, model);
+		
+		return "customer/customer/emailConfirmAction"; 
+    }
+	
+	// 이메일 인증 확인
+	@RequestMapping("/emailAuthAction.do")
+    public String emailAuthAction(HttpServletRequest request, HttpServletResponse response, Model model)
+    		throws ServletException, IOException{
+		logger.info("<<< url ==>  /emailAuthAction.do >>>");
+		
+		return "customer/customer/emailAuthAction"; 
+    }
+
+	
 	// ----------- 개발하면서 컨트롤러 분리 예정 ------------
 	// 내부시설 페이지 이동
 	@GetMapping("/facility.do")

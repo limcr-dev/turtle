@@ -44,6 +44,7 @@
 							
 							<!-- 중복확인 -->
 							<input type="hidden" name="hiddenUserid" value="0">
+							<input type="hidden" name="hiddenUserEmail" value="0">
 							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
@@ -169,6 +170,10 @@
 								    <option value="nate.com">네이트</option>
 								  </select>
 								</div>
+								<div class="col-md-2">
+									<input type="button" class="btn btn-secondary" name="emailChk" value="이메일 중복 확인" onclick="confirmEmail()">
+								</div>
+								
 							</div>
 							<br>
 	

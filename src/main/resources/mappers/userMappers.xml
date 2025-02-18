@@ -8,6 +8,9 @@
 	<!--  ID 중복확인 처리  -->
 	<select id="useridCheck" parameterType="String" resultType="int"> SELECT COUNT(*) FROM user_tb WHERE userId = #{userId} </select>
 	
+	<!--  Email 중복확인 처리  -->
+	<select id="useremailCheck" parameterType="String" resultType="int"> SELECT COUNT(*) FROM user_tb WHERE userEmail = #{userEmail} </select>
+		
 	<!--  회원가입처리  -->
 	<insert id="insertUser" parameterType="com.spring.turtle.dto.UserDTO"> INSERT INTO user_tb (userNo, userId, userPw, userName, userAddress, userBirthday, userHp, userEmail, userShow, userType) VALUES((SELECT NVL(MAX(userNo) + 1, 1)FROM user_tb), #{userId}, #{userPw}, #{userName}, #{userAddress}, #{userBirthday}, #{userHp}, #{userEmail}, 'Y', 'user') </insert>
 	
