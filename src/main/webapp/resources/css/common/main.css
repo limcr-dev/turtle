@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #container {
-	width: 100%;
+	width: auto;
 	margin: 0 auto;
 }
 
@@ -42,4 +42,43 @@
 	padding-top: 10px;
 	font-weight: bold;
 	color: #555555;
+}
+
+.area_black{
+	height : 600px; 
+	background-color : black;
+	
+}
+
+.carousel-inner{
+    top: 50px; 
+}
+
+
+.btn_chatbot{
+	bottom: 230px!important;
+	position: fixed;
+	bottom: 130px; /* 아래 끝에서부터의 거리 */
+	right: 30; /* 오른쪽 끝에서부터의 거리 */
+	z-index: 99;
+	
+}
+
+.content_main{
+	align-items: center;
+	text-align : center;
+	justify-content: center;
+	display : flex ;
+	position : relative;
+	padding : 10px;
+}
+
+.content_sub{
+	padding : 20px 20px 20px;
+}
+
+#main_category-text{
+	font-size: 25; 
+	font-weight: bolder; 
+	color: #ff8000;"
 }

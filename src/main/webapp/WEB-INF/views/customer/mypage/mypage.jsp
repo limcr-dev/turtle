@@ -33,11 +33,11 @@
 					<div class="form-group" align="right">
 						<input type="submit" value="회원수정" class="btn btn-warning" onclick="window.location='${path}/modifyUser.do'">
 						<input type="reset" value="회원탈퇴" class="btn btn-warning" onclick="window.location='${path}/deleteUser.do'">
-						<input type="button" value="로그아웃" class="btn btn-warning" onclick="window.location='logout.do'">
+						<input type="button" value="로그아웃" class="btn btn-warning" onclick="window.location='${path}/logout.do'">
 			
 						<!-- admin 관리자인 경우 -> 관리자페이지 -->
 						<c:if test="${dto.userType.equals('admin')}">
-						<input class="btn btn-warning" type="button" value="관리자" onclick="window.location='admin_main.do'">
+						<input class="btn btn-warning" type="button" value="관리자" onclick="window.location='${path}/adMain.ad'">
 						</c:if>
 					</div>
 				</div>
@@ -56,6 +56,10 @@
 								<tr>
 									<th> 이름 <br><br></th>
 									<td> ${dto.userName} <br><br></td>
+								</tr>
+								<tr>
+									<th> 성별 <br><br></th>
+									<td> ${dto.userGender} <br><br></td>
 								</tr>
 								<tr>
 									<th> 전화번호 <br><br></th>
