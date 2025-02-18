@@ -28,7 +28,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaListAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaListAction()");
+		System.out.println("QnaServiceImpl - qnaListAction()");
 
 		String pageNum = request.getParameter("pageNum");
 		Paging10 paging = new Paging10(pageNum);
@@ -73,7 +73,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void adQnaListAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaListAction()");
+		System.out.println("QnaServiceImpl - qnaListAction()");
 		
 		String pageNum = request.getParameter("pageNum");
 		Paging10 paging = new Paging10(pageNum);
@@ -107,7 +107,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaDetailAction()");
+		System.out.println("QnaServiceImpl - qnaDetailAction()");
 		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		QnaDTO dto = dao.getQnaDetail(qnaNo);
@@ -118,7 +118,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaInsertAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaInsertAction()");
+		System.out.println("QnaServiceImpl - qnaInsertAction()");
 		
 		QnaDTO dto = new QnaDTO();
 		dto.setQnaWriter((String) request.getSession().getAttribute("sessionID"));
@@ -132,7 +132,7 @@ public class QnaServiceImpl implements QnaService{
 	// 1대1문의 수정
 	public void qnaUpdateAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException{
-		System.out.println("SupportServiceImpl - qnaUpdateAction()");
+		System.out.println("QnaServiceImpl - qnaUpdateAction()");
 		
 		QnaDTO dto = new QnaDTO();
 		dto.setQnaWriter((String) request.getSession().getAttribute("sessionID"));
@@ -147,7 +147,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaDeleteAction()");
+		System.out.println("QnaServiceImpl - qnaDeleteAction()");
 		
 		int num = Integer.parseInt(request.getParameter("qnaNo"));
 		
@@ -158,7 +158,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaCommentListAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaCommentListAction()");
+		System.out.println("QnaServiceImpl - qnaCommentListAction()");
 		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		List<QnaCommentDTO> list = dao.qnaCommentList(qnaNo);
@@ -169,7 +169,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaCommentAddAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaCommentAddAction()");
+		System.out.println("QnaServiceImpl - qnaCommentAddAction()");
 		
 		QnaCommentDTO dto = new QnaCommentDTO();
 		
@@ -198,7 +198,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaCommentUpdateAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - qnaCommentUpdateAction()");
+		System.out.println("QnaServiceImpl - qnaCommentUpdateAction()");
 		
 		QnaCommentDTO dto = new QnaCommentDTO();
 		int qnaNo = Integer.parseInt(request.getParameter("hidden_qnaNo"));
@@ -213,7 +213,7 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public void qnaCommentDelete(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException{
-		System.out.println("SupportServiceImpl - qnaCommentDelete()");
+		System.out.println("QnaServiceImpl - qnaCommentDelete()");
 		int q_comNo = Integer.parseInt(request.getParameter("q_comNo"));
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		dao.DeleteQnaComment(q_comNo);
@@ -222,7 +222,6 @@ public class QnaServiceImpl implements QnaService{
 		String sessionType = (String) request.getSession().getAttribute("sessionType");
 		
 		if(sessionType.equals("admin") || sessionType.equals("trainer")){
-			String sessionID = ((String) request.getSession().getAttribute("sessionID"));
 			String q_comWriter = request.getParameter("q_comWriter");
 			
 			// 관리자 댓글 삭제시에만
@@ -236,107 +235,14 @@ public class QnaServiceImpl implements QnaService{
 		}
 		request.setAttribute("qnaNo", qnaNo);
 	}
-
-	// ------공지사항-------
-	// 공지 목록
+	// 1대1문의 복구
 	@Override
-	public void noticeListAction(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void adQnaRestoreAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - noticeListAction()");
+		System.out.println("QnaServiceImpl - adQnaRestoreAction()");
+
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		
+		dao.adRestoreQna(qnaNo);
 	}
-	// 공지 상세페이지
-	@Override
-	public void noticeDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - noticeDetailAction()");
-		
-	}
-
-
-	// ------이벤트------
-	// 이벤트 목록
-	@Override
-	public void eventListAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - eventListAction()");
-		
-	}
-
-	// 이벤트 상세페이지
-	@Override
-	public void eventDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - eventDetailAction()");
-		
-	}
-
-
-	// ------FAQ------
-	// FAQ 목록
-	@Override
-	public void faqListAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - faqListAction()");
-		
-	}
-
-	// FAQ 상세내용
-	@Override
-	public void faqDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - faqDetailAction()");
-		
-	}
-
-	
-	// ------자유게시판------
-	// 자유게시판 게시글 목록
-	@Override
-	public void boardListAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - boardListAction()");
-		
-	}
-
-	// 자유게시판 게시글 작성
-	@Override
-	public void boardInsertAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - boardInsertAction()");
-		
-	}
-
-	// 자유게시판 게시글 상세페이지
-	@Override
-	public void boardDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - boardDetailAction()");
-		
-	}
-
-	// 자유게시판 게시글 삭제
-	@Override
-	public void boardDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - boardDeleteAction()");
-		
-	}
-
-	// 자유게시판 게시글 댓글 작성
-	@Override
-	public void boardCommentAddAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - boardCommentAddAction()");
-		
-	}
-
-	// 자유게시판 게시글 댓글 수정
-	@Override
-	public void boardCommentUpdateAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException {
-		System.out.println("SupportServiceImpl - boardCommentUpdateAction()");
-		
-	}
-
 }

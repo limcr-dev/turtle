@@ -3,85 +3,97 @@
 <%@ include file="/WEB-INF/views/common/setting.jsp" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+	function page() {
+	    document.getElementById("FaqList").submit();
+	}
+</script>
 <head>
 <meta charset="UTF-8">
-<title>main</title>
+<title>adFaqList</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
-	<div class="wrap"> <!-- 스타일을 해주려고 class명을 지정함  -->
+	<div class="wrap">
 		<!-- header 시작 -->
 		<%@include file= "/WEB-INF/views/common/header.jsp"%>
 		<!-- header 끝 -->
-		
+	      
 		<!-- 컨텐츠 시작 -->
 		<div id="container">
 			<div id="contents">
-			<!-- 상단 중앙1 시작 -->
-	            <div>
-	               <hr>
-	               <h1 align="center">FAQ</h1>
-	               <hr>
-	            </div>
+				<!-- 상단 중앙1 시작 -->
+				<div>
+					<hr>
+					<h1 align="center">FAQ 목록</h1>
+					<hr>
+				</div>
 	            <!-- 상단 중앙1 종료 -->
 	            
-	            <!-- 상단 중앙2 시작 -->
-	            <div id="section2">
-	               
-				<!-- 좌측 메뉴 시작 -->                              
-				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
-				<!-- 좌측메뉴 종료 -->
-				<!-- 우측매뉴 시작 -->
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">작성자</th>
-							<th scope="col">제목</th>
-							<th scope="col">질문유형</th>
-						</tr>
-					</thead>
-					<tbody class="table-group-divider">
-						
-						<tr>
-							<th scope="row">1</th>
-							<td>관리자1</td>
-							<td>헬스 이용 안내</td>
-							<td>헬스</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">2</th>
-							<td>관리자1</td>
-							<td>P.T 이용안내</td>
-							<td>P.T</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">2</th>
-							<td>관리자2</td>
-							<td>헬스장 운영시간</td>
-							<td>헬스</td>
-						</tr>
-					  
-					</tbody>
-				</table>
-				<br>
-				<!-- 우측메뉴 종료 -->
-	            <!-- 상단 중앙2 종료 -->
-	         </div>
-	         <p align="center">
-		         SQL(FAQ 목록)<br>
-		         SELECT *<br>
-		         FROM faq_tb<br>
-		         WHERE faqWriter = faqWriter<br>
-		         AND faqTitle = faqTitle<br>
-		         AND faqType = faqType<br>
-	         </p>
+				<div id="section2">
+					<!-- 좌측 메뉴 시작 -->               					
+					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
+					<!-- 좌측메뉴 종료 -->
+					<!-- FAQ 목록 시작 -->
+					<form name ="FaqList" id="FaqList" action="${path}/adFaqList.ad" method="post" style="width:1300px">
+						<table class="table" style="width:900px; margin:auto;">
+							<thead>
+							    <tr>
+									<th scope="col" style="width:8%; text-align:center;">번호</th>
+							        <th scope="col" style="width:30%; text-align:center;">제목</th>
+							        <th scope="col" style="width:15%; text-align:center;">작성자</th>
+							        <th scope="col" style="width:15%; text-align:center;">날짜</th>
+							        <th scope="col" style="width:10%; text-align:center;">
+							        	<select  name="category" id="category" onchange="page()">
+											<option value=""
+												<c:if test="${category == '전체'}">selected="selected"</c:if>>FAQ타입</option>
+											<option value="예약관련"
+												<c:if test="${category == '예약관련'}">selected="selected"</c:if>>예약관련</option>
+											<option value="로그인관련"
+												<c:if test="${category == '로그인관련'}">selected="selected"</c:if>>로그인/회원가입 관련</option>
+											<option value="시설관련"
+												<c:if test="${category == '시설관련'}">selected="selected"</c:if>>시설관련</option>
+											<option value="프로그램관련"
+												<c:if test="${category == '프로그램관련'}">selected="selected"</c:if>>프로그램 관련</option>
+											<option value="상품관련"
+												<c:if test="${category == '상품관련'}">selected="selected"</c:if>>상품관련</option>
+										</select>
+							        </th>
+							        <th scope="col" style="width:13%; text-align:center;">삭제유무</th>
+							        <th scope="col" style="width:10%; text-align:center;">복구</th>
+							    </tr>
+							</thead>
+							<tbody>
+								<c:forEach var="dto" items="${list}" >
+									<tr>
+										<th scope="row" style="text-align:center;">${dto.faqNo}</th>
+								        <td style="text-align:left"><a href="${path}/adFaqDetailAction.ad?faqNo=${dto.faqNo}">${dto.faqTitle}</a></td>
+								        <td>${dto.faqWriter}</td>
+								        <td>${dto.faqRegDate}</td>
+								        <td>${dto.faqType}</td>
+								        <td>${dto.faqShow}</td>
+								        <td>
+									        <c:if test="${dto.faqShow == 'N'}">
+									        	<button type="button" class="btn active"onclick="window.location='${path}/adFaqRestore.ad?faqNo=${dto.faqNo}'">복구</button>
+									        </c:if>
+								        </td>
+								    </tr>
+								</c:forEach>
+								<tr>
+									<td colspan="5"></td>
+									<td colspan="2" style="text-align:right">
+										<button type="button" class="btn active"onclick="window.location='${path}/adFaqInsert.ad'">작성하기</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+					<!-- FAQ 목록 끝 -->
+				</div>
+				<hr>
 			</div>
-			<!-- 컨텐츠 끝 -->
-			<hr>
 		</div>
+	<!-- 컨텐츠 끝 -->
 	</div>
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

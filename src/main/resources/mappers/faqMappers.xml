@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+
+<mapper namespace="com.spring.turtle.dao.FaqDAO">
+	<!-- FAQ 목록  -->
+	<select id="faqList" parameterType="String" resultType="com.spring.turtle.dto.FaqDTO">
+		SELECT *
+	      FROM faq_tb
+	     WHERE faqType = #{category}
+	       AND faqShow = 'Y'
+	</select>
+	
+	<!-- FAQ 목록 관리자 -->
+	<select id="adFaqList" parameterType="String" resultType="com.spring.turtle.dto.FaqDTO">
+		SELECT *
+	      FROM faq_tb
+	      <if test="_parameter != ''">
+	   	  	WHERE faqType = #{_parameter}
+	      </if>
+	     ORDER BY faqNo DESC
+	</select>
+	
+	<!-- FAQ 작성 -->
+	<insert id="adInsertFaq" parameterType="com.spring.turtle.dto.FaqDTO">
+		INSERT INTO faq_tb(faqNo, faqWriter, faqTitle, faqContent, faqType)
+		VALUES ((SELECT NVL(MAX(faqNo) + 1, 1)FROM faq_tb), #{faqWriter}, #{faqTitle}, #{faqContent}, #{faqType})
+	</insert>
+	
+	<!-- FAQ 상세페이지 -->
+	<select id="getFaqDetail" parameterType="int" resultType="com.spring.turtle.dto.FaqDTO">
+		SELECT *
+		  FROM faq_tb
+		 WHERE faqNo = #{faqNo}
+	</select>
+	
+	<!-- FAQ 삭제처리 -->
+	<update id="adDeleteFaq" parameterType="int">
+		UPDATE faq_tb
+		   SET faqShow = 'N'
+		 WHERE faqNo =#{num}
+	</update>
+	
+	<!-- FAQ 수정처리 -->
+	<update id="adUpdateFaq" parameterType="com.spring.turtle.dto.FaqDTO">
+		UPDATE faq_tb
+		   SET faqTitle = #{faqTitle},
+		   	   faqContent = #{faqContent},
+		   	   faqType = #{faqType}
+		 WHERE faqNo = #{faqNo}
+	</update>
+	
+	<!-- FAQ 복구 -->
+	<update id="adRestoreFaq" parameterType="int">
+		UPDATE faq_tb
+		   SET faqShow = 'Y'
+		 WHERE faqNo = #{num}
+	</update>
+</mapper>

@@ -85,6 +85,9 @@
 		
 		<div id="container">
 			<div id="contents">
+				<hr>
+				<h1 align="center">문의내용</h1>
+				<hr>
 				<!-- 컨텐츠 시작 -->
 				<div id="section2">
 					<!-- 좌측 메뉴 시작 -->               					
@@ -94,8 +97,7 @@
 					<!-- 문의내용 시작 -->
 					<input type="hidden" name="hidden_qnaNo" value="${dto.qnaNo}">
 					<form name ="statusForm" id="statusForm" action="${path}/adQnaList.ad" method="post" style="width:1300px">
-					<hr>
-					<h3 align="center">문의내용</h3>
+					
 						<table class="table" style="width:900px; margin:auto;">
 							<thead>
 								<tr>
@@ -103,25 +105,23 @@
 									<!-- 삭제버튼 시작 -->
 										<!-- Modal 시작 -->
 										<div style="text-align: right">
-											<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
 											  삭제
 											</button>
-											<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												<div class="modal-dialog">
-													<div class="modal-dialog modal-dialog-centered">
-														<div class="modal-content">
-															<div class="modal-header">
-												        		<h1 class="modal-title fs-5" id="exampleModalLabel">확인</h1>
-												       			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-												      		</div>
-													     	<div class="modal-body">
-													        	삭제하겠습니까?
-													      	</div>
-													      	<div class="modal-footer">
-													        	<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="qnaDelete">예</button>
-													        	<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">아니요</button>
-													      	</div>
-														</div>
+											<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+												<div class="modal-dialog modal-dialog-centered">
+													<div class="modal-content">
+														<div class="modal-header">
+											        		<h1 class="modal-title fs-5" id="exampleModalLabel">확인</h1>
+											       			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											      		</div>
+												     	<div class="modal-body">
+												        	삭제하겠습니까?
+												      	</div>
+												      	<div class="modal-footer">
+												        	<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="qnaDelete">예</button>
+												        	<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">아니요</button>
+												      	</div>
 													</div>
 												</div>
 											</div>
