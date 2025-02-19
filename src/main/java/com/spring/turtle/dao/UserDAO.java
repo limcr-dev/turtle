@@ -9,6 +9,9 @@ public interface UserDAO {
 	// ID 중복확인 처리
 	public int useridCheck(String userId);
 	
+	// Email 중복확인 처리
+	public int useremailCheck(String userEmail);
+	
 	// 회원가입처리
 	public int insertUser(UserDTO dto);
 	

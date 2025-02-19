@@ -23,6 +23,16 @@ public class UserDAOImpl implements UserDAO{
 		return selectCnt;
 	}
 	
+	// ID 중복확인 처리
+	@Override
+	public int useremailCheck(String userEmail) {
+		System.out.println("DAO - useremailCheck()");
+		
+		int selectCnt = sqlSession.selectOne("com.spring.turtle.dao.UserDAO.useremailCheck", userEmail);
+		return selectCnt;
+	}
+
+	
 	// 회원가입처리
 	@Override
 	public int insertUser(UserDTO dto) {
