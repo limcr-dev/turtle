@@ -52,65 +52,35 @@
 		<!-- 질문카테고리 시작 -->
 		<div  style="width:1000px; margin:auto">
 			<br>
-			<button type="button" class="btn btn-secondary">예약관련</button>
-			<button type="button" class="btn btn-secondary">로그인/회원가입 관련</button>
-			<button type="button" class="btn btn-secondary">시설관련</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=예약관련'">예약관련</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=로그인관련'">로그인/회원가입 관련</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=시설관련'">시설관련</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=프로그램관련'">프로그램 관련</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=상품관련'">상품관련</button>
 			<br><br>
 		</div>
 		<!-- 질문카테고리 끝 -->
 		
-		<!-- 질문 시작 -->	
+		<!-- FAQ 시작 -->	
 		<div class="accordion" id="accordionExample" style="width:1000px; margin:auto;">
-			<div class="accordion-item">
-				<h2 class="accordion-header">
-				    <button class="accordion-button bg-light " id="customAccordionButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-						1차 팀프로젝트
-				    </button>
-			    </h2>
-			    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-			    	<div class="accordion-body ">
-						화이팅
-			    	</div>
-			    </div>
-			</div>
-			
-			<div class="accordion-item">
-			    <h2 class="accordion-header">
-					<button class="accordion-button collapsed bg-light" id="customAccordionButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-			       		1차 프로젝트
-			        </button>
-			    </h2>
-			    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						화이팅
-			      </div>
-			    </div>
-			</div>
-			  
-			<div class="accordion-item">
-				<h2 class="accordion-header">
-			    	<button class="accordion-button collapsed bg-light" id="customAccordionButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-			      		1차 프로젝트
-			    	</button>
-			 	</h2>
-				<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-					<div class="accordion-body">
-						화이팅
-					</div>
-			    </div>
-			</div>
+			<c:forEach var="dto" items="${list}">
+				<div class="accordion-item">
+					<h2 class="accordion-header">
+					    <button class="accordion-button collapsed bg-light " id="customAccordionButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${dto.faqNo}" aria-expanded="false" aria-controls="collapse${dto.faqNo}">
+							${dto.faqTitle}
+					    </button>
+				    </h2>
+				    <div id="collapse${dto.faqNo}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				    	<div class="accordion-body">
+							${dto.faqContent}
+				    	</div>
+				    </div>
+				</div>
+			</c:forEach>
 		</div>
-		<!-- 질문 끝 -->	
+		<!-- FAQ 끝 -->	
 			
 		<!-- 컨텐츠 끝 -->
-		<p align="center">
-			SELECT *<br>
-				FROM faq_tb<br>
-				WHERE faqNo = faqNo <br>
-				AND faqShow = 'Y' <br>
-				AND faqNo >= start <br>
-				AND faqNo <= end <br>
-		</p>
 	</div>
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

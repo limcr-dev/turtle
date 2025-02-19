@@ -6,28 +6,62 @@
     
 <mapper namespace="com.spring.turtle.dao.UserDAO">
 	<!--  ID 중복확인 처리  -->
-	<select id="useridCheck" parameterType="String" resultType="int"> SELECT COUNT(*) FROM user_tb WHERE userId = #{userId} </select>
+	<select id="useridCheck" parameterType="String" resultType="int"> 
+		SELECT COUNT(*) 
+		  FROM user_tb 
+		 WHERE userId = #{userId} 
+	</select>
 	
 	<!--  Email 중복확인 처리  -->
 	<select id="useremailCheck" parameterType="String" resultType="int"> SELECT COUNT(*) FROM user_tb WHERE userEmail = #{userEmail} </select>
 		
 	<!--  회원가입처리  -->
-	<insert id="insertUser" parameterType="com.spring.turtle.dto.UserDTO"> INSERT INTO user_tb (userNo, userId, userPw, userName, userAddress, userBirthday, userHp, userEmail, userShow, userType) VALUES((SELECT NVL(MAX(userNo) + 1, 1)FROM user_tb), #{userId}, #{userPw}, #{userName}, #{userAddress}, #{userBirthday}, #{userHp}, #{userEmail}, 'Y', 'user') </insert>
+	<insert id="insertUser" parameterType="com.spring.turtle.dto.UserDTO"> 
+		INSERT INTO user_tb (userId, userPw, userName, userGender, userAddress, userBirthday, userHp, userEmail, userShow, userType) 
+		VALUES(#{userId}, #{userPw}, #{userName}, #{userGender}, #{userAddress}, #{userBirthday}, #{userHp}, #{userEmail}, 'Y', 'user') 
+	</insert>
 	
 	<!--  아이디패스워드체크 - 로그인 -->
-	<select id="idPwChk" parameterType="java.util.Map" resultType="int"> SELECT COUNT(*) FROM user_tb WHERE userId = #{userId} AND userPw = #{userPw} AND userShow = 'Y' </select>
+	<select id="idPwChk" parameterType="java.util.Map" resultType="int"> 
+		SELECT COUNT(*) 
+		  FROM user_tb 
+		 WHERE userId = #{userId} 
+		   AND userPw = #{userPw} 
+		   AND userShow = 'Y' 
+	</select>
 	
 	<!--  회원,관리자 구분 유저타입 확인  -->
-	<select id="getUserType" parameterType="String" resultType="String"> SELECT userType FROM user_tb WHERE userId = #{userId} </select>
+	<select id="getUserType" parameterType="String" resultType="String"> 
+		SELECT userType 
+		  FROM user_tb 
+		 WHERE userId = #{userId} 
+	</select>
 	
 	<!--  회원 상세페이지  -->
-	<select id="userDetail" parameterType="String" resultType="com.spring.turtle.dto.UserDTO"> SELECT * FROM user_tb WHERE userId = #{userId} </select>
+	<select id="userDetail" parameterType="String" resultType="com.spring.turtle.dto.UserDTO"> 
+		SELECT * 
+		  FROM user_tb 
+		 WHERE userId = #{userId} 
+	</select>
 	
 	<!--  회원 수정 처리 -->
-	<update id="updateUser" parameterType="com.spring.turtle.dto.UserDTO"> UPDATE user_tb SET userPw = #{userPw}, userName = #{userName}, userAddress = #{userAddress}, userHp = #{userHp}, userEmail = #{userEmail}, userBirthday = #{userBirthday} WHERE userId = #{userId} </update>
+	<update id="updateUser" parameterType="com.spring.turtle.dto.UserDTO"> 
+		UPDATE user_tb 
+		   SET userPw = #{userPw}
+		     , userName = #{userName}
+		     , userAddress = #{userAddress}
+		     , userHp = #{userHp}
+		     , userEmail = #{userEmail}
+		     , userBirthday = #{userBirthday} 
+		 WHERE userId = #{userId} 
+	</update>
 	
 	<!--  회원 탈퇴처리  -->
-	<update id="deleteUser" parameterType="String"> update user_tb SET userShow = 'N' WHERE userId = #{userId} </update>
+	<update id="deleteUser" parameterType="String"> 
+		update user_tb 
+		   SET userShow = 'N' 
+		 WHERE userId = #{userId} 
+	</update>
 	
 	<!--  회원목록 조회  -->
 	

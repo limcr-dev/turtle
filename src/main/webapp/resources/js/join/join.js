@@ -50,7 +50,6 @@ function confirmId(){
 }
 
 
-
 // 이메일 중복확인 버튼 클릭시
 function confirmEmail(){
 

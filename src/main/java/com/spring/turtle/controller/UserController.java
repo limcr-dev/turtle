@@ -242,7 +242,7 @@ public class UserController {
 	public String productList() {
 		logger.info("<<< url ==>  /productList.do >>>");
 		
-        return "product/productList"; 
+        return "product/diet"; 
     }
 	
 	// 프로그램 페이지 이동

@@ -3,14 +3,17 @@ import pandas as pd
 import google.generativeai as genai
 import streamlit as st
 
+with open('D:/DEV/workspace_team_pj/team_pj/turtle/src/main/webapp/WEB-INF/views/common/Google_api.txt','r', encoding='utf-8') as f:
+    gemini_key = f.read().strip()
+
 st.title("Turtle Gym chatbot")
 
-st.button("회원 가입", url="http://localhost/turtle/main.do")
-st.button("상담 예약", url="http://localhost/turtle/Consult.do")
+st.link_button("회원 가입", "http://localhost/turtle/join.do")
+st.link_button("상담 예약", "http://localhost/turtle/reservation.do")
 
 # turtlegym_info 파일 경로
 file_path = "turtlegym_info.csv"
-genai.configure(api_key="AIzaSyAtWltfJ_qT6kc2AOgvTgMTBMDaUB2y_FA")
+genai.configure(api_key=gemini_key)
 
 # Gemini 설정
 genai.GenerationConfig(

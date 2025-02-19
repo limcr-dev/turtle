@@ -41,12 +41,12 @@
 			"q_comContent" : $('#q_comContent').val()
 		}
 		$.ajax({
-			url: '${path}/qnaCommentInsert.bo',	// 컨트롤러로 이동 3번
+			url: '${path}/qnaCommentInsert.bo',
 			type: 'POST',
 			data: param,
-			success: function(){	// 콜백함수 6번 => 댓글쓰기가 완료되면 서버에서 콜백함수 호출
+			success: function(){	
 				$('#q_comContent').val('');
-				comment_list();		// 댓글목록 새로고침 7번			
+				location.reload(true);	// 현재 페이지 새로고침
 			},
 			error: function(){
 				comment_list();
@@ -58,12 +58,12 @@
 	// 댓글 목록
 	function comment_list(){ 
 		$.ajax({
-			url: '${path}/qnaCommentList.bo',	// 컨트롤러로 이동(9번)
+			url: '${path}/qnaCommentList.bo',
 			type: 'POST',
 			data: 'qnaNo=${dto.qnaNo}',
 			// 
-			success: function(result){	//  13번 콜백함수 => result는 comment_list.jsp(컨트롤러에서 넘긴)
-				$('#commentList').html(result);		// div id가 commentList인 자리에 댓글 리스트페이지를 출력			
+			success: function(result){
+				$('#commentList').html(result);			
 			},
 			error: function(){
 				alert('comment_list() 오류');
@@ -117,19 +117,18 @@
 		
 		<table class="table" style="width:1000px; margin:auto;">
 			<thead>
-			<tr>
-				<td colspan="6" align="right">
-				<!-- 수정삭제버튼 시작 -->
-					<button type="button" class="btn btn-warning" >
-							<a href="${path}/qnaUpdate.bo?qnaNo=${dto.qnaNo}" style="text-decoration: none; color: inherit;">수정</a>
-					</button>
-					
-					<!-- Modal 시작 -->
-					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					  삭제
-					</button>
-					<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
+				<tr>
+					<td colspan="6" align="right">
+					<!-- 수정삭제버튼 시작 -->
+						<button type="button" class="btn btn-warning" >
+								<a href="${path}/qnaUpdate.bo?qnaNo=${dto.qnaNo}" style="text-decoration: none; color: inherit;">수정</a>
+						</button>
+						
+						<!-- Modal 시작 -->
+						<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						  삭제
+						</button>
+						<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -146,22 +145,22 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Modal 끝 -->
-				<!-- 수정삭제버튼 끝 -->
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="6">
-					<hr style="border:3px solid orange; width:1000px; margin:auto;">
-				</td>
-			</tr>
+						<!-- Modal 끝 -->
+					<!-- 수정삭제버튼 끝 -->
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="6">
+						<hr style="border:3px solid orange; width:1000px; margin:auto;">
+					</td>
+				</tr>
 			    <tr>
 					<th colspan="5" style="width:5%">
-						<h4>${dto.qnaTitle}</h4>
+						<h2>${dto.qnaTitle}</h2>
 					</th>
 					<td align="right" colspan="5" style="width:5%"> 
+						작성자 : ${dto.qnaWriter}<br>
 						처리상태 : ${dto.qnaStatus}
 					</td>
 			    </tr>
@@ -169,13 +168,12 @@
 		    <tbody>
 			    <tr>
 			        <td colspan="7">
-			      	 <p class="text-start"> ${dto.qnaContent}</p>
+			      		 <p class="text-start"> ${dto.qnaContent}</p>
 			        </td>
 			    </tr>
 			    <!-- 댓글 목록 시작 -->
 			    <tr>
 				    <td colspan="7" >
-				    	
 				    	<div id="commentList" align="center">
 							<!-- 댓글 들어가는 부분 -->
 						</div>
@@ -194,7 +192,9 @@
 						<div class="row form-group">
 							<textarea style="width:800px; margin:auto;"name="q_comContent" id="q_comContent" rows="3" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
 						</div>
-						<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+						<div style="margin-top:8px">
+							<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+						</div>
 			  		</td>
 				</tr>
 				<!-- 추가문의 끝 -->
