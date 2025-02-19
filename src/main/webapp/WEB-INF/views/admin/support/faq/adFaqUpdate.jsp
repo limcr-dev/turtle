@@ -40,7 +40,7 @@
 										<h5>제목</h5>
 									</div>
 									<div class="col-md-8">
-										<input type="text" name="faqTitle" id="faqTitle" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${dto.faqTitle}" required autofocus>
+										<input type="text" name="faqTitle" id="faqTitle" maxlength="33" class="form-control form-control-lg" placeholder="제목을 입력하세요" value="${dto.faqTitle}" required autofocus>
 									</div>
 								</div>
 								<br>

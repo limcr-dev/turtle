@@ -31,9 +31,11 @@ function page() {
 	            <!-- 상단 중앙1 종료 -->
 	            
 				<div id="section2">
-					<!-- 좌측 메뉴 시작 -->               					
-					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
-					<!-- 좌측메뉴 종료 -->
+					<div style="width:300px">
+						<!-- 좌측 메뉴 시작 -->
+						<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
+						<!-- 좌측메뉴 종료 -->
+					</div>
 					<!-- 게시글 목록 시작 -->
 					<form name ="statusForm" id="statusForm" action="${path}/adQnaList.ad" method="post" style="width:1300px">
 						<table class="table" style="width:1050px; margin:auto;">
@@ -65,7 +67,7 @@ function page() {
 										<th scope="row" style="text-align:center;">${dto.qnaNo}</th>
 								        <td style="text-align:left"><a href="${path}/adQnaDetailAction.ad?qnaNo=${dto.qnaNo}">${dto.qnaTitle}</a></td>
 								        <td>${dto.qnaWriter}</td>
-								        <td>${dto.qnaRegdate}</td>
+								        <td>${fn: substring(dto.qnaRegdate,0,19)}</td>
 								        <td>${dto.qnaStatus}</td>
 								        <td>${dto.qnaShow}</td>
 								        <td>

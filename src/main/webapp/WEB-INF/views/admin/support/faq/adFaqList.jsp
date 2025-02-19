@@ -31,9 +31,11 @@
 	            <!-- 상단 중앙1 종료 -->
 	            
 				<div id="section2">
-					<!-- 좌측 메뉴 시작 -->               					
-					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
-					<!-- 좌측메뉴 종료 -->
+					<div style="width:300px">
+						<!-- 좌측 메뉴 시작 -->
+						<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
+						<!-- 좌측메뉴 종료 -->
+					</div>
 					<!-- FAQ 목록 시작 -->
 					<form name ="FaqList" id="FaqList" action="${path}/adFaqList.ad" method="post" style="width:1300px">
 						<table class="table" style="width:1050px; margin:auto;">
@@ -69,7 +71,7 @@
 										<th scope="row" style="text-align:center;">${dto.faqNo}</th>
 								        <td style="text-align:left"><a href="${path}/adFaqDetailAction.ad?faqNo=${dto.faqNo}">${dto.faqTitle}</a></td>
 								        <td>${dto.faqWriter}</td>
-								        <td>${dto.faqRegDate}</td>
+								        <td>${fn: substring(dto.faqRegDate,0,19)}</td>
 								        <td>${dto.faqType}</td>
 								        <td>${dto.faqShow}</td>
 								        <td>

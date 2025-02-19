@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의글 등록</title>
+<title>게시글 등록</title>
 </head>
 
 <body>
@@ -24,13 +24,13 @@
 				<button type="button" class="btn btn-light">
 					<a href="${path}/eventList.bo" style="text-decoration: none; color: inherit;">이벤트</a>
 				</button>
-				<button type="button" class="btn btn-light">
+				<button type="button" class="btn btn-warning">
 					<a href="${path}/boardList.bo" style="text-decoration: none; color: inherit;">자유게시판</a>
 				</button>
 			    <button type="button" class="btn btn-light" >
 					<a href="${path}/faqList.bo" style="text-decoration: none; color: inherit;"> FAQ</a>
 			    </button>
-			    <button type="button" class="btn btn-warning" >
+			    <button type="button" class="btn btn-light" >
 					<a href="${path}/qnaList.bo" style="text-decoration: none; color: inherit;">1대1문의</a>
 				</button>
 			</div>
@@ -45,28 +45,28 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8 animate-box">
-						<p class="fs-1">문의글 작성</p>
+						<p class="fs-1">게시글 작성</p>
 						<br>
-						<form name="inputform" action="qnaInsertAction.bo" method="post">
+						<form name="inputform" action="boardInsertAction.bo" method="post">
 							<div class="row g-3 align-items-center">
 								<div class="col-md-1">
 									<h5>제목</h5>
 								</div>
 								<div class="col-md-11">
-									<input type="text" name="qnaTitle" id="qnaTitle" maxlength="33" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
+									<input type="text" name="boardTitle" id="boardTitle" maxlength="33" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
 								</div>
 							</div>
 							<br>
 	
 							<div class="row form-group">
-								<textarea name="qnaContent" id="qnaContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요" required></textarea>
+								<textarea name="boardContent" id="boardContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요" required></textarea>
 							</div>
 							<br>
 							
 							<div class="form-group" align="right">
 								<input type="submit" value="작성" class="btn btn-warning">
 								<input type="reset" value="초기화" class="btn btn-warning">
-								<input type="button" value="작성취소" class="btn btn-warning" onclick="window.location='main.do'">
+								<input type="button" value="작성취소" class="btn btn-warning" onclick="window.location='boardList.bo'">
 							</div>
 						</form>	
 					</div>	

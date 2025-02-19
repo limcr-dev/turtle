@@ -3,9 +3,14 @@
 <%@ include file="/WEB-INF/views/common/setting.jsp" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+function page() {
+    document.getElementById("statusForm").submit();
+}
+</script>
 <head>
 <meta charset="UTF-8">
-<title>adBoardList</title>
+<title>board</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
@@ -13,82 +18,95 @@
 		<!-- header 시작 -->
 		<%@include file= "/WEB-INF/views/common/header.jsp"%>
 		<!-- header 끝 -->
-		
+	      
 		<!-- 컨텐츠 시작 -->
 		<div id="container">
 			<div id="contents">
 				<!-- 상단 중앙1 시작 -->
 				<div>
 					<hr>
-					<h1 align="center">자유 게시판</h1>
+					<h1 align="center">자유게시판 관리</h1>
 					<hr>
 				</div>
-				<!-- 상단 중앙1 종료 -->
-				
-				<!-- 상단 중앙2 시작 -->
+	            <!-- 상단 중앙1 종료 -->
+	            
 				<div id="section2">
+					<div style="width:300px">
+						<!-- 좌측 메뉴 시작 -->
+						<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
+						<!-- 좌측메뉴 종료 -->
+					</div>
+					<!-- 게시글 목록 시작 -->
+					<form name ="statusForm" id="statusForm" action="${path}/adBoardList.ad" method="post" style="width:1300px">
+						<table class="table" style="width:1050px; margin:auto;">
+							<thead>
+							    <tr>
+							      <th scope="col" style="width:8%; text-align:center; height:41.5px">번호</th>
+							        <th scope="col" style="width:30%; text-align:center;">제목</th>
+							        <th scope="col" style="width:15%; text-align:center;">작성자</th>
+							        <th scope="col" style="width:15%; text-align:center;">날짜</th>
+							        <th scope="col" style="width:13%; text-align:center;">삭제유무</th>
+							        <th scope="col" style="width:10%; text-align:center;">조회수</th>
+							        <th scope="col" style="width:10%; text-align:center;">복구</th>
+							    </tr>
+							</thead>
+							<tbody>
+							    <c:forEach var="dto" items="${list}" >
+									<tr>
+										<th scope="row" style="text-align:center;">${dto.boardNo}</th>
+								        <td style="text-align:left"><a href="${path}/adBoardDetail.ad?boardNo=${dto.boardNo}">${dto.boardTitle}</a></td>
+								        <td>${dto.boardWriter}</td>
+								        <td>${fn: substring(dto.boardRegdate,0,19)}</td>
+								        <td>${dto.boardShow}</td>
+								        <td>${dto.boardViews}</td>
+								        <td>
+									        <c:if test="${dto.boardShow == 'N'}">
+									        	<button type="button" class="btn active"onclick="window.location='${path}/adBoardRestore.ad?boardNo=${dto.boardNo}'">복구</button>
+									        </c:if>
+								        </td>
+								    </tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<!-- 페이지컨트롤 시작 -->
+						<br>
+						<div style="width:900px; margin:auto" >
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item">
+										<c:if test="${paging.startPage > 10}">
+										    <a class="page-link" href="${path}/adBoardList.ad?pageNum=${paging.prev}" aria-label="Previous">
+										      <span aria-hidden="true">&laquo;</span>
+										    </a>
+									    </c:if>
+									</li>
+									
+									<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+										<li class="page-item"><a class="page-link" href="${path}/adBoardList.ad?pageNum=${num}">${num}</a></li>
+									</c:forEach>
+									
+									<li class="page-item">
+										<c:if test="${paging.endPage < paging.pageCount}">
+										    <a class="page-link" href="${path}/adBoardList.ad?pageNum=${paging.next}" aria-label="Next">
+										      <span aria-hidden="true">&raquo;</span>
+										    </a>
+									    </c:if>
+								    </li>
+								</ul>
+							</nav>
+						</div>
+						<!-- 페이지컨트롤 끝 -->
+					</form>
+					<!-- 게시글 목록 끝 -->
 					
-				<!-- 좌측 메뉴 시작 -->               					
-				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
-				<!-- 좌측메뉴 종료 -->
-				<!-- 우측매뉴 시작 -->
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">작성자</th>
-							<th scope="col">제목</th>
-							<th scope="col">조회수</th>
-							<th scope="col">등록일자</th>
-						</tr>
-					</thead>
-					<tbody class="table-group-divider">
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>운동하기 싫어요</td>
-							<td>1000</td>
-							<td>2024.12.05</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">2</th>
-							<td>Mark</td>
-							<td>운동이 좋아요</td>
-							<td>1</td>
-							<td>2024.11.24</td>
-						</tr>
-						
-						<tr>
-							<th scope="row">3</th>
-							<td>Mark</td>
-							<td>다이어트가 안되네요</td>
-							<td>2</td>
-							<td>2023.04.24</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<br>
-				<!-- 우측메뉴 종료 -->
-				<!-- 상단 중앙2 종료 -->
-			</div>
-			<p align="center">
-			SQL(자유게시판 목록)<br>
-			SELECT *<br>
-			FROM board_tb<br>
-			WHERE boardNo = boardNo<br>
-			AND boardShow = Y<br>
-			AND boardNo >= start<br>
-			AND boardNo <= end
-			</p>
-		</div>
-		<!-- 컨텐츠 끝 -->
-		<hr>
+				</div>
+			<!-- 컨텐츠 끝 -->
+			<hr>
 		</div>
 	</div>
-<!-- footer 시작 -->
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-<!-- footer 끝 -->
+	</div>
+	<!-- footer 시작 -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	<!-- footer 끝 -->
 </body>
 </html>

@@ -3,14 +3,6 @@
 <%@ include file="/WEB-INF/views/common/setting.jsp" %>
 <!DOCTYPE html>
 <html>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#qnaCommentEdit').click(function() {
-        // 폼을 수동으로 제출
-        $('form[name="CommentList"]').submit();
-    });
-});
-</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,44 +10,64 @@ $(document).ready(function() {
 <title>BoardCommentList</title>
 </head>
 <body>
-	
 	<div class="table_div">
-		<form name="CommentList" action="qnaCommentUpdate.bo" method="post">
-		<!-- 반복 -->
-			<c:forEach var="dto" items="${list}">
-				<table  border="1"cellpadding="10" style="border-radius: 5px; border-collapse: separate; border-spacing: 0; width: 800px; margin:auto;">
-					<tr style="background-color:#FFCD28">
-						<td >${dto.q_comWriter}님의 답변</td>
-						<td colspan="2" align="right"style="font-size:small">
-							${dto.q_comRegdate}
+		<c:forEach var="dto" items="${list}">
+			<form name="CommentList${dto.b_comNo}" action="boardCommentUpdate.bo" method="post">
+			<!-- 반복 -->
+				<table style="width: 100%; margin:auto;">
+					<tr>
+						<td rowspan="4" colspan="2" style="width:8%; text-align:center">
+							<c:if test="${dto.b_comType == 'trainer'}">
+								<i class="fa-solid fa-dumbbell fa-2xl" style="color: #FFD43B;"></i>
+							</c:if> 	
+							<c:if test="${dto.b_comType == 'admin'}">
+								<i class="fa-solid fa-user-tie fa-2xl" style="color: #ff0000;"></i>
+							</c:if>
+							<c:if test="${dto.b_comType == 'user'}">
+								<i class="fa-solid fa-user fa-2xl" style="color: #FFD43B;"></i>
+							</c:if>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><hr style="width:800px; margin:auto;">
+						<th style="width:83%">
+							${dto.b_comWriter}
+							
+						</th>
+						<td>
+							<c:if test="${sessionScope.sessionID == dto.b_comWriter || sessionScope.sessionType == 'admin' || sessionScope.sessionType == 'trainer'}">
+								<input type="hidden" name="hidden_b_comNo" id="hidden_b_comNo" value="${dto.b_comNo}">
+					 			<input type="hidden" name="hidden_boardNo" id="hidden_boardNo" value="${dto.boardNo}">
+					 			
+								<a href="javascript:commentUpdateBox${dto.b_comNo}();" style="pafont-size:13px; color: gray; text-decoration : underline; ">수정</a>
+								
+								<script type="text/javascript">
+									function commentUpdateBox${dto.b_comNo}(){
+										let editBox = '<div style="display: flex; align-items: center;">' +
+								        			      '<textarea style="width: 700px; margin-right: 10px;" name="b_comContent_re" id="b_comContent_re${dto.b_comNo}">' + '${dto.b_comContent}' + '</textarea>' +
+								                     	  '<button type="submit" class="btn active" id="boardInsert${dto.b_comNo}">수정</button>' +
+								                      '</div>';
+										$('#commentUpdate${dto.b_comNo}').html(editBox);
+										
+										$('#boardInsert' + ${dto.b_comNo}).click(function(){
+											$('form[name="CommentList${dto.b_comNo}"]').submit();
+										});
+										
+									}
+								</script>
+								<a href="${path}/boardCommentDelete.bo?b_comNo=${dto.b_comNo}&boardNo=${dto.boardNo}" style="pafont-size:13px; color: gray; text-decoration : underline;">삭제</a>
+							</c:if>
 						</td>
 					</tr>
 					<tr>
-						<td style="width:80%">${dto.q_comContent}</td>
-						
-				 	</tr>
-				 	<tr>
-				 		<c:if test="${sessionScope.sessionType == 'admin' || sessionScope.sessionType == 'trainer' || sessionScope.sessionID == dto.q_comWriter }" > 
-				 			<input type="hidden" name="hidden_q_comWriter" id="hidden_q_comWriter" value="${sessionScope.sessionID}">
-				 			<input type="hidden" name="hidden_q_comNo" id="hidden_q_comNo" value="${dto.q_comNo}">
-				 			<input type="hidden" name="hidden_qnaNo" id="hidden_qnaNo" value="${dto.qnaNo}">
-					 		<td>
-					 			<textarea style="width:700px; margin:auto;"name="q_comContent_re" id="q_comContent_re" rows="3" class="form-control form-control-lg" placeholder="수정할 내용을 입력해주세요"></textarea>
-					 		</td>
-				 			<td style="width:10%" align="center">
-								<button type="submit" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentEdit">수정</button>
-								<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" onclick="window.location='${path}/qnaCommentDelete.bo?q_comNo=${dto.q_comNo}&qnaNo=${dto.qnaNo}&q_comWriter=${dto.q_comWriter}'">삭제</button>
-							</td>
-						</c:if>
-				 	</tr>
+						<td colspan="2" style="font-size:13px; padding-bottom:10px">${fn: substring(dto.b_comRegdate,0,19)}</td>
+					</tr>
+					<tr>
+						<td id="commentUpdate${dto.b_comNo}" style="width:760px">${dto.b_comContent}</td>
+					</tr>
 				</table>
-		   		<br><br>
-			</c:forEach>
-      </form>
+				<hr>
+    	  </form>
+      </c:forEach>
    </div>
 </body>
 </html>

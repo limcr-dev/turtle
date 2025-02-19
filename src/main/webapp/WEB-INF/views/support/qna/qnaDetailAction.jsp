@@ -156,8 +156,8 @@
 					</td>
 				</tr>
 			    <tr>
-					<th colspan="5" style="width:5%">
-						<h2>${dto.qnaTitle}</h2>
+					<th colspan="5" style="width:20%">
+						<h3>${dto.qnaTitle}</h3>
 					</th>
 					<td align="right" colspan="5" style="width:5%"> 
 						작성자 : ${dto.qnaWriter}<br>
@@ -186,7 +186,12 @@
 				    <td colspan="7" align="center">
 					    <div class="row g-3 align-items-center">
 							<div class="col-md-4" >
-								<h5>추가문의</h5>
+								<c:if test="${sessionScope.sessionType == 'admin' || sessionScope.sessionType == 'trainer'}">
+									<h5 style="text-align:left; margin-left:100px;">답변</h5>
+								</c:if>
+								<c:if test="${sessionScope.sessionType == 'user'}">
+									<h5 style="text-align:left; margin-left:100px;">추가문의</h5>
+								</c:if>
 							</div>
 						</div>
 						<div class="row form-group">
