@@ -39,8 +39,8 @@ function page() {
 						<table class="table" style="width:900px; margin:auto;">
 							<thead>
 							    <tr>
-							      <th scope="col" style="width:10%; text-align:center;">번호</th>
-							        <th scope="col" style="width:40%; text-align:center;">제목</th>
+							      <th scope="col" style="width:8%; text-align:center;">번호</th>
+							        <th scope="col" style="width:30%; text-align:center;">제목</th>
 							        <th scope="col" style="width:15%; text-align:center;">작성자</th>
 							        <th scope="col" style="width:15%; text-align:center;">날짜</th>
 							        <th scope="col" style="width:10%; text-align:center;">
@@ -55,8 +55,8 @@ function page() {
 												<c:if test="${statusType == '답변완료'}">selected="selected"</c:if>>답변완료</option>
 										</select>
 							        </th>
-							        <th scope="col" style="width:10%; text-align:center;">삭제유무</th>
-							        
+							        <th scope="col" style="width:13%; text-align:center;">삭제유무</th>
+							        <th scope="col" style="width:10%; text-align:center;">복구</th>
 							    </tr>
 							</thead>
 							<tbody>
@@ -68,6 +68,11 @@ function page() {
 								        <td>${dto.qnaRegdate}</td>
 								        <td>${dto.qnaStatus}</td>
 								        <td>${dto.qnaShow}</td>
+								        <td>
+									        <c:if test="${dto.qnaShow == 'N'}">
+									        	<button type="button" class="btn active"onclick="window.location='${path}/adQnaRestore.ad?qnaNo=${dto.qnaNo}'">복구</button>
+									        </c:if>
+								        </td>
 								    </tr>
 								</c:forEach>
 							</tbody>

@@ -25,6 +25,7 @@
 		document.querySelector('input[name="userAddress"]').value = roadFullAddr;
 	}
 </script>
+
 <body>
 	<div class="wrap">
 		<!-- header 시작 -->
@@ -44,6 +45,7 @@
 							
 							<!-- 중복확인 -->
 							<input type="hidden" name="hiddenUserid" value="0">
+							<input type="hidden" name="hiddenUserEmail" value="0">
 							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
@@ -84,6 +86,28 @@
 								</div>
 								<div class="col-md-10">
 									<input type="text" id="userName" name="userName" class="form-control  form-control-lg" placeholder="이름을 입력하세요" required>
+								</div>
+							</div>
+							<br>
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
+									성별
+								</div>
+								<div class="col-md-6">
+								 	<input type="radio" class="btn-check" name="userGender" id="M" value="M" autocomplete="off" required>
+									 	<label class="btn btn-outline-secondary" for="M"> 
+									 		&nbsp; &nbsp; &nbsp; &nbsp; M (남) &nbsp; &nbsp; &nbsp; &nbsp; 
+									 	</label> &nbsp; &nbsp;&nbsp; 
+									<input type="radio" class="btn-check" name="userGender" id="F" value="F" autocomplete="off" required>
+								 		<label class="btn btn-outline-secondary" for="F"> 
+								 			&nbsp; &nbsp; &nbsp; &nbsp;F (여)  &nbsp; &nbsp; &nbsp; &nbsp; 
+								 		</label>
+								</div>
+								<div class="col-md-4">
+									<span id="userGenderHelpInline" class="form-text" style="font-size:22">
+								      성별을 선택하세요
+								    </span>
 								</div>
 							</div>
 							<br>
@@ -147,12 +171,12 @@
 								<div class="col-md-2">
 									이메일
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-2">
 								
 								  <label class="visually-hidden" for="specificSizeInputName">Name</label>
 								  <input type="text" class="form-control form-control-lg" id="userEmail1" name="userEmail1" placeholder="이메일" required>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-3">
 								  <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
 								  <div class="input-group">
 								    <div class="input-group-text">@</div>
@@ -169,12 +193,9 @@
 								    <option value="nate.com">네이트</option>
 								  </select>
 								</div>
-							</div>
-							<br>
-	
-							<div class="row form-group">
-								<!-- <label for="message">Message</label> -->
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control form-control-lg" placeholder="체형에 대한 고민을 작성해주세요"></textarea>
+								<div class="col-md-2">
+									<input type="button" class="btn btn-secondary" name="emailCheck" value="이메일중복" onclick="emailCheck()">
+								</div>
 							</div>
 							<br>
 							

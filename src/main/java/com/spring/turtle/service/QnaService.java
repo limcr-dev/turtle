@@ -49,62 +49,7 @@ public interface QnaService {
 	public void qnaCommentDelete(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
 	
-	
-
-	
-	
-	// ------공지사항-------
-	// 공지 목록
-	public void noticeListAction(HttpServletRequest request, HttpServletResponse response, Model model)
+	// 1대1문의 복구 
+	public void adQnaRestoreAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
-			
-	// 공지 상세페이지
-	public void noticeDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-	
-	// ------이벤트------
-	// 이벤트 목록
-	public void eventListAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// 이벤트 상세페이지
-	public void eventDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-	
-	
-	// ------FAQ------
-	// FAQ 목록
-	public void faqListAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// FAQ 상세내용
-	public void faqDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-	
-	
-	// ------자유게시판------
-	// 자유게시판 게시글 목록
-	public void boardListAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// 자유게시판 게시글 작성
-	public void boardInsertAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// 자유게시판 게시글 상세페이지
-	public void boardDetailAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// 자유게시판 게시글 삭제
-	public void boardDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// 자유게시판 게시글 댓글 작성
-	public void boardCommentAddAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
-	// 자유게시판 게시글 댓글 수정
-	public void boardCommentUpdateAction(HttpServletRequest request, HttpServletResponse response, Model model)
-			throws ServletException, IOException;
-			
 }

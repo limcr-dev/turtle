@@ -128,22 +128,20 @@
 						<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
 						  삭제
 						</button>
-						<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-							        		<h1 class="modal-title fs-5" id="exampleModalLabel">확인</h1>
-							       			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      		</div>
-								     	<div class="modal-body">
-								        	삭제하겠습니까?
-								      	</div>
-								      	<div class="modal-footer">
-								        	<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="qnaDelete">예</button>
-								        	<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">아니요</button>
-								      	</div>
-									</div>
+						<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+						        		<h1 class="modal-title fs-5" id="exampleModalLabel">확인</h1>
+						       			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      		</div>
+							     	<div class="modal-body">
+							        	삭제하겠습니까?
+							      	</div>
+							      	<div class="modal-footer">
+							        	<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="qnaDelete">예</button>
+							        	<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">아니요</button>
+							      	</div>
 								</div>
 							</div>
 						</div>

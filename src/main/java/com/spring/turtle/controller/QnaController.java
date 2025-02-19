@@ -204,47 +204,16 @@ public class QnaController {
 		
 		return null;
 	}	
-	
-	// 공지사항 목록
-	@RequestMapping("/noticeList.bo")
-	public String noticeList() {
-		logger.info("<<< url ==>  /noticeList.bo >>>");
-		return "support/notice/noticeList";
-	}
+	// FAQ 복구 관리자
+	@RequestMapping("/adQnaRestore.ad")
+	public String adQnaRestore(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaRestore.ad >>>");
+		service.adQnaRestoreAction(request, response, model);
 		
-	// 공지사항 상세 페이지
-	@RequestMapping("/noticeDetail.bo")
-	public String noticeDetail() {
-		logger.info("<<< url ==>  /noticeDetail.bo >>>");
-		return "support/notice/noticeDetail";
-	}
-	
-	// 이벤트 목록
-	@RequestMapping("/eventList.bo")
-	public String eventList() {
-		logger.info("<<< url ==>  /eventList.bo >>>");
-		return "support/event/eventList";
-	}
-	
-	// 자유게시판 목록
-	@RequestMapping("/boardList.bo")
-	public String boardList() {
-		logger.info("<<< url ==>  /boardList.bo >>>");
-		return "support/board/boardList";
-	}
-	
-	// 자유게시판 목록
-	@RequestMapping("/boardDetail.bo")
-	public String boarDetail() {
-		logger.info("<<< url ==>  /boardDetail.bo >>>");
-		return "support/board/boardDetail";
-	}
+		viewPage = request.getContextPath() +  "/adQnaList.ad";
+		response.sendRedirect(viewPage);
 		
-	// FAQ 목록
-	@RequestMapping("/faqList.bo")
-	public String faqList() {
-		logger.info("<<< url ==> /faqList.bo >>>");
-		return "support/faq/faqList";
+		return null;
 	}
-
 }
