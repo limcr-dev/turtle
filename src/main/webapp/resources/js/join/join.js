@@ -1,6 +1,9 @@
 /**
  * join.js
  */
+// 전역 변수 선언
+let ResponseCode = 'global';
+let email_auth_result = 0; 
  
 // join.jsp - 이메일 체크
 function selectEmailChk(){
@@ -28,9 +31,7 @@ function u_selectEmailChk(){
 		document.modifyform.userEmail2.value = document.modifyform.userEmail3.value;
 		return false;
 	}
-	
 }
-
  
  
 // 아이디 중복확인 버튼 클릭시
@@ -49,6 +50,69 @@ function confirmId(){
 }
 
 
+// 이메일 중복확인 버튼 클릭시
+function confirmEmail(){
+
+	// 중복확인 버튼 클릭시 컨트롤러로 url을 전달, 컨트롤러에 추가
+	userEmail = document.inputform.userEmail1.value + "@" + document.inputform.userEmail2.value
+	let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
+	window.open(url, "confirm", "menubar=no, width=600, height=500");
+}
+
+
+// 이메일 중복확인창에서 중복 확인 버튼 클릭시
+function confirmEmail2(){
+
+	// 중복확인 버튼 클릭시 컨트롤러로 url을 전달, 컨트롤러에 추가
+	userEmail = document.confirmform.userEmail1.value + "@" + document.confirmform.userEmail2.value
+	let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
+	window.open(url, "confirm", "menubar=no, width=600, height=500");
+}
+
+// 인증코드 발송 버튼 클릭시
+function sendEmail(){
+	
+	// 이메일 주소를 url에서 가져오기
+	const urlParams = new URL(window.location.href).searchParams; // 전체 url 가져오기
+	const Emailaddr = urlParams.get('userEmail'); // url에서 필요한 파라미터 찾아 반환하기
+		
+    // 랜덤 인증 코드(6자리) 생성 
+    ResponseCode = Math.floor(Math.random() * 900000 + 100000);
+
+	(function() {
+        // EmailJS 계정 경로 : https://dashboard.emailjs.com/admin/account
+        emailjs.init({
+          // EMailJS API 연결을 위한 공유 Key
+          publicKey: "BmjcXuKqOZnx3hUmY",
+        });
+		// 연결된 GMail 계정메일로 입력 받은 이메일 주소(user_email)로 메일 전송
+        emailjs.send("service_or095gz","template_1j62m25", {to_name:Emailaddr, from_name: "seb.dev.it@gmail.com", message:ResponseCode});
+    })();
+	alert("인증 메일을 전송하였습니다. 입력한 메일 수신함에서 인증메일을 확인해 주세요.(60초 뒤에 재발송이 가능합니다.)");
+	                
+    // 타이머 설정 및 화면에 출력
+    // timer_start();
+            
+    // 인증 msg 인증코드 발송 성공. (60초 뒤부터 재발송 가능합니다.)
+    // code_msg.textContent = "인증코드를 전송하였습니다. (60초 뒤에 재발송이 가능합니다.)";
+}
+    
+
+// 인증코드 확인 버튼 클릭할 때
+function confirmAuth(){
+
+    let code = auth_input.value;
+    // alert(code);
+    // 인증코드 검사 
+    if(ResponseCode == code){
+    	alert("이메일 인증에 성공하였습니다.");
+    	email_auth_result = 1;
+    }
+    else{
+    // 검증 실패
+    alert("인증코드가 일치하지 않습니다. 다시 인증하여 주십시오.");
+    }
+}
 
 
 // 2. join.jsp - onsubmit - 회원가입페이지 필수 체크
@@ -58,9 +122,16 @@ function signInCheck(){
 	// <input type="hidden" name="hiddenUserid" value="0"> 
 	// hiddenUserid : 중복확인 버튼 클릭여부 체크(0:클릭안함, 1:클릭함)
 	
-	// 2-2. 중복확인 버튼을 클릭하지 않는 경우 "중복확인 해주세요!" 메세지 띄운다.
+	// 2-2. ID 중복 확인 버튼을 클릭하지 않는 경우 "중복확인 해주세요!" 메세지 띄운다.
 	if(document.inputform.hiddenUserid.value == "0"){
-		alert("중복확인 해주세요!");
+		alert("ID 중복확인 해주세요!");
+		document.inputform.dubChk.focus();
+		return false;
+	}
+	
+	// 2-3. Email 중복 확인 버튼을 클릭하지 않는 경우 "중복확인 해주세요!" 메세지 띄운다.
+	if(document.inputform.hiddenUserEmail.value == "0"){
+		alert("이메일 인증 해주세요!");
 		document.inputform.dubChk.focus();
 		return false;
 	}
@@ -94,10 +165,16 @@ function modifyCheck(){
 */
 
 function setUserid(userId){
-	// alert(userid);
 	opener.document.inputform.userId.value= userId;
 	opener.document.inputform.hiddenUserid.value= "1";
 	self.close();
 }
 
-
+function setUserEmail(userEmail){
+	mail = userEmail;
+	var user_email = mail.split('@')
+	opener.document.inputform.userEmail1.value= user_email[0];
+	opener.document.inputform.userEmail2.value= user_email[1];
+	opener.document.inputform.hiddenUserEmail.value = "1";
+	self.close();
+}

@@ -12,6 +12,9 @@
 		 WHERE userId = #{userId} 
 	</select>
 	
+	<!--  Email 중복확인 처리  -->
+	<select id="useremailCheck" parameterType="String" resultType="int"> SELECT COUNT(*) FROM user_tb WHERE userEmail = #{userEmail} </select>
+		
 	<!--  회원가입처리  -->
 	<insert id="insertUser" parameterType="com.spring.turtle.dto.UserDTO"> 
 		INSERT INTO user_tb (userId, userPw, userName, userGender, userAddress, userBirthday, userHp, userEmail, userShow, userType) 
