@@ -34,6 +34,15 @@ public class QnaController {
 		
 		return "support/qna/qnaList";
 	}
+	// 1:1 문의 목록 관리자
+	@RequestMapping("/adQnaList.ad")
+	public String adQnaList(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaList.ad >>>");
+		service.adQnaListAction(request, response, model);
+		
+		return "admin/support/qna/adQnaList";
+	}
 	// 1:1 상세페이지
 	@RequestMapping("/qnaDetailAction.bo")
 	public String qnaDetailAction(HttpServletRequest request, HttpServletResponse response, Model model) 
@@ -42,7 +51,16 @@ public class QnaController {
 		service.qnaDetailAction(request, response, model);
 		
 		return "support/qna/qnaDetailAction";
-	}	
+	}
+	// 1:1 상세페이지 관리자
+	@RequestMapping("/adQnaDetailAction.ad")
+	public String adQnaDetailAction(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaDetailAction.bo >>>");
+		service.qnaDetailAction(request, response, model);
+		
+		return "admin/support/qna/adQnaDetailAction";
+	}
 	
 	// 1대1문의 작성 페이지
 	@RequestMapping("/qnaInsert.bo")
@@ -71,6 +89,15 @@ public class QnaController {
 		
 		return "support/qna/qnaCommentList";
 	}	
+	// 1대1문의 댓글목록 댓글관리자
+	@RequestMapping("/adQnaCommentList.ad")
+	public String adQnaCommentList(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaDetailAction.bo >>>");
+		service.qnaCommentListAction(request, response, model);
+		
+		return "admin/support/qna/adQnaCommentList";
+	}
 	// 1대1문의 댓글 추가 
 	@RequestMapping("/qnaCommentInsert.bo")
 	public String qnaCommentInsert(HttpServletRequest request, HttpServletResponse response, Model model) 
@@ -114,6 +141,17 @@ public class QnaController {
 		return null;
 	}	
 	
+	// 1대1문의 삭제 관리자
+	@RequestMapping("/adQnaDelete.ad")
+	public String adQnaDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaDelete.ad >>>");
+		service.qnaDeleteAction(request, response, model);
+		
+		viewPage = request.getContextPath() +  "/adQnaList.ad";
+		response.sendRedirect(viewPage);
+		return null;
+	}	
 	// 1대1문의 댓글 삭제
 	@RequestMapping("/qnaCommentDelete.bo")
 	public String qnaCommentDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model) 
@@ -126,7 +164,18 @@ public class QnaController {
 		response.sendRedirect(viewPage);
 		return null;
 	}
-	
+	// 1대1문의 댓글 삭제 관리자
+	@RequestMapping("/adQnaCommentDelete.ad")
+	public String adQnaCommentDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaCommentDeleteAction.ad >>>");
+		
+		service.qnaCommentDelete(request, response, model);
+		int qnaNo = (int) request.getAttribute("qnaNo");
+		viewPage = request.getContextPath() +  "/adQnaDetailAction.ad?qnaNo=" + qnaNo;
+		response.sendRedirect(viewPage);
+		return null;
+	}	
 	// 1대1문의 댓글 수정
 	@RequestMapping("/qnaCommentUpdate.bo")
 	public String qnaCommentUpdate(HttpServletRequest request, HttpServletResponse response, Model model) 
@@ -141,7 +190,20 @@ public class QnaController {
 		
 		return null;
 	}
-	
+	// 1대1문의 댓글 수정 관리자
+	@RequestMapping("/adQnaCommentUpdate.ad")
+	public String adQnaCommentUpdate(HttpServletRequest request, HttpServletResponse response, Model model) 
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adQnaCommentUpdate.ad >>>");
+		
+		service.qnaCommentUpdateAction(request, response, model);
+		
+		int qnaNo = (int) request.getAttribute("qnaNo");
+		viewPage = request.getContextPath() +  "/adQnaDetailAction.ad?qnaNo=" + qnaNo;
+		response.sendRedirect(viewPage);
+		
+		return null;
+	}	
 	
 	// 공지사항 목록
 	@RequestMapping("/noticeList.bo")
@@ -183,16 +245,6 @@ public class QnaController {
 	public String faqList() {
 		logger.info("<<< url ==> /faqList.bo >>>");
 		return "support/faq/faqList";
-	}
-	
-	// 1:1 문의 목록
-	@RequestMapping("/adQnaList.ad")
-	public String adQnaList(HttpServletRequest request, HttpServletResponse response, Model model) 
-			throws ServletException, IOException {
-		logger.info("<<< url ==>  /adQnaList.ad >>>");
-		service.qnaListAction(request, response, model);
-		
-		return "admin/support/qna/adQnaList";
 	}
 
 }

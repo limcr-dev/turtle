@@ -17,89 +17,132 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 		<!-- header 끝 -->
 		<br>
-		
-		<div id="container">
-			<div id="contents">
-				<div id="section1">
-					<h1 align="center">헬스 회원 등록</h1>
-				</div>
-				
-				<div id="section2">
-					<div id="right">
-						<div class="table_div">
-							<form name="adHealthInsert" action="adHealthInsertAction.ad" method="post" enctype="multipart/form-data">
-								<table>
-									<tr>
-										<th> 아이디 </th>
-										<td>
-											<input type="text" class="input" name="userId" id="userId" size="50">
-										</td>
-									</tr>
-									
-									<tr>
-										<th> 이름 </th>
-										<td>
-											<input type="text" class="input" name="userName" id="userName" size="50">
-										</td>
-									</tr>
-									
-									<tr>
-										<th> 핸드폰번호 </th>
-										<td>
-											<input type="text" class="input" name="userHp1" size="3" style="width:50px">
-											-
-											<input type="text" class="input" name="userHp2" size="4" style="width:70px">
-											-
-											<input type="text" class="input" name="userHp3" size="4" style="width:70px">
-										</td>
-									</tr>
-									
-									<tr>
-										<th> 상품이미지 </th>
-										<td>
-											<input type="file" class="input" name="hmImg" id="hmImg" accept="image/*" required>
-										</td>
-									</tr>
-									
-									<tr>
-										<th> P.T 횟수 </th>
-										<td>
-											<select class="input" name="ptCnt" id="ptCnt" required>
-												<option value="">횟수</option>
-												<option value=12>12회</option>
-												<option value=24>24회</option>
-												<option value=36>36회</option>
-											</select>
-										</td>
-									</tr>
-									
-									<tr>
-										<th>상태</th>
-										<td>
-											<input type="text" class="input" name="healthStatus" id="healthStatus" size="50">
-										</td>
-									</tr>
-									
-									<tr>	
-										<td colspan ="2">
-											<br>
-											<div align="right">
-												<input class="inputButton" type="submit" value="등록">
-												<input class="inputButton" type="reset" value="초기화">
-												<input class="inputButton" type="button" value="회원목록" onclick="window.location='${path}/adHealthList.ad'"> 
-											</div>
-										</td>
-									</tr>
-								</table>
-							</form>
-						</div>
+		<div id="fh5co-contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+					</div>		
+					<div class="col-md-8 animate-box">
+						<p class="fs-1" align="center">헬스회원 등록</p>
+						<br>
+						
+						<form name="inputform" action="adHealthInsertAction.ad" method="post" enctype="multipart/form-data"
+						onsubmit="return signInCheck()">
+							
+							
+							<input type="hidden" name="hiddenSearchId" value="0">
+							
+							<input type="hidden" name="hiddenUserid" value="">
+							<input type="hidden" name="hiddenuserName" value="">
+							<input type="hidden" name="hiddenuserHp" value="">
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
+									아이디
+								</div>
+								<div class="col-md-8">
+									<input type="text" name="userId" id="userId" class="form-control form-control-lg" placeholder="아이디를 입력하세요" required autofocus>
+								</div>
+								<div class="col-md-2">
+									<input type="button" class="btn btn-light" name="dubChk" value="아이디 조회" onclick="searchId()">
+								</div>
+							</div>
+							<br>
+							
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
+									이름
+								</div>
+								<div class="col-md-10">
+									<input type="text" id="userName" name="userName" class="form-control  form-control-lg" disabled>
+								</div>
+							</div>
+							<br>
+							
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
+									전화번호
+								</div>
+								<div class="col-md-10">
+									<input type="text" id="userHp" name="userHp" class="form-control form-control-lg" disabled>
+								</div>
+							</div>
+							<br>
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
+									회원 이미지
+								</div>
+								<div class="col-md-10">
+									<input type="file" id="hmImg" name="hmImg" class="form-control  form-control-lg" accept="image/*" required>
+								</div>
+							</div>
+							<br>
+							
+							<div class="row g-3 align-items-center">
+							    <div class="col-md-2">
+							        등록 기간
+							    </div>
+							    <div class="col-md-5 d-flex align-items-center gap-2">
+							        <input type="date" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg" required>
+							        <span>~</span>
+							        <input type="date" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg">
+							    </div>
+							</div>
+							<br>
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
+									P.T 등록 횟수
+								</div>
+								<div class="col-md-3">
+								  <label class="visually-hidden" for="specificSizeSelect">Preference</label>
+								  <select class="form-select  form-select-lg" id="ptCnt" name="ptCnt">
+								    <option value="">횟수</option>
+									<option value=12>12회</option>
+									<option value=24>24회</option>
+									<option value=36>36회</option>
+								  </select>
+								</div>
+							</div>
+							<br>
+							
+							<div class="row g-3 align-items-center">
+							    <div class="col-md-2">
+							        상태
+							    </div>
+							    <div class="col-md-10 d-flex align-items-center gap-3">
+							        <div class="form-check">
+							            <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus1" value="헬스">
+							            <label class="form-check-label" for="healthStatus1">
+							                헬스
+							            </label>
+							        </div>
+							        <div class="form-check">
+							            <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus2" value="PT">
+							            <label class="form-check-label" for="healthStatus2">
+							                P.T
+							            </label>
+							        </div>
+							    </div>
+							</div>
+							<br>
+							
+							<div class="form-group" align="right">
+								<input class="btn btn-light" type="submit" value="등록">
+								<input class="btn btn-light" type="reset" value="초기화">
+								<input class="btn btn-light" type="button" value="회원목록" onclick="window.location='${path}/adHealthList.ad'"> 
+							</div>					
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-			
 		<br>
+		
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	<!-- footer 끝 -->

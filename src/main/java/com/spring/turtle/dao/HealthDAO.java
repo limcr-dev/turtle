@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spring.turtle.dto.HealthDTO;
+import com.spring.turtle.dto.UserDTO;
 
 public interface HealthDAO {
 	
@@ -13,8 +14,8 @@ public interface HealthDAO {
 	// 헬스회원 목록
 	public List<HealthDTO> healthList(Map<String, Object> map);
 		
-	// 이름 조회
-	public int userNameCheck(int userNo);
+	// 헬스회원 등록시(Id 조회)
+	public UserDTO userIdCheck(String userId);
 		
 	// 헬스회원 등록 처리
 	public int healthInsert(HealthDTO dto);

@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.turtle.dao.HealthDAOImpl;
 import com.spring.turtle.dto.HealthDTO;
+import com.spring.turtle.dto.UserDTO;
 import com.spring.turtle.page.Paging10;
 
 @Service
@@ -49,21 +50,37 @@ public class HealthServiceImpl implements HealthService{
 			map.put("start", start);
 			map.put("end", end);
 			
+			String statusType = "";
+			if(request.getParameter("statusType") != null) {
+				statusType = request.getParameter("statusType");
+			}
+			map.put("statusType", statusType);
+			
 			List<HealthDTO> list = dao.healthList(map);
 			
 			System.out.println("list(Service)" + list);
 			
-			
+			model.addAttribute("statusType", statusType);
 			model.addAttribute("list", list);
 			model.addAttribute("paging", paging);
 	}
 	
-	// 헬스 회원 등록(이름조회)
+	// 헬스회원 등록시(Id 조회)
 	@Override
-	public void nameCheckAction(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void IdCheckAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
 		
+		System.out.println("HealthServiceImpl - IdCheckAction");
 		
+		String userId = request.getParameter("userId");
+		System.out.println("userId" + userId);
+		UserDTO dto = dao.userIdCheck(userId);
+		
+		System.out.println("dto : " + dto);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("userId", userId);
+
 	}
 	
 	// 헬스 회원 등록 
@@ -94,19 +111,9 @@ public class HealthServiceImpl implements HealthService{
 			
 			HealthDTO dto = new HealthDTO();
 			
-			dto.setUserName(request.getParameter("userName"));
-			dto.setUserId(request.getParameter("userId"));
-			System.out.println("userName");
-			
-			
-			String userHp1 = request.getParameter("userHp1");
-			String userHp2 = request.getParameter("userHp2");
-			String userHp3 = request.getParameter("userHp3");
-			String userHp = "";
-			if(!userHp1.equals("") && !userHp2.equals("") && !userHp3.equals("")) {
-				userHp = userHp1 + "-" + userHp2 + "-" + userHp3;
-			}
-			dto.setUserHp(userHp);
+			dto.setUserName(request.getParameter("hiddenuserName"));
+			dto.setUserId(request.getParameter("hiddenUserid"));
+			dto.setUserHp(request.getParameter("hiddenuserHp"));
 			
 			String HmImg = "/turtle/resources/images/healthMember/" + file.getOriginalFilename();
 			dto.setHealthImg(HmImg);

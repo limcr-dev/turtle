@@ -38,45 +38,41 @@
 		<!-- 상단 메뉴바 끝 -->
 		
 		<!-- 작성칸 시작 -->
-			<br>	
-			<hr>
-			<div id="fh5co-contact">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-2">
-						</div>
-						<div class="col-md-8 animate-box">
-							<p class="fs-1">문의글 작성</p>
+		<br>	
+		<hr>
+		<div id="fh5co-contact">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8 animate-box">
+						<p class="fs-1">문의글 작성</p>
+						<br>
+						<form name="inputform" action="qnaInsertAction.bo" method="post">
+							<div class="row g-3 align-items-center">
+								<div class="col-md-1">
+									<h5>제목</h5>
+								</div>
+								<div class="col-md-11">
+									<input type="text" name="qnaTitle" id="qnaTitle" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
+								</div>
+							</div>
 							<br>
-							<form name="inputform" action="qnaInsertAction.bo" method="post">
-								
-								
-								<div class="row g-3 align-items-center">
-									<div class="col-md-1">
-										<h5>제목</h5>
-									</div>
-									<div class="col-md-11">
-										<input type="text" name="qnaTitle" id="qnaTitle" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
-									</div>
-								</div>
-								<br>
-		
-								<div class="row form-group">
-									<!-- <label for="message">Message</label> -->
-									<textarea name="qnaContent" id="qnaContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
-								</div>
-								<br>
-								
-								<div class="form-group" align="right">
-									<input type="submit" value="작성" class="btn btn-warning">
-									<input type="reset" value="초기화" class="btn btn-warning">
-									<input type="button" value="작성취소" class="btn btn-warning" onclick="window.location='main.do'">
-								</div>
-							</form>	
-						</div>	
-					</div>
+	
+							<div class="row form-group">
+								<textarea name="qnaContent" id="qnaContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
+							</div>
+							<br>
+							
+							<div class="form-group" align="right">
+								<input type="submit" value="작성" class="btn btn-warning">
+								<input type="reset" value="초기화" class="btn btn-warning">
+								<input type="button" value="작성취소" class="btn btn-warning" onclick="window.location='main.do'">
+							</div>
+						</form>	
+					</div>	
 				</div>
 			</div>
+		</div>
 		<!-- 작성칸 끝 -->
 	</div>
 	

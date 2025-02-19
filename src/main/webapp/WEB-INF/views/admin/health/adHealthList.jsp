@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>adHealthList</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
+<script type="text/javascript">
+function page() {
+	document.getElementById("healthForm").submit();
+}
+
+</script>
 <script>
 	$(function(){
 		$("#btnInsert").click(function(){
@@ -36,75 +42,93 @@
 				<!-- 상단 중앙2 시작 -->
 				<div id="section2">
 					<!-- 좌측 메뉴 시작 -->               					
-					<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
-					<!-- 좌측 메뉴 종료 -->
-						
-						<!-- 우측 화면 시작 -->
-						<table class = "table">
-							<tr>
-								<th scope="col">회원번호</th>
-								<th scope="col">회원 이미지</th>
-								<th scope="col">이름</th>
-								<th scope="col">전화번호</th>
-								<th scope="col">유형</th>
-								<th scope="col">등록기간</th>
-							</tr>
-						
-						
-						<c:forEach var='dto' items="${list}">
-							<tr>
-								<td>${dto.healthNo}</td>
-								<td><img src = "${dto.healthImg}" width="100px"></td>
-								<td>${dto.userName}</td>
-								<td>${dto.userHp}</td>
-								<td>${dto.healthStatus}</td>
-								<td>
-									${dto.healthStartDate} ~ ${dto.healthEndDate}
-								</td>
-								<td>
-									<input class="" type="button" value="수정"
-									onclick="window.location = '${path}/adHealthDetailAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
-									<input class="" type="button" value="삭제"
-									onclick="window.location = '${path}/adHealthDeleteAction.ad?healthNo=${dto.healthNo}'">
-								</td>
-							</tr>
-						</c:forEach>
-						
-							<tr>
-	                            <td colspan=11" align="center">
-	                                <ul class="pagination">
-	                                    <!-- 이전 버튼 -->
-	                                    <c:if test="${paging.startPage > paging.pageSize}">
-	                                        <li><a href="${path}/ad_product_list.pd?pageNum=${paging.prev}" class="prevPage">«</a></li>
-	                                    </c:if>
-	                                    
-	                                    <!-- 페이징 번호 -->
-	                                    <c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-	                                        <li>
-	                                            <a href="${path}/ad_product_list.pd?pageNum=${num}" 
-	                                               class="<c:if test='${num == paging.currentPage}'>active</c:if>">${num}</a>
-	                                        </li>
-	                                    </c:forEach>
-	                                    
-	                                    <!-- 다음 버튼 -->
-	                                    <c:if test="${paging.endPage < paging.pageCount}">
-	                                        <li><a href="${path}/ad_product_list.pd?pageNum=${paging.next}" class="nextPage">»</a></li>
-	                                    </c:if>
-	                                </ul>
-	                            </td>
-	                        </tr> 
-                                       
-                            <tr>
-                               <td colspan=11" align="center">
-                                  <input type="button" class="inputButton" value="등록" id="btnInsert">
-                               </td>
-                            </tr>
-					</table>
-						<!-- 우측 화면 종료 -->		
-								
-				<!-- 상단 중앙2 종료 -->
+					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
+					<!-- 좌측메뉴 종료 -->
+					
+					<!-- 헬스회원 목록 -->	
+					<form name="healthForm" id="healthForm" method="post" style="width:1300px">
+						<table class="table" style="width:900px; margin:auto;">
+							<thead>
+								<tr>
+									<th scope="col" style="width:10%; text-align:center;">등록번호</th>
+									<th scope="col" style="width:10%; text-align:center;">회원 이미지</th>
+									<th scope="col" style="width:10%; text-align:center;">이름</th>
+									<th scope="col" style="width:20%; text-align:center;">전화번호</th>
+									<th scope="col" style="width:10%; text-align:center;">
+									<select class="" name="statusType" id="listSize" onchange="page()">
+										<option value=""
+											<c:if test="${statusType == ''}">selected="selected"</c:if>>전체유형</option>
+										<option value="헬스"
+											<c:if test="${statusType == '헬스'}">selected="selected"</c:if>>헬스</option>
+										<option value="PT"
+											<c:if test="${statusType == 'PT'}">selected="selected"</c:if>>PT</option>
+									</select>
+									</th>
+									<th scope="col" style="width:30%; text-align:center;">등록기간
+									</th>
+									<th scope="col" style="width:10%; text-align:center;">설정</th>
+								</tr>
+							</thead>							
+							<tbody>
+								<c:forEach var='dto' items="${list}">
+									<tr>
+										<td style="vertical-align: middle;">${dto.healthNo}</td>
+										<td><img src = "${dto.healthImg}" width="100px"></td>
+										<td style="vertical-align: middle;">${dto.userName}</td>
+										<td style="vertical-align: middle;">${dto.userHp}</td>
+										<td style="vertical-align: middle;">${dto.healthStatus}</td>
+										<td style="vertical-align: middle;">
+											${dto.healthStartDate} ~ ${dto.healthEndDate}
+										</td>
+										<td>
+											<div>
+											<input class="btn btn-light" type="button" value="수정"
+											onclick="window.location = '${path}/adHealthDetailAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
+											</div>
+											<br>
+											<div>
+											<input class="btn btn-light" type="button" value="삭제"
+											onclick="window.location = '${path}/adHealthDeleteAction.ad?healthNo=${dto.healthNo}'">
+											</div>											
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+								<tr>
+	                               <td colspan=11" align="center">
+	                                  <input type="button" class="btn btn-light" value="등록" id="btnInsert">
+	                               </td>
+                            	</tr>					
+						</table>						
+						<br>
+						<div style="width:900px; margin:auto" >
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item">
+										<c:if test="${paging.startPage > 10}">
+										    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
+										      <span aria-hidden="true">&laquo;</span>
+										    </a>
+									    </c:if>
+									</li>
+									
+									<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+										<li class="page-item"><a class="page-link" href="${path}/adHealthList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
+									</c:forEach>
+									
+									<li class="page-item">
+										<c:if test="${paging.endPage < paging.pageCount}">
+										    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
+										      <span aria-hidden="true">&raquo;</span>
+										    </a>
+									    </c:if>
+								    </li>
+								</ul>
+							</nav>
+						</div>
+					</form>
+				</div>
 			</div>
-		</div>
 		<!-- 컨텐츠 끝 -->
 		<hr>
 		</div>

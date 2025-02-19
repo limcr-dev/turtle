@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.turtle.dto.HealthDTO;
+import com.spring.turtle.dto.UserDTO;
 
 @Repository
 public class HealthDAOImpl implements HealthDAO{
@@ -38,11 +39,12 @@ public class HealthDAOImpl implements HealthDAO{
 
 	}
 	
-	// 헬스 회원 등록(이름조회)
+	// 헬스회원 등록시(Id 조회)
 	@Override
-	public int userNameCheck(int userNo) {
-		
-		return 0;
+	public UserDTO userIdCheck(String userId) {
+		System.out.println("HealthDAOImpl - userIdCheck");
+	
+		return sqlSession.selectOne("com.spring.turtle.dao.HealthDAO.userIdCheck", userId);
 	}
 	
 	//헬스 회원 등록

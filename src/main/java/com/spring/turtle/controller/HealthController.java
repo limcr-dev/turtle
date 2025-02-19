@@ -34,6 +34,16 @@ public class HealthController {
 		return "admin/health/adHealthList";
 	}
 	
+	// // 헬스회원 등록시(Id 조회)
+	@RequestMapping("/adIdConfirmAction.ad")
+	public String adIdConfirmAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adIdConfirmAction.ad >>>");
+		
+		service.IdCheckAction(request, response, model);
+		return "admin/health/adIdConfirmAction";
+	}
+	
 	// 헬스회원 등록 화면
 	@RequestMapping("/adHealthInsert.ad")
 	public String adHealthInsert(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -56,8 +66,8 @@ public class HealthController {
 	public String adHealthDetail(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
 		logger.info("<<< url ==>  /adHealthDetailAction.ad >>>");
+		
 		service.healthDetailAction(request, response, model);
-		System.out.println("-----------healthDetailAction 완료 ------------------");
 		return "admin/health/adHealthDetailAction";
 	}
 	

@@ -21,6 +21,9 @@ public interface QnaDAO {
 	// 1대1문의 갯수 구하기
 	public int qnaCnt(Map<String, Object> map);
 	
+	// 1대1문의 갯수 구하기 관리자
+	public int adQnaCnt(Map<String, Object> map);
+		
 	// 1대1문의 작성
 	public int insertQna(QnaDTO dto);
 	

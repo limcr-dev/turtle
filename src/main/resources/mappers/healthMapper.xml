@@ -15,20 +15,24 @@
 	
 	<!-- 헬스회원 목록 -->
 	<select id="healthList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.HealthDTO">
-		<![CDATA[
-			SELECT * 
-	  		  FROM 
-	   	    	(SELECT A.*,
-	 	         rownum AS rn 
-	   		       FROM 
-	    	   		(SELECT  *
-	       			   FROM health_tb 
-	      			  WHERE healthShow = 'Y' 
-	      			  ORDER BY healthNo DESC) A 
-	    		) 
-		   	 WHERE rn >= #{start}
-		   	   AND rn <= #{end}
-		   	 ]]>
+		   	 
+		   	 SELECT * 
+		FROM (SELECT A.*, 
+					 rownum AS rn 
+				FROM (SELECT * 
+						FROM health_tb 
+						<if test="statusType != ''"> 
+						  WHERE healthStatus = #{statusType}
+						</if>
+						ORDER BY healthNo DESC) A ) 
+		WHERE rn BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<!-- 헬스회원 등록시(Id 조회) -->
+	<select id="userIdCheck" parameterType="String" resultType="com.spring.turtle.dto.UserDTO">
+		SELECT *
+	      FROM user_tb
+	     WHERE userId = #{userId}
 	</select>
 	
 	<!-- 헬스회원 등록 -->
