@@ -36,7 +36,7 @@
 					<!-- 좌측메뉴 종료 -->
 					<!-- FAQ 목록 시작 -->
 					<form name ="FaqList" id="FaqList" action="${path}/adFaqList.ad" method="post" style="width:1300px">
-						<table class="table" style="width:900px; margin:auto;">
+						<table class="table" style="width:1050px; margin:auto;">
 							<thead>
 							    <tr>
 									<th scope="col" style="width:8%; text-align:center;">번호</th>

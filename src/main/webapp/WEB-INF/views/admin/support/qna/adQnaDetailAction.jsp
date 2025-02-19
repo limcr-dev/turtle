@@ -98,7 +98,7 @@
 					<input type="hidden" name="hidden_qnaNo" value="${dto.qnaNo}">
 					<form name ="statusForm" id="statusForm" action="${path}/adQnaList.ad" method="post" style="width:1300px">
 					
-						<table class="table" style="width:900px; margin:auto;">
+						<table class="table" style="width:1050px; margin:auto;">
 							<thead>
 								<tr>
 									<td colspan="7" align="right">
