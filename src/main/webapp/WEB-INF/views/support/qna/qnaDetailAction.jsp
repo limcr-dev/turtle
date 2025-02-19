@@ -117,19 +117,18 @@
 		
 		<table class="table" style="width:1000px; margin:auto;">
 			<thead>
-			<tr>
-				<td colspan="6" align="right">
-				<!-- 수정삭제버튼 시작 -->
-					<button type="button" class="btn btn-warning" >
-							<a href="${path}/qnaUpdate.bo?qnaNo=${dto.qnaNo}" style="text-decoration: none; color: inherit;">수정</a>
-					</button>
-					
-					<!-- Modal 시작 -->
-					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					  삭제
-					</button>
-					<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
+				<tr>
+					<td colspan="6" align="right">
+					<!-- 수정삭제버튼 시작 -->
+						<button type="button" class="btn btn-warning" >
+								<a href="${path}/qnaUpdate.bo?qnaNo=${dto.qnaNo}" style="text-decoration: none; color: inherit;">수정</a>
+						</button>
+						
+						<!-- Modal 시작 -->
+						<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						  삭제
+						</button>
+						<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -146,22 +145,22 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- Modal 끝 -->
-				<!-- 수정삭제버튼 끝 -->
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="6">
-					<hr style="border:3px solid orange; width:1000px; margin:auto;">
-				</td>
-			</tr>
+						<!-- Modal 끝 -->
+					<!-- 수정삭제버튼 끝 -->
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="6">
+						<hr style="border:3px solid orange; width:1000px; margin:auto;">
+					</td>
+				</tr>
 			    <tr>
 					<th colspan="5" style="width:5%">
 						<h2>${dto.qnaTitle}</h2>
 					</th>
 					<td align="right" colspan="5" style="width:5%"> 
+						작성자 : ${dto.qnaWriter}<br>
 						처리상태 : ${dto.qnaStatus}
 					</td>
 			    </tr>
@@ -169,7 +168,7 @@
 		    <tbody>
 			    <tr>
 			        <td colspan="7">
-			      	 <p class="text-start"> ${dto.qnaContent}</p>
+			      		 <p class="text-start"> ${dto.qnaContent}</p>
 			        </td>
 			    </tr>
 			    <!-- 댓글 목록 시작 -->
@@ -193,7 +192,9 @@
 						<div class="row form-group">
 							<textarea style="width:800px; margin:auto;"name="q_comContent" id="q_comContent" rows="3" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
 						</div>
-						<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+						<div style="margin-top:8px">
+							<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+						</div>
 			  		</td>
 				</tr>
 				<!-- 추가문의 끝 -->

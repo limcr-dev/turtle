@@ -10,6 +10,7 @@ public class UserDTO {
 	private String userId; 			// 아이디
 	private String userPw; 			// 비밀번호
 	private String userName;		// 이름
+	private String userGender;		// 성별
 	private String userAddress;		// 주소
 	private Date userBirthday;		// 생일
 	private String userHp;			// 전화번호
@@ -24,13 +25,14 @@ public class UserDTO {
 	}
 
 	// 매개변수
-	public UserDTO(int userNo, String userId, String userPw, String userName, String userAddress, Date userBirthday,
+	public UserDTO(int userNo, String userId, String userPw, String userName, String userGender, String userAddress, Date userBirthday,
 			String userHp, String userEmail, String userShow, Timestamp userRegDate, String userType) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
+		this.userGender = userGender;
 		this.userAddress = userAddress;
 		this.userBirthday = userBirthday;
 		this.userHp = userHp;
@@ -79,7 +81,15 @@ public class UserDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	public String getUserGender() {
+		return userGender;
+	}
 
+
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
 
 	public String getUserAddress() {
 		return userAddress;
@@ -154,7 +164,7 @@ public class UserDTO {
 	
 	@Override
 	public String toString() {
-		return "UserDTO [userNo=" + userNo + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
+		return "UserDTO [userNo=" + userNo + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userGender=" + userGender
 				+ ", userAddress=" + userAddress + ", userBirthday=" + userBirthday + ", userHp=" + userHp
 				+ ", userEmail=" + userEmail + ", userShow=" + userShow + ", userRegDate=" + userRegDate + ", userType="
 				+ userType + "]";
