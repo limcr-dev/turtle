@@ -38,6 +38,7 @@
 						
 						<div align="right">
 							<a href="${path}/revConsult.do" class="btn btn-primary">예약하기</a>
+							<a href="${path}/revConsultList.do" class="btn btn-primary">예약조회</a>
 						</div>
 						
 				    </div>
@@ -62,6 +63,7 @@
 						
 						<div align="right">
 							<a href="${path}/revConsult.do" class="btn btn-primary">예약하기</a>
+							<a href="${path}/revConsultList.do" class="btn btn-primary">예약조회</a>
 						</div>
 				    </div>
 				</div>

@@ -6,11 +6,11 @@ var today = new Date();
 // calendar 객체 지정
 var calendarElement = document.getElementById('calendar');
 
+// document가 load될 때 calendar 띄우기
 document.addEventListener('DOMContentLoaded', function(){
 	
 	// FullCalendar 생성
 	var calendar = new FullCalendar.Calendar(calendarElement, {
-		themeSystem: 'bootstrap5',
 		locale: 'ko',
 		timeZone: 'local',	// 현지 시간
 		initialView: 'dayGridMonth',	// 뷰 지정
@@ -33,15 +33,36 @@ document.addEventListener('DOMContentLoaded', function(){
 		selectable: true,	// 날짜 선택 가능
 		events: [],
 		dateClick: function(info){	// 날짜 선택 시, 실행되는 함수
-			console.log("clicked event occurs date : " + info.dateStr);
-			addEventToCalendar(info.dateStr)
+			if(document.revConsultForm.hiddenCheckUser.value == "0"){
+				alert("회원 인증 해주세요.");
+				document.revConsultForm.userChk.focus();
+				return false;
+			}else{
+				addEventToCalendar(info.dateStr);
+			}
 		}
 		
-		});
+	});
 	calendar.render();
 });
 
+// 날짜 선택 시, 예약가능한 시간 DB에서 조회
 function addEventToCalendar(date){
-	let url = "/turtle/revConsult.do?revDate=" + date;
-	location.href = url;
+	let param = {"revDate" : date};
+	
+	// 선택된 날짜 hiddenRevDate값으로 지정
+	document.revConsultForm.hiddenRevDate.value = date;
+	
+	// ajax로 화면에 시간 띄우기
+	$.ajax({
+		url: 'revConsultDateCheck.do',
+		type: 'GET',
+		data: param,
+		success: function(result){
+			$('#revTimeShow').html(result);
+		},
+		error: function(){
+			alert('날짜를 다시 선택해주세요.');
+		}
+	});
 }

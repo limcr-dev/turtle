@@ -6,7 +6,7 @@
     
 <mapper namespace="com.spring.turtle.dao.ReservationDAO">
 	
-	<!--  아이디패스워드체크 - 로그인 -->
+	<!--  회원 인증 -->
 	<select id="checkUserAction" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		  FROM user_tb
@@ -14,9 +14,49 @@
 		   AND userPw = #{userPw}
 	</select>
 	
+	<!-- 회원 정보 가져오기(이름, 전화번호) -->
 	<select id="detailUserAction" parameterType="String" resultType="com.spring.turtle.dto.UserDTO">
 		SELECT *
 		  FROM user_tb
 		 WHERE userId = #{userId}
 	</select>
+	
+	<!-- 해당 날짜 예약된 시간 정보 가져오기 -->
+	<select id="revConsultDateCheck" parameterType="java.sql.Date" resultType="String">
+		SELECT SUBSTR(revConsultDate, 10, 5)
+  		  FROM revConsult_tb
+		 WHERE revConsultDate LIKE #{date} || '%'
+		   AND revConsultStatus IN ('대기', '완료', '승인')
+	</select>
+	
+	<!-- 예약 정보 등록 -->
+	<insert id="insertRevConsult" parameterType="com.spring.turtle.dto.RevConsultDTO" >
+		INSERT INTO revConsult_tb (revConsultNo, userId, userName, userHp, revConsultDate, revConsultStatus)
+		VALUES((SELECT NVL(MAX(revConsultNo) + 1, 1)FROM revConsult_tb), #{userId}, #{userName}, #{userHp}, #{revConsultDate}, '대기')
+	</insert>
+	
+	<!-- 상담 예약 개수(개인) -->
+	<select id="revConsultCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM revConsult_tb
+		 WHERE userId = #{userId}
+	</select>
+	
+	<!-- 상담 예약 목록(개인) -->
+	<select id="revConsultList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.RevConsultDTO">
+		SELECT *
+		  FROM ( SELECT A.*
+				      , rownum AS rn 
+				   FROM (SELECT * 
+				           FROM revConsult_tb 
+				          WHERE userId = #{userId}
+				          ORDER BY revConsultNo DESC) A)   
+		 WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<update id="deleteRevConsult" parameterType="int">
+		UPDATE revConsult_tb
+		   SET revConsultStatus = '취소'
+		 WHERE revConsultNo = #{revConsultNo}
+	</update>
 </mapper>

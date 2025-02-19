@@ -34,5 +34,7 @@ public interface ReservationService {
 	public void revConsultList(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
 	
-	
+	// 상담 시간 체크
+	public void revConsultDateCheck(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
 }

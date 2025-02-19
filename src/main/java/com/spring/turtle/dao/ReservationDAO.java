@@ -1,5 +1,6 @@
 package com.spring.turtle.dao;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +22,18 @@ public interface ReservationDAO {
 	// 상담 예약 상세 정보 조회
 	public RevConsultDTO revConsultDetail(String userId);
 	
+	// 상담 예약 목록
+	public List<RevConsultDTO> revConsultList(Map<String, Object> map);
+	
+	// 상담 예약 개수(개인)
+	public int revConsultCnt(String userId);
+	
 	// 상담 예약 수정(관리자)
 	public int updateRevConsult(RevConsultDTO dto);
 	
-	// 상담 예약 삭제
-	public int deleteRevConsult(String userId);
-	
-	// 상담 예약 목록
-	public List<RevConsultDTO> revConsultList(int start, int end);
+	// 상담 예약 삭제(관리자)
+	public int deleteRevConsult(int revConsultNo);
+		
+	// 상담 시간 체크
+	public List<String> revConsultDateCheck(Date date);
 }

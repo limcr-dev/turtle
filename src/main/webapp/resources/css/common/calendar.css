@@ -1,22 +1,65 @@
 @charset "UTF-8";
 
-
-
   #calendar .fc-daygrid-day-number {
     color: black; /* 달력의 날짜 숫자 색상 */
-  }
+}
 
-  #calendar .fc-toolbar-title {
-    color: black; /* 달력의 제목 색상 */
-  }
+#calendar .fc-toolbar-title {
+  color: black; /* 달력의 제목 색상 */
+}
 
-  #calendar .fc-event-title {
-    color: black; /* 일정 제목 색상 */
-  }
-  #calendar .fc-header {
-    color: black; /* 일정 제목 색상 */
-  }
-  
-  #calendar .weekNumbers {
-    color: blue; /* 일정 제목 색상 */
-  }
+#calendar .fc-event-title {
+	color: black; /* 일정 제목 색상 */
+}
+
+#calendar .fc-header {
+	color: black; /* 일정 제목 색상 */
+}
+
+#calendar .weekNumbers {
+	color: blue; /* 일정 제목 색상 */
+}
+ 
+/* 시간 라디오 */
+.radioButtonStyle{
+	font-size: 14px;
+	margin-top: 50px;
+}
+
+.radioStyle{
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+input[type="radio"] {
+    display: none;
+    text-align: center;
+    align-items: left;
+    margin:5px 5px 5px 5px;
+}
+
+input[type="radio"] + span{
+    text-align: center;
+    height:30px;
+    width:60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid #ee8432;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+input[type="radio"]:checked + span{
+    border:1px solid #ee8432;
+    background-color: #ee8432;
+    font-weight: 700;
+}
+
+input[type="radio"]:disabled + span{
+    border:1px solid #f3f3f3;
+    background-color: #f3f3f3;
+    color:#dcdcdc;
+}
+ 

@@ -20,6 +20,9 @@
 <!-- FullCalendar 언어 CDN --> 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/locales-all.min.js'></script>
 
+<script>
+
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -49,17 +52,8 @@
 						<form name="revConsultForm" action="revConsultAction.do" method="post"
 							onsubmit="return revConsultCheck()">
 							
-							<!-- 회원 조회 여부 -->
+							<!-- 회원 조회 -->
 							<input type="hidden" name="hiddenCheckUser" value="0">
-							
-							<!-- input 속성에 disabled가 있으면 파라미터 전달이 안됨 => hidden 값 지정 -->
-							<input type="hidden" name="hiddenUserId" value="">
-							<input type="hidden" name="hiddenUserName" value="">
-							<input type="hidden" name="hiddenUserHp" value="">
-							
-							<input type="hidden" name="hiddenRevTime" value=" ">
-							<input type="hidden" name="hiddenRevDate" value="${revDate}">
-							
 							
 							<!-- sessionID 값으로 회원 인증 -->
 							<div class="row g-3 align-items-center">
@@ -81,7 +75,7 @@
 									이름
 								</div>
 								<div class="col-md-10">
-									<input type="text" id="userName" name="userName" class="form-control  form-control-lg" disabled>
+									<input type="text" id="userName" name="userName" class="form-control  form-control-lg"  value="${dto.userHp}" disabled>
 								</div>
 							</div>
 							<br>
@@ -91,7 +85,7 @@
 									전화번호
 								</div>
 								<div class="col-md-10">
-									<input type="text" id="userHp" name="userHp" class="form-control form-control-lg" disabled>
+									<input type="text" id="userHp" name="userHp" class="form-control form-control-lg" value="${dto.userHp}" disabled>
 								</div>
 							</div>
 							<br>
@@ -100,13 +94,11 @@
 							<div class="row g-3 align-items-center">
 								<div class="col-md-12" align="center"><b>예약 날짜와 시간을 선택하세요</b></div>
 								<br>
-									<div class="col-md-9" id="calendar">
+									<div class="col-md-10" id="calendar">
 										<!-- FullCalendar 띄우는 부분 -->
 									</div>
-									<div class="col-md-3" id="revTimeShow">
-										<c:if test="${dayOfWeek == null}">
-											<div align="center">날짜를 선택하세요</div>
-										</c:if>
+									<div class="col-md-2" id="revTime" style="padding:5px" align="center">
+										<!-- 예약 가능한 시간 띄우는 부분 -->
 									</div> 
 								
 							</div>
