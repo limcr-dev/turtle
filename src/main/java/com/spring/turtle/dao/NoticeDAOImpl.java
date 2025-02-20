@@ -34,6 +34,16 @@ public class NoticeDAOImpl implements NoticeDAO{
 				
 		return total;
 	}
+	
+	// noticeShow에 따른 공지사항 갯수
+	@Override
+	public int noticeCntShow(Map<String, Object> map) {
+		System.out.println("DAO - customerCntShow()");
+		
+		int total = sqlSession.selectOne("com.spring.turtle.dao.NoticeDAO.noticeCntShow", map);
+		
+		return total;
+	}
 
 	// 조회수 증가
 	@Override
@@ -79,6 +89,16 @@ public class NoticeDAOImpl implements NoticeDAO{
 		System.out.println("DAO - deleteNotice()");
 		
 		int deleteCnt = sqlSession.update("com.spring.turtle.dao.NoticeDAO.deleteNotice", noticeNo);
+		
+		return deleteCnt;
+	}
+	
+	// 공지사항 다중 삭제
+	@Override
+	public int deleteNoticeSeveral(String[] noticeMul) {
+		System.out.println("DAO - deleteNotice()");
+		
+		int deleteCnt = sqlSession.update("com.spring.turtle.dao.NoticeDAO.deleteNoticeSeveral", noticeMul);
 		
 		return deleteCnt;
 	}
