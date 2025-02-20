@@ -7,48 +7,128 @@
 <mapper namespace="com.spring.turtle.dao.QnaDAO">
 	<!--  1대1문의 목록  -->
 	<select id="qnaList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.QnaDTO">
-	SELECT * FROM (SELECT A.*, rownum AS rn FROM (SELECT * FROM qna_tb WHERE qnaShow ='Y'
-	<if test="qnaWriter != null and qnaWriter != ''"> AND qnaWriter = #{qnaWriter} </if>
-	<choose>
-	<when test="qnaWriter != null and qnaWriter != ''"> AND qnaWriter = #{qnaWriter} </when>
-	<otherwise> AND qnaWriter IS NULL </otherwise>
-	</choose>
-	ORDER BY qnaNo DESC) A ) WHERE rn BETWEEN #{start} AND #{end}
+		SELECT * 
+		  FROM (SELECT A.*, 
+		  			   rownum AS rn 
+		  		  FROM (SELECT * 
+		  		  	 	  FROM qna_tb 
+		  		  	 	 WHERE qnaShow ='Y'
+						<if test="qnaWriter != null and qnaWriter != ''"> 
+							AND qnaWriter = #{qnaWriter} 
+						</if>
+						<choose>
+							<when test="qnaWriter != null and qnaWriter != ''"> 
+								AND qnaWriter = #{qnaWriter} 
+							</when>
+							<otherwise> 
+								AND qnaWriter IS NULL 
+							</otherwise>
+						</choose>
+								ORDER BY qnaNo DESC) A ) WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!--  1대1문의 목록 관리자  -->
-	<select id="qnaListAdmin" parameterType="java.util.Map" resultType="com.spring.turtle.dto.QnaDTO"> SELECT * FROM (SELECT A.*, rownum AS rn FROM (SELECT * FROM qna_tb ORDER BY qnaNo DESC) A ) WHERE rn BETWEEN #{start} AND #{end} </select>
+	<select id="qnaListAdmin" parameterType="java.util.Map" resultType="com.spring.turtle.dto.QnaDTO"> 
+		SELECT * 
+		FROM (SELECT A.*, 
+					 rownum AS rn 
+				FROM (SELECT * 
+						FROM qna_tb 
+						<if test="statusType != ''"> 
+						  WHERE qnaStatus = #{statusType}
+						</if>
+						ORDER BY qnaNo DESC) A ) 
+		WHERE rn BETWEEN #{start} AND #{end} 
+		
+	</select>
+	<!-- 1대1문의 처리상태 선택 -->
+	
 	
 	<!--  1대1문의 갯수  -->
 	<select id="qnaCnt" parameterType="java.util.Map" resultType="int">
-	SELECT COUNT(*) FROM qna_tb WHERE qnaShow = 'Y'
-	<if test="sessionType != 'admin' and sessionType != 'trainer'"> AND qnaWriter = #{qnaWriter} </if>
+		SELECT COUNT(*) 
+		  FROM qna_tb
+		 WHERE qnaShow = 'Y'
+		<if test="sessionType != 'admin' and sessionType != 'trainer'"> 
+		   AND qnaWriter = #{qnaWriter} 
+		</if>
+	</select>
+	
+	<!--  1대1문의 갯수 관리자 -->
+	<select id="adQnaCnt" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) 
+		  FROM qna_tb
+		<if test="statusType != ''"> 
+		  WHERE qnaStatus = #{statusType}
+		</if>
 	</select>
 	
 	<!--  1대1문의 상세페이지  -->
-	<select id="getQnaDetail" parameterType="int" resultType="com.spring.turtle.dto.QnaDTO"> SELECT * FROM qna_tb WHERE qnaNo = #{num} </select>
-	
+	<select id="getQnaDetail" parameterType="int" resultType="com.spring.turtle.dto.QnaDTO"> 
+		SELECT * 
+		  FROM qna_tb 
+		 WHERE qnaNo = #{num} 
+	</select>
+		
 	<!--  1대1문의 작성  -->
-	<insert id="insertQna" parameterType="com.spring.turtle.dto.QnaDTO"> INSERT INTO qna_tb (qnaNo, qnaWriter, qnaTitle, qnaContent) VALUES ((SELECT NVL(MAX(qnaNo) + 1, 1)FROM qna_tb), #{qnaWriter}, #{qnaTitle},#{qnaContent}) </insert>
+	<insert id="insertQna" parameterType="com.spring.turtle.dto.QnaDTO"> 
+		INSERT INTO qna_tb (qnaNo, qnaWriter, qnaTitle, qnaContent) 
+		VALUES ((SELECT NVL(MAX(qnaNo) + 1, 1)FROM qna_tb), #{qnaWriter}, #{qnaTitle},#{qnaContent}) 
+	</insert>
 	
 	<!--  1대1문의 댓글목록  -->
-	<select id="qnaCommentList" parameterType="int" resultType="com.spring.turtle.dto.QnaCommentDTO"> SELECT * FROM qna_comment_tb WHERE qnaNo = #{num} ORDER BY q_comNo </select>
+	<select id="qnaCommentList" parameterType="int" resultType="com.spring.turtle.dto.QnaCommentDTO"> 
+		SELECT * 
+		  FROM qna_comment_tb 
+		 WHERE qnaNo = #{num} 
+		 ORDER BY q_comNo 
+	 </select>
 	
 	<!--  1대1문의 댓글 추가  -->
-	<insert id="insertQnaComment" parameterType="com.spring.turtle.dto.QnaCommentDTO"> INSERT INTO qna_comment_tb (q_comNo, q_comWriter, qnaNo, q_comContent) VALUES ((SELECT NVL(MAX(q_comNo) + 1, 1)FROM qna_comment_tb), #{q_comWriter}, #{qnaNo}, #{q_comContent}) </insert>
+	<insert id="insertQnaComment" parameterType="com.spring.turtle.dto.QnaCommentDTO"> 
+		INSERT INTO qna_comment_tb (q_comNo, q_comWriter, qnaNo, q_comContent) 
+		VALUES ((SELECT NVL(MAX(q_comNo) + 1, 1)FROM qna_comment_tb), #{q_comWriter}, #{qnaNo}, #{q_comContent}) 
+	</insert>
 	
 	<!--  1대1문의 수정  -->
-	<update id="qnaUpdate" parameterType="com.spring.turtle.dto.QnaDTO"> UPDATE qna_tb SET qnaTitle = #{qnaTitle}, qnaContent=#{qnaContent} WHERE qnaNo = #{qnaNo} </update>
+	<update id="qnaUpdate" parameterType="com.spring.turtle.dto.QnaDTO"> 
+		UPDATE qna_tb 
+		   SET qnaTitle = #{qnaTitle}, 
+			   qnaContent=#{qnaContent} 
+		 WHERE qnaNo = #{qnaNo} 
+	</update>
 	
 	<!--  1대1문의 삭제  -->
-	<update id="deleteQna" parameterType="int"> UPDATE qna_tb SET qnaShow = 'N' WHERE qnaNo = #{num} </update>
+	<update id="deleteQna" parameterType="int"> 
+		UPDATE qna_tb 
+		   SET qnaShow = 'N' 
+		 WHERE qnaNo = #{num} 
+	 </update>
 	
 	<!--  1대1문의 답변처리  -->
-	<update id="changeQnaCommentStatus" parameterType="java.util.Map"> UPDATE qna_tb SET qnaStatus = #{qnaStatus} WHERE qnaNo = #{num} </update>
+	<update id="changeQnaCommentStatus" parameterType="java.util.Map"> 
+		UPDATE qna_tb 
+		   SET qnaStatus = #{qnaStatus} 
+		 WHERE qnaNo = #{num} 
+	</update>
 	
 	<!--  1대1문의 댓글 수정  -->
-	<update id="updateQnaComment" parameterType="com.spring.turtle.dto.QnaCommentDTO"> UPDATE qna_comment_tb SET q_comContent = #{q_comContent} WHERE qnaNo = #{qnaNo} AND q_comNo = #{q_comNo} </update>
+	<update id="updateQnaComment" parameterType="com.spring.turtle.dto.QnaCommentDTO"> 
+		UPDATE qna_comment_tb 
+		   SET q_comContent = #{q_comContent} 
+		 WHERE qnaNo = #{qnaNo} AND q_comNo = #{q_comNo} 
+	</update>
 	
 	<!--  1대1문의 댓글삭제  -->
-	<delete id="DeleteQnaComment" parameterType="int"> DELETE qna_comment_tb WHERE q_comNo = #{num} </delete>
+	<delete id="DeleteQnaComment" parameterType="int"> 
+		DELETE qna_comment_tb 
+		  WHERE q_comNo = #{num} 
+	</delete>
+	
+	<!-- 1대1문의 복구 -->
+	<update id="adRestoreQna" parameterType="int">
+		UPDATE qna_tb
+		   SET qnaShow = 'Y'
+		 WHERE qnaNo = #{num}
+	</update>
 </mapper>

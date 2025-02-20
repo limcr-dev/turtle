@@ -80,3 +80,9 @@ config.properties
 # Uncomment this line if you wish to ignore the project description file.
 # Typically, this file would be tracked if it contains build/dependency configurations:
 #.project
+
+<<<<<<< HEAD
+pom.xml
+=======
+pom.xml
+>>>>>>> 73f5880c671c70bf35a5ddecaba567bd10f4c403
