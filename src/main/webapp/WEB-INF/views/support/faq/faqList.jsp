@@ -67,12 +67,12 @@
 				<div class="accordion-item">
 					<h2 class="accordion-header">
 					    <button class="accordion-button collapsed bg-light " id="customAccordionButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${dto.faqNo}" aria-expanded="false" aria-controls="collapse${dto.faqNo}">
-							${dto.faqTitle}
+							<div style="font-size:20px; margin-bottom: -16px"><p><i class="fa-solid fa-q fa-lg"></i>  ${dto.faqTitle}</p></div>
 					    </button>
 				    </h2>
 				    <div id="collapse${dto.faqNo}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 				    	<div class="accordion-body">
-							${dto.faqContent}
+							&nbsp&nbsp <i class="fa-solid fa-a"></i>. ${dto.faqContent}
 				    	</div>
 				    </div>
 				</div>

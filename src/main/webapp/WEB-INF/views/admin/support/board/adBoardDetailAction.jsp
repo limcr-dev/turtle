@@ -20,17 +20,13 @@
 		comment_list();
 	
 		// [댓글쓰기 버튼 클릭 1번]
-		$('#qnaCommentInsert').click(function(){
+		$('#boardCommentInsert').click(function(){
 			comment_add();
 		});
-		// [문의 목록 버튼] 클릭시 컨트롤러의 목록으로 이동
-		$("#adQnaList").click(function(){
-			location.href="${path}/adQnaList.ad";
-		});
 		// [삭제 버튼] 클릭시 
-		$("#qnaDelete").click(function(){
+		$("#boardDelete").click(function(){
 			alert("삭제합니다")
-			location.href="${path}/adQnaDelete.ad?qnaNo=${dto.qnaNo}";
+			location.href="${path}/adBoardDelete.ad?boardNo=${dto.boardNo}";
 		});
 	});
 	
@@ -38,15 +34,15 @@
 	function comment_add(){
 		// 게시글번호,댓글 내용을 파라미터로 넘김
 		let param = {
-			"qnaNo" : ${dto.qnaNo},
-			"q_comContent" : $('#q_comContent').val()
+			"boardNo" : ${dto.boardNo},
+			"b_comContent" : $('#b_comContent').val()
 		}
 		$.ajax({
-			url: '${path}/qnaCommentInsert.bo',
+			url: '${path}/boardCommentInsert.bo',
 			type: 'POST',
 			data: param,
 			success: function(){	
-				$('#q_comContent').val('');
+				$('#b_comContent').val('');
 				location.reload(true);	// 현재 페이지 새로고침
 			},
 			error: function(){
@@ -59,10 +55,11 @@
 	// 댓글 목록
 	function comment_list(){ 
 		$.ajax({
-			url: '${path}/adQnaCommentList.ad',
+			url: '${path}/adBoardCommentList.ad',
 			type: 'POST',
-			data: 'qnaNo=${dto.qnaNo}',
-			success: function(result){	  
+			data: 'boardNo=${dto.boardNo}',
+			// 
+			success: function(result){
 				$('#commentList').html(result);			
 			},
 			error: function(){
@@ -70,11 +67,10 @@
 			}
 		});
 	}
-	
 </script>
 <head>
 <meta charset="UTF-8">
-<title>QNA Detail</title>
+<title>BOARD Detail</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
@@ -86,7 +82,7 @@
 		<div id="container">
 			<div id="contents">
 				<hr>
-				<h1 align="center">문의내용</h1>
+				<h1 align="center">자유게시판</h1>
 				<hr>
 				<!-- 컨텐츠 시작 -->
 				<div id="section2">
@@ -95,8 +91,8 @@
 					<!-- 좌측메뉴 종료 -->
 					
 					<!-- 문의내용 시작 -->
-					<input type="hidden" name="hidden_qnaNo" value="${dto.qnaNo}">
-					<form name ="statusForm" id="statusForm" action="${path}/adQnaList.ad" method="post" style="width:1300px">
+					<input type="hidden" name="hidden_boardNo" value="${dto.boardNo}">
+					<form name ="statusForm" id="statusForm" action="${path}/adBoardList.ad" method="post" style="width:1300px">
 					
 						<table class="table" style="width:1050px; margin:auto;">
 							<thead>
@@ -119,7 +115,7 @@
 												        	삭제하겠습니까?
 												      	</div>
 												      	<div class="modal-footer">
-												        	<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="qnaDelete">예</button>
+												        	<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="boardDelete">예</button>
 												        	<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">아니요</button>
 												      	</div>
 													</div>
@@ -132,18 +128,18 @@
 								</tr>
 							    <tr>
 									<th style="width:70%">
-										<h2>${dto.qnaTitle}</h2>
+										<h2>${dto.boardTitle}</h2>
 									</th>
-									<td align="right" style="width:15%"> 
-										작성자 : ${dto.qnaWriter}<br>
-										처리상태 : ${dto.qnaStatus}
+									<td align="right" style="width:20%"> 
+										작성자 : ${dto.boardWriter}<br>
+										작성일 : ${fn: substring(dto.boardRegdate,0,16)} 
 									</td>
 							    </tr>
 						    </thead>
 						    <tbody>
 							    <tr>
 							        <td colspan="7">
-							      	 <p class="text-start"> ${dto.qnaContent}</p>
+							      	 <p class="text-start"> ${dto.boardContent}</p>
 							        </td>
 							    </tr>
 							    <!-- 댓글 목록 시작 -->
@@ -153,31 +149,41 @@
 											<!-- 댓글 들어가는 부분 -->
 										</div>
 								    </td>
+								   
 								</tr>
 								<!-- 댓글 목록 끝 -->
-								
-								<!-- 답변 시작 -->
 								<tr>
+									<td colspan="7" align="center">
+										<div class="row g-3 align-items-center">
+											<div class="col-md-2" style="margin-left:110px">
+								    			<h4 style="text-align:left; color:gray">댓글 ${dto.boardCommentCnt}</h4>
+								    		</div>
+								    	</div>
+								    </td>
+								</tr>
+								 <!-- 댓글 입력칸 시작 -->
+							    <tr>
 								    <td colspan="7" align="center">
 									    <div class="row g-3 align-items-center">
-											<div class="col-md-2" style="margin-left:60px">
-												<h5>답변</h5>
+											<div class="col-md-2" style="margin-left:80px">
+											
+												<h5>댓글 작성</h5>
 											</div>
 										</div>
 										<div class="row form-group">
-											<textarea style="width:800px; margin:auto;"name="q_comContent" id="q_comContent" rows="3" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
+											<textarea style="width:800px; margin:auto;"name="b_comContent" id="b_comContent" rows="3" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
 										</div>
 										<div style="margin-top:8px">
-											<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="qnaCommentInsert">작성</button>
+											<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="boardCommentInsert">작성</button>
 										</div>
 							  		</td>
 								</tr>
-								<!-- 답변 끝 -->
+							    <!-- 댓글 입력칸 끝 -->
 								
 								<!-- 목록 버튼 -->
 							    <tr>
 							   		<td colspan="7" class="text-end">
-										<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="adQnaList">목록</button>
+										<button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="adBoardList">목록</button>
 							  		</td>
 							    </tr>
 						    </tbody>

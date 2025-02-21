@@ -53,7 +53,7 @@
 										<h5>제목</h5>
 									</div>
 									<div class="col-md-11">
-										<input type="text" name="qnaTitle" id="qnaTitle" class="form-control form-control-lg" value="${dto.qnaTitle}" required autofocus>
+										<input type="text" name="qnaTitle" id="qnaTitle" maxlength="33" class="form-control form-control-lg" value="${dto.qnaTitle}" required autofocus>
 									</div>
 								</div>
 								<br>
