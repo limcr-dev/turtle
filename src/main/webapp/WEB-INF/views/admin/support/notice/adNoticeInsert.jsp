@@ -54,32 +54,30 @@
             <div id="section2">
                
 				<!-- 좌측 메뉴 시작 -->                              
-				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
+				<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 				<!-- 좌측메뉴 종료 -->
 				<!-- 우측매뉴 시작 -->
-				<form name ="noticeInsertForm" method="post">
-					<table class="table">
-						<tr>
-							<th style="width: 200px"> 글제목 </th>
-							<td colspan="3" style="width: 200px; text-align:center"> 
-								<input style="width:645px" type="text" class="input" name="noticeTitle"
-									id="noticeTitle" size="50" placeholder="글제목 입력">
-							</td>
-						</tr>
-						<tr>
-							<th style="width: 200px"> 글내용 </th>
-							<td colspan="3" style="width: 200px; text-align:center"> 
-								<textarea rows="5" cols="93" name="noticeContent" id="noticeContent"></textarea>
-							</td>
-						</tr>
-						<tr>
-					  		<td colspan="5" class="text-end" align="center">
-								<button type="button" class="btn active" id="noticeSave" name="noticeSave">작성</button>
-								<button type="reset" class="btn active">초기화</button>
-								<button type="button" class="btn active" id="noticeList" name="noticeList">목록</button>
-							</td>
-						</tr>
-					</table>
+				<form name ="noticeInsertForm" method="post" style="width:5400px;">
+					<div class="row g-3 align-items-center">
+						<div class="col-md-1" style="text-vertical:center">
+							<h5>제목</h5>
+						</div>
+						<div class="col-md-11">
+							<input type="text" name="noticeTitle" id="noticeTitle" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
+						</div>
+					</div>
+					<br>
+		
+					<div class="row form-group">
+						<textarea name="noticeContent" id="noticeContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
+					</div>
+					
+				 	<!-- 버튼 -->
+					<div class="form-group" align="right">
+						<button type="reset" class="btn active">초기화</button>
+						<button type="button" class="btn active" id="noticeList" name="noticeList">목록</button>
+						<button type="button" class="btn active" id="noticeSave" name="noticeSave">작성</button>
+					</div>
 				</form>
 				<br>
 				<!-- 우측메뉴 종료 -->

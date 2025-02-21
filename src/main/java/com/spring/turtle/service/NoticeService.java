@@ -31,6 +31,10 @@ public interface NoticeService {
 			throws ServletException, IOException;
 	
 	// 공지사항 삭제 처리
-	public void noticeDelete(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void noticeDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
+	
+	// 공지사항 삭제 처리 - 체크박스
+	public void noticeDelete(String[] noticeMul);
 }
+

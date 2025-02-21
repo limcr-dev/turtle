@@ -13,13 +13,26 @@
 		$("#customerList").click(function() {
 			location.href = "${path}/adCustomerList.ad"
 		});
-		// 삭제
-		$("#deleteCustomer").click(function(){
-			document.noticeDetailForm.action = "${path}/adNoticeDeleteAction.ad";
-			document.noticeDetailForm.submit();
+		
+		// 복구
+		$("#restoreCustomer").click(function(){
+			var userId = $(".userId").text().trim(); // userId 가져오기
+
+	        $("#hidden_UserId").val(userId);
+			document.customerDetailForm.action = "${path}/adCustomerRestore.ad";
+			document.customerDetailForm.submit();
 		});
 	});
 </script>
+<style>
+	tr {
+		vertical-align: middle
+	}
+	
+	td {
+		text-align : left
+	}
+</style>
 </head>
 <body>
 	<div class="wrap"> <!-- 스타일을 해주려고 class명을 지정함  -->
@@ -33,57 +46,84 @@
 				<!-- 상단 중앙1 시작 -->
 			<div>
 				<hr>
-				<h1 align="center">회원 목록</h1>
+				<h1 align="center">회원 상세 조회</h1>
 				<hr>
 			</div>
 			<!-- 상단 중앙1 종료 -->
 			
 			<!-- 상단 중앙2 시작 -->
 			<div id="section2">
-	
 				<!-- 좌측 메뉴 시작 -->               					
-				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
+				<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 				<!-- 좌측메뉴 종료 -->
 				<!-- 우측매뉴 시작 -->
-				<form name ="customerDetailForm" method="post">
-					<table class="table">
+				<div class="col-md-3">
+				</div>
+	  			<form name ="customerDetailForm" method="post" style="width:4500px; font-size:10pt;">
+					<table class="table table-bordered" style="width: 600px">
 						<thead>
-							<tr>
-								<th scope="col">No.</th>
-								<th scope="col">ID</th>
-								<th scope="col">이름</th>
-								<th scope="col">주소</th>
-								<th scope="col">생일</th>
-								<th scope="col">전화번호</th>
-								<th scope="col">이메일</th>
-								<th scope="col">일반 / 관리자</th>
-								
-							</tr>
+							<div class="form-group" align="right">
+					  			<input type="hidden" name="hidden_userId" value="${dto.userId}">
+					  			<%-- <button type="button" id="updateTrainer" class="btn active" data-bs-toggle="button" aria-pressed="true">트레이너</button>
+					  			<button type="button" id="updateAdmin" class="btn active" data-bs-toggle="button" aria-pressed="true">관리자</button>
+					  			<button type="button" id="updateCustomer" class="btn active" data-bs-toggle="button" aria-pressed="true">일반회원</button> --%>
+					  			<button type="button" id="restoreCustomer" class="btn active" data-bs-toggle="button" aria-pressed="true">복구</button>
+					  			<button type="button" id="customerList" class="btn active" data-bs-toggle="button" aria-pressed="true">목록</button>
+			  				</div>
 						</thead>
-						<tbody class="table-group-divider">
+						<br>
+						<tbody>
 							<tr>
-								<td>${dto.userNo}</td>
-								<td>${dto.userId}</td>
+								<th scope="col">ID</th>
+								<td class="userId">${dto.userId}</td>
+							</tr>
+							<tr>
+								<th scope="col">이름</th>
 								<td>${dto.userName}</td>
+							</tr>
+							<tr>
+								<th scope="col">성별</th>
+								<td><%-- ${dto.userGender} --%></td>
+							</tr>
+							<tr>
+								<th scope="col">주소</th>
 								<td>${dto.userAddress}</td>
+							</tr>
+							<tr>
+								<th scope="col">생일</th>
 								<td>${dto.userBirthday}</td>
+							</tr>
+							<tr>
+								<th scope="col">전화번호</th>
 								<td>${dto.userHp}</td>
+							</tr>
+							<tr>
+								<th scope="col">이메일</th>
 								<td>${dto.userEmail}</td>
+							</tr>
+							<tr>
+								<th scope="col">회원 구분</th>
 								<c:if test="${dto.userType == 'admin'}">
 									<td>관리자</td>
 								</c:if>
 								<c:if test="${dto.userType == 'user'}">
 									<td>일반회원</td>
 								</c:if>
+								<c:if test="${dto.userType == 'trainer'}">
+									<td>트레이너</td>
+								</c:if>
+							</tr>
+							<tr>
+								<th scope="col">삭제 여부</th>
+								<c:if test="${dto.userShow == 'Y'}">
+									<td>삭제 안됐슈</td>
+								</c:if>
+								
+								<c:if test="${dto.userShow == 'N'}">
+									<td>삭제 된 회원입니다.</td>
+								</c:if>
 							</tr>
 						</tbody>
-						<tr>
-					  		<td colspan="10" class="text-end">
-					  			 <button type="button" id="updateCustomer" class="btn active" data-bs-toggle="button" aria-pressed="true">관리자 지정</button>
-					  			 <button type="button" id="deleteCustomer" class="btn active" data-bs-toggle="button" aria-pressed="true">삭제</button>
-					  			 <button type="button" id="customerList" class="btn active" data-bs-toggle="button" aria-pressed="true">목록</button>
-					  		</td>
-						</tr>
 					</table>
 				</form>					
 				<!-- 우측메뉴 종료 -->

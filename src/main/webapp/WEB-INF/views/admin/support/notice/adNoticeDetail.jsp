@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 공지사항 상세페이지</title>
-<%-- <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css"> --%>
+<link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 <script>
 	$(function() {
 		// 목록
@@ -62,42 +62,42 @@
             <div id="section2">
                
 				<!-- 좌측 메뉴 시작 -->                              
-				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
+				<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 				<!-- 좌측메뉴 종료 -->
 				<!-- 우측매뉴 시작 -->
-				<form name ="noticeDetailForm" method="post">
-					<table class="table">
-						<tbody class="table-group-divider">
+				<form name ="noticeDetailForm" method="post" style="width:4300px; font-size:10pt;">
+					<table class="table" style="width: 920px"><!-- class="table table-bordered"  -->
+						<thead>
+							<div class="form-group" align="right">
+								<input type="hidden" name="hidden_noticeNo" value="${dto.noticeNo}">
+								<button type="button" id="noticeDelete" class="btn active" data-bs-toggle="button" aria-pressed="true">삭제</button>
+					  			<button type="button" id="noticeUpdate" class="btn active" data-bs-toggle="button" aria-pressed="true">수정</button>
+					  			<button type="button" id="noticeList" class="btn active" data-bs-toggle="button" aria-pressed="true">목록</button>
+			  				</div>
+		  				</thead>
+		  				<br>
+						<tbody>
 								<tr>
-									<th style="width: 80px"> 번호 </th>
-									<td style="width: 80px; text-align:center">${dto.noticeNo}</td>
+								<th scope="col"> No. </th>
+									<td style="text-align:left">${dto.noticeNo}</td>
 									
-									<th> 작성자 </th>
-									<td>${dto.noticeWriter}</td>
+									<th scope="col"> 작성자 </th>
+									<td style="text-align:left">${dto.noticeWriter}</td>
 									
-									<th> 제목 </th>
-									<td>${dto.noticeTitle}</td>
+									<th scope="col"> 제목 </th>
+									<td style="text-align:left">${dto.noticeTitle}</td>
 									
-									<th> 등록일자 </th>
-									<td>${dto.noticeRegdate}</td>
+									<th scope="col"> 등록일자 </th>
+									<td style="text-align:left">${dto.noticeRegdate}</td>
 									
-									<th> 조회수 </th>
-									<td>${dto.noticeViews}</td>
+									<th scope="col"> 조회수 </th>
+									<td style="text-align:left">${dto.noticeViews}</td>
 								</tr>
 								<tr>
-									<th> 내용 </th>
-									<td colspan="10">${dto.noticeContent} </td>
+									<th scope="col"> 내용 </th>
+									<td colspan="8" style="text-align:center">${dto.noticeContent} </td>
 								</tr>
 						</tbody>
-						<tr>
-					  		<td colspan="10" class="text-end" align="center">
-					  			<input type="hidden" name="hidden_noticeNo" value="${dto.noticeNo}">
-								<button type="button" class="btn active" id="noticeUpdate">수정</button>
-								<button type="button" class="btn active" id="noticeDelete">삭제</button>
-								<button type="button" class="btn active" id="noticeList">목록</button>
-							</td>
-						</tr>
-					
 					</table>
 				</form>
 				<br>
