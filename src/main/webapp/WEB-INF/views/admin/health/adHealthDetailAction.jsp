@@ -24,30 +24,37 @@
 					<div class="col-md-2">
 					</div>		
 					<div class="col-md-8 animate-box">
-						<p class="fs-1" align="center">헬스회원 수정</p>
+						<p class="fs-1" align="center">헬스회원 상세내용</p>
 						<br>
 					
 					<form name="inputform" action="adHealthUpdateAction.ad" method="post" enctype="multipart/form-data">
-					
+					<hr>
 					<div class="row g-3 align-items-center">
 						<div class="col-md-2">
 							회원 번호 
 						</div>
-						<div class="col-md-8">
+						<div class="col-md-5">
 							<p class="fs-4">${dto.healthNo}</p>
+						</div>
+						<br>
+						<div class="col-md-5" align="center">
+						<img src = "${dto.healthImg}" style="width:200px"><br>
 						</div>
 					</div>
 					
-					
+					<br>
 					<div class="row g-3 align-items-center">
 						<div class="col-md-2">
 							아이디
 						</div>
-						<div class="col-md-8">
+						<div class="col-md-5">
 							<p class="fs-4">${dto.userId}</p>
 						</div>
+						<div class="col-md-5">
+						 <p align="center">남은 일수: <span class="fs-4" id="dateDifference">0</span>일</p>
+						</div>
 					</div>
-					<hr>
+					<br>
 					
 					<div class="row g-3 align-items-center">
 						<div class="col-md-2">
@@ -110,32 +117,76 @@
 							회원 이미지
 						</div>
 						<div class="col-md-10">
-							<img src = "${dto.healthImg}" style="width:200px"><br>
 							<input type="file" id="hmImg" name="hmImg" value="${dto.healthImg}" class="form-control  form-control-lg" accept="image/*">
 						</div>
 					</div>
 					<br>
-					
-					<div class="row g-3 align-items-center">
-					    <div class="col-md-2">
-					        등록 기간
-					    </div>
-					    <div class="col-md-5 d-flex align-items-center gap-2">
-					        <input type="date" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg" required>
-					        <span>~</span>
-					        <input type="date" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg">
-					    </div>
+				
+					<div class="col-md-10 d-flex align-items-center gap-3">
+					  <div class="form-check">
+					    <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus1" value="헬스" 
+					      onchange="toggleInputs()" 
+					      <c:if test="${dto.healthStatus == '헬스'}">checked</c:if>>
+					    <label class="form-check-label" for="healthStatus1">헬스</label>
+					  </div>
+					  <div class="form-check">
+					    <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus2" value="PT" 
+					      onchange="toggleInputs()" 
+					      <c:if test="${dto.healthStatus == 'PT'}">checked</c:if>>
+					    <label class="form-check-label" for="healthStatus2">P.T</label>
+					  </div>
 					</div>
-					<br>
 					
-					<div class="row g-3 align-items-center">
+					<hr><br>
+					<!-- 등록 기간 (헬스 선택 시) -->
+					<div class="row g-3 align-items-center" id="dateInputRow" style="display: none;">
+					  <div class="col-md-2">
+					    등록 기간
+					  </div>
+					  
+					  <div class="col-md-5 d-flex align-items-center gap-2">
+					    <input type="date" value="${dto.healthStartDate}" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg">
+					    <span>~</span>
+					    <input type="date" value="${dto.healthEndDate}" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg">
+					  </div>
+					</div>
+							
+					<!-- 등록 기간 자동 설정 버튼 -->
+					<br>
+					<div class="row g-3 align-items-center" id="autoDateButtons" style="display: none;">
+					  <div class="col-md-2"></div>
+					  <div class="col-md-10">
+					    <button type="button" class="btn btn-light" onclick="setAutoDate(3)">3개월</button>
+					    <button type="button" class="btn btn-light" onclick="setAutoDate(6)">6개월</button>
+					    <button type="button" class="btn btn-light" onclick="setAutoDate(12)">12개월</button>
+					  </div>
+					</div>
+							
+							
+					<!-- 선생님 선택 (P.T 선택 시) -->
+					<div class="row g-3 align-items-center" id="trainerRow" style="display: none;">
+					  <div class="col-md-2">
+					    P.T 선생님
+					  </div>
+					  <div class="col-md-5 d-flex align-items-center gap-2">
+					    <select class="form-select form-select-lg" name="trainerId" id="trainerId">
+					      <c:forEach var="list" items="${list}">
+					        <option value="${list.userId}">${list.userId}</option>
+					      </c:forEach>
+					    </select>
+					  </div>
+					</div>
+							
+					<!-- P.T 등록 횟수 (P.T 선택 시) -->
+					<br>
+					<div class="row g-3 align-items-center" id="ptCountRow" style="display: none;">
 						<div class="col-md-2">
 							P.T 등록 횟수
 						</div>
 						<div class="col-md-3">
 						  <label class="visually-hidden" for="specificSizeSelect">Preference</label>
 						  <select class="form-select  form-select-lg" id="ptCnt" name="ptCnt">
-						    <option value="">횟수</option>
+						    <option value=0>${dto.ptCnt}회</option>
 							<option value=12>12회</option>
 							<option value=24>24회</option>
 							<option value=36>36회</option>
@@ -143,28 +194,7 @@
 						</div>
 					</div>
 					<br>
-					
-					<div class="row g-3 align-items-center">
-					    <div class="col-md-2">
-					        상태
-					    </div>
-					    <div class="col-md-10 d-flex align-items-center gap-3">
-					        <div class="form-check">
-					            <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus1" value="헬스">
-					            <label class="form-check-label" for="healthStatus1">
-					                헬스
-					            </label>
-					        </div>
-					        <div class="form-check">
-					            <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus2" value="PT">
-					            <label class="form-check-label" for="healthStatus2">
-					                P.T
-					            </label>
-					        </div>
-					    </div>
-					</div>
-					<br>
-					
+			
 					<div class="form-group" align="right">
 				        <input class="btn btn-light" type="submit" value="수정">
 						<input class="btn btn-light" type="button" value="회원목록" onclick="window.location='${path}/adHealthList.ad'">

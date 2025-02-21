@@ -49,6 +49,7 @@ public class HealthController {
 	public String adHealthInsert(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
 		logger.info("<<< url ==>  /adHealthInsert.ad >>>");
+		service.healthInsert(request, response, model);
 		return "admin/health/adHealthInsert";
 	}
 	
@@ -66,7 +67,6 @@ public class HealthController {
 	public String adHealthDetail(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
 		logger.info("<<< url ==>  /adHealthDetailAction.ad >>>");
-		
 		service.healthDetailAction(request, response, model);
 		return "admin/health/adHealthDetailAction";
 	}

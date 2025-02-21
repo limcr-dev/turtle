@@ -18,6 +18,10 @@ public interface HealthService {
 	// 헬스회원 등록시(Id 조회)
 	public void IdCheckAction(HttpServletRequest request, HttpServletResponse response, Model model)
 		throws ServletException, IOException;
+	
+	//헬스 회원 등록 화면
+	public void healthInsert(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
 
 	//헬스 회원 등록
 	public void healthInsertAction(MultipartHttpServletRequest request, HttpServletResponse response, Model model)

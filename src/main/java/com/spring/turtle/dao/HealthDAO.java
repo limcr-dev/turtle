@@ -16,7 +16,10 @@ public interface HealthDAO {
 		
 	// 헬스회원 등록시(Id 조회)
 	public UserDTO userIdCheck(String userId);
-		
+	
+	//헬스트레이너 목록
+	public List<String> trainerList();
+	
 	// 헬스회원 등록 처리
 	public int healthInsert(HealthDTO dto);
 	

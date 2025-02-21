@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- join.js -->
+<script src="${path}/resources/js/health/insert.js" defer></script>
 <title>adHealthList</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 <script type="text/javascript">
@@ -20,6 +22,7 @@ function page() {
 		});
 	});
 </script>
+
 </head>
 <body>
 	<div class="wrap"> <!-- 스타일을 해주려고 class명을 지정함  -->
@@ -47,7 +50,7 @@ function page() {
 					
 					<!-- 헬스회원 목록 -->	
 					<form name="healthForm" id="healthForm" method="post" style="width:1300px">
-						<table class="table" style="width:900px; margin:auto;">
+						<table class="table" style="width:1050px; margin:auto;">
 							<thead>
 								<tr>
 									<th scope="col" style="width:10%; text-align:center;">등록번호</th>
@@ -78,11 +81,13 @@ function page() {
 										<td style="vertical-align: middle;">${dto.userHp}</td>
 										<td style="vertical-align: middle;">${dto.healthStatus}</td>
 										<td style="vertical-align: middle;">
-											${dto.healthStartDate} ~ ${dto.healthEndDate}
+										    ${dto.healthStartDate} ~ <span class="healthEndDate">${dto.healthEndDate}</span>
+										    <br>
+										   
 										</td>
 										<td>
 											<div>
-											<input class="btn btn-light" type="button" value="수정"
+											<input class="btn btn-light" type="button" value="상세내용"
 											onclick="window.location = '${path}/adHealthDetailAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
 											</div>
 											<br>

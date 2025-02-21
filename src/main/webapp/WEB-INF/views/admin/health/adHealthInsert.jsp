@@ -81,52 +81,64 @@
 							</div>
 							<br>
 							
-							<div class="row g-3 align-items-center">
-							    <div class="col-md-2">
-							        등록 기간
-							    </div>
-							    <div class="col-md-5 d-flex align-items-center gap-2">
-							        <input type="date" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg" required>
-							        <span>~</span>
-							        <input type="date" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg">
-							    </div>
-							</div>
-							<br>
 							
 							<div class="row g-3 align-items-center">
+							  <div class="col-md-2">상태</div>
+							  <div class="col-md-10 d-flex align-items-center gap-3">
+							    <div class="form-check">
+							      <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus1" value="헬스" onchange="toggleInputs()">
+							      <label class="form-check-label" for="healthStatus1">헬스</label>
+							    </div>
+							    <div class="form-check">
+							      <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus2" value="PT" onchange="toggleInputs()">
+							      <label class="form-check-label" for="healthStatus2">P.T</label>
+							    </div>
+							  </div>
+							</div>
+							
+							<hr><br>
+							<!-- 등록 기간 (헬스 선택 시) -->
+							<div class="row g-3 align-items-center" id="dateInputRow" style="display: none;">
+							  <div class="col-md-2">
+							    등록 기간
+							  </div>
+							  <div class="col-md-5 d-flex align-items-center gap-2">
+							    <input type="date" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg">
+							    <span>~</span>
+							    <input type="date" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg">
+							  </div>
+							</div>
+							
+							
+							<!-- 선생님 선택 (P.T 선택 시) -->
+							<div class="row g-3 align-items-center" id="trainerRow" style="display: none;">
+							  <div class="col-md-2">
+							    P.T 선생님
+							  </div>
+							  <div class="col-md-5 d-flex align-items-center gap-2">
+							    <select class="form-select form-select-lg" name="trainerId" id="trainerId">
+							      <c:forEach var="list" items="${list}">
+							        <option value="${list.userId}">${list.userId}</option>
+							      </c:forEach>
+							    </select>
+							  </div>
+							</div>
+							
+							<!-- P.T 등록 횟수 (P.T 선택 시) -->
+							<br>
+							<div class="row g-3 align-items-center" id="ptCountRow" style="display: none;">
 								<div class="col-md-2">
 									P.T 등록 횟수
 								</div>
 								<div class="col-md-3">
 								  <label class="visually-hidden" for="specificSizeSelect">Preference</label>
 								  <select class="form-select  form-select-lg" id="ptCnt" name="ptCnt">
-								    <option value="">횟수</option>
+								    <option value=0>횟수</option>
 									<option value=12>12회</option>
 									<option value=24>24회</option>
 									<option value=36>36회</option>
 								  </select>
 								</div>
-							</div>
-							<br>
-							
-							<div class="row g-3 align-items-center">
-							    <div class="col-md-2">
-							        상태
-							    </div>
-							    <div class="col-md-10 d-flex align-items-center gap-3">
-							        <div class="form-check">
-							            <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus1" value="헬스">
-							            <label class="form-check-label" for="healthStatus1">
-							                헬스
-							            </label>
-							        </div>
-							        <div class="form-check">
-							            <input class="form-check-input" type="radio" name="healthStatus" id="healthStatus2" value="PT">
-							            <label class="form-check-label" for="healthStatus2">
-							                P.T
-							            </label>
-							        </div>
-							    </div>
 							</div>
 							<br>
 							

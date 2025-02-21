@@ -25,7 +25,6 @@ public class HealthDAOImpl implements HealthDAO{
 		
 		return total;
 	}
-
 	// 헬스회원 목록
 	@Override
 	public List<HealthDTO> healthList(Map<String, Object> map) {
@@ -45,6 +44,15 @@ public class HealthDAOImpl implements HealthDAO{
 		System.out.println("HealthDAOImpl - userIdCheck");
 	
 		return sqlSession.selectOne("com.spring.turtle.dao.HealthDAO.userIdCheck", userId);
+	}
+	
+	//헬스트레이너 목록
+	public List<String> trainerList() {
+		System.out.println("HealthDAOImpl - trainerList");
+		
+		List<String> list = sqlSession.selectList("com.spring.turtle.dao.HealthDAO.trainerList");
+		return list;
+		
 	}
 	
 	//헬스 회원 등록

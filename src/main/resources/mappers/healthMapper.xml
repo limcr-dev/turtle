@@ -35,10 +35,17 @@
 	     WHERE userId = #{userId}
 	</select>
 	
+	<!-- 헬스트레이너 목록 -->
+	<select id="trainerList" resultType="com.spring.turtle.dto.UserDTO">
+	SELECT userId
+	  FROM user_tb
+	 WHERE userType = 'trainer'
+	</select>
+	
 	<!-- 헬스회원 등록 -->
-	<insert id="healthInsert" parameterType="com.spring.turtle.dao.HealthDAO">
-	INSERT INTO health_tb(healthNo, userId, userName, userHp, healthImg, ptCnt, healthStartDate, healthEndDate, healthShow, healthStatus)
-	VALUES ((SELECT NVL(MAX(healthNo)+1, 1) FROM health_tb), #{userId}, #{userName}, #{userHp}, #{healthImg}, #{ptCnt}, sysdate, sysdate, 'Y', #{healthStatus})
+	<insert id="healthInsert" parameterType="com.spring.turtle.dto.UserDTO">
+	INSERT INTO health_tb(healthNo, userId, userName, userHp, healthImg, ptCnt, healthStartDate, healthEndDate, healthShow, healthStatus, trainerId)
+	VALUES ((SELECT NVL(MAX(healthNo)+1, 1) FROM health_tb), #{userId}, #{userName}, #{userHp}, #{healthImg}, #{ptCnt}, #{healthStartDate}, #{healthEndDate}, 'Y', #{healthStatus}, #{trainerId})
 	</insert>
 
 	<!-- 헬스회원 상세목록 -->
