@@ -5,8 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- join.js -->
+<script src="${path}/resources/js/health/insert.js" defer></script>
 <title>adHealthList</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
+<script type="text/javascript">
+function page() {
+	document.getElementById("healthForm").submit();
+}
+
+</script>
+<script>
+	$(function(){
+		$("#btnInsert").click(function(){
+			location.href="${path}/adHealthInsert.ad";
+		});
+	});
+</script>
+
 </head>
 <body>
 	<div class="wrap"> <!-- 스타일을 해주려고 class명을 지정함  -->
@@ -17,6 +33,7 @@
 		<!-- 컨텐츠 시작 -->
 		<div id="container">
 			<div id="contents">
+			
 				<!-- 상단 중앙1 시작 -->
 				<div>
 					<hr>
@@ -28,62 +45,95 @@
 				<!-- 상단 중앙2 시작 -->
 				<div id="section2">
 					<!-- 좌측 메뉴 시작 -->               					
-					<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
+					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 					<!-- 좌측메뉴 종료 -->
 					
-					<!-- 우측매뉴 시작 -->
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">담당트레이너</th>
-								<th scope="col">P.T현황</th>
-								<th scope="col">생일</th>
-								<th scope="col">기간</th>
-								<th scope="col">등록상태</th>
-							</tr>
-						</thead>
-						<tbody class="table-group-divider">
-							<tr>
-								<th scope="row">1</th>
-								<td>강아지</td>
-								<td>12</td>
-								<td>1995.02.25</td>
-								<td>24.12.02 ~ 25.07.12</td>
-								<td>P.T</td>
-							</tr>
-						    
-							<tr>
-								<th scope="row">2</th>
-								<td>고양이</td>
-								<td></td>
-								<td>1985.11.01</td>
-								<td>24.01.02 ~ 25.12.12</td>
-								<td>헬스</td>
-							</tr>
-						 
-							<tr>
-								<th scope="row">3</th>
-								<td>강아지</td>
-								<td>50</td>
-								<td>1994.03.15</td>
-								<td>24.04.08 ~ 25.01.14</td>
-								<td>P.T</td>
-							</tr>
-						</tbody>
-					</table>
-					<!-- 우측메뉴 종료 -->
-				<!-- 상단 중앙2 종료 -->
+					<!-- 헬스회원 목록 -->	
+					<form name="healthForm" id="healthForm" method="post" style="width:1300px">
+						<table class="table" style="width:1050px; margin:auto;">
+							<thead>
+								<tr>
+									<th scope="col" style="width:10%; text-align:center;">등록번호</th>
+									<th scope="col" style="width:10%; text-align:center;">회원 이미지</th>
+									<th scope="col" style="width:10%; text-align:center;">이름</th>
+									<th scope="col" style="width:20%; text-align:center;">전화번호</th>
+									<th scope="col" style="width:10%; text-align:center;">
+									<select class="" name="statusType" id="listSize" onchange="page()">
+										<option value=""
+											<c:if test="${statusType == ''}">selected="selected"</c:if>>전체유형</option>
+										<option value="헬스"
+											<c:if test="${statusType == '헬스'}">selected="selected"</c:if>>헬스</option>
+										<option value="PT"
+											<c:if test="${statusType == 'PT'}">selected="selected"</c:if>>PT</option>
+									</select>
+									</th>
+									<th scope="col" style="width:30%; text-align:center;">등록기간
+									</th>
+									<th scope="col" style="width:10%; text-align:center;">설정</th>
+								</tr>
+							</thead>							
+							<tbody>
+								<c:forEach var='dto' items="${list}">
+									<tr>
+										<td style="vertical-align: middle;">${dto.healthNo}</td>
+										<td><img src = "${dto.healthImg}" width="100px"></td>
+										<td style="vertical-align: middle;">${dto.userName}</td>
+										<td style="vertical-align: middle;">${dto.userHp}</td>
+										<td style="vertical-align: middle;">${dto.healthStatus}</td>
+										<td style="vertical-align: middle;">
+										    ${dto.healthStartDate} ~ <span class="healthEndDate">${dto.healthEndDate}</span>
+										    <br>
+										   
+										</td>
+										<td>
+											<div>
+											<input class="btn btn-light" type="button" value="상세내용"
+											onclick="window.location = '${path}/adHealthDetailAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
+											</div>
+											<br>
+											<div>
+											<input class="btn btn-light" type="button" value="삭제"
+											onclick="window.location = '${path}/adHealthDeleteAction.ad?healthNo=${dto.healthNo}'">
+											</div>											
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+								<tr>
+	                               <td colspan=11" align="center">
+	                                  <input type="button" class="btn btn-light" value="등록" id="btnInsert">
+	                               </td>
+                            	</tr>					
+						</table>						
+						<br>
+						<div style="width:900px; margin:auto" >
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item">
+										<c:if test="${paging.startPage > 10}">
+										    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
+										      <span aria-hidden="true">&laquo;</span>
+										    </a>
+									    </c:if>
+									</li>
+									
+									<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+										<li class="page-item"><a class="page-link" href="${path}/adHealthList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
+									</c:forEach>
+									
+									<li class="page-item">
+										<c:if test="${paging.endPage < paging.pageCount}">
+										    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
+										      <span aria-hidden="true">&raquo;</span>
+										    </a>
+									    </c:if>
+								    </li>
+								</ul>
+							</nav>
+						</div>
+					</form>
+				</div>
 			</div>
-			<p align="center">
-			SQL(헬스 목록)<br>
-			SELECT * <br>
-			FROM health_tb<br>
-			WHERE healthNo >= start<br>
-			AND healthNo <= end<br>
-			ORDER BY healthNo
-			</p>
-		</div>
 		<!-- 컨텐츠 끝 -->
 		<hr>
 		</div>
