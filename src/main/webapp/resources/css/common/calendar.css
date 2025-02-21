@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-  #calendar .fc-daygrid-day-number {
-    color: black; /* 달력의 날짜 숫자 색상 */
-}
-
 #calendar .fc-toolbar-title {
   color: black; /* 달력의 제목 색상 */
 }
@@ -19,7 +15,56 @@
 #calendar .weekNumbers {
 	color: blue; /* 일정 제목 색상 */
 }
- 
+
+.fc-day {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    /* height: 50px; */
+}
+
+.fc-day:hover {
+    background-color: #fef2dc;
+}
+
+.fc-day-number {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.fc-daygrid-day-top {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.fc .fc-col-header-cell-cushion{
+    display: inline-block;
+    padding: 2px 4px;
+    color: black;
+}
+
+.fc-col-header-cell-cushion, .fc-daygrid-day-number {
+    text-decoration: none;
+}
+
+.fc-scrollgrid-sync-inner > .fc-col-header-cell-cushion,
+.fc-day-mon, .fc-daygrid-day-number,
+.fc-day-tue, .fc-daygrid-day-number,
+.fc-day-wed, .fc-daygrid-day-number,
+.fc-day-thu, .fc-daygrid-day-number,
+.fc-day-fri, .fc-daygrid-day-number {
+    color: black;
+}
+
+.fc-day-sun .fc-col-header-cell-cushion,
+.fc-day-sun a{
+    color : red;
+}
+
+.fc-day-sat .fc-col-header-cell-cushion,
+.fc-day-sat a {
+    color : blue;
+}
+
 /* 시간 라디오 */
 .radioButtonStyle{
 	font-size: 14px;

@@ -20,14 +20,14 @@
 		<c:if test="${deleteCnt == 1}">
 			<script type="text/javascript">
 			alert("예약 취소가 완료되었습니다.");
-			window.location="${path}/revConsultList.do?userId=${sessionID}";
+			window.location="${path}/adRevConsultList.ad";
 		</script>
 		</c:if>
 		
 		<c:if test="${deleteCnt != 1}">
 			<script type="text/javascript">
 			alert("예약 취소에 실패하였습니다.");
-			window.location="${path}/revConsultList.do?userId=${sessionID}";
+			window.location="${path}/adRevConsultList.ad";
 		</script>
 		</c:if>
 	</div>

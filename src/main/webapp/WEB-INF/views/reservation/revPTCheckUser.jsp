@@ -9,7 +9,7 @@
 <title>회원 인증 및 조회</title>
 
 <!-- revConsult.js -->
-<script src="${path}/resources/js/reservation/revConsult.js" defer></script>
+<script src="${path}/resources/js/reservation/revPT.js" defer></script>
 
 </head>
 <body>
@@ -21,7 +21,7 @@
 					<p class="fs-1" align="center">회원 조회 및 인증</p>
 					<br><hr><br>	
 					
-					<form name="searchUserform" action="revConsultCheckUser.do" method="post">
+					<form name="searchUserform" action="revPTCheckUser.do" method="post">
 						<!-- 회원 인증 초기 페이지 및 인증 실패 화면 -->
 						<c:if test="${dto == null}">
 							<!-- 회원 인증 실패 시 알림창 띄우기 -->
@@ -60,7 +60,7 @@
 							<br>
 							
 							<div class="form-group" align="right">
-								<input type="button" class="btn btn-dark" value="확인" onclick="setUser('${dto.userId}', '${dto.userName}','${dto.userHp}')">
+								<input type="button" class="btn btn-dark" value="확인" onclick="setUser('${dto.userId}', '${dto.userName}','${dto.userHp}', '${dto.trainerId}')">
 							</div>
 						</c:if>
 					</form>

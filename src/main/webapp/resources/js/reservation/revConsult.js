@@ -1,7 +1,7 @@
 // revConsult.js - 상담 예약
  
 // 회원조회 버튼 클릭 시, 회원조회 및 인증 페이지 open
-function revCheckUser(){
+function revConsultCheckUser(){
 	if(!document.revConsultForm.userId.value){
 		alret("아이디를 입력하세요.");
 		document.revConsultForm.userId.focus();
@@ -9,7 +9,7 @@ function revCheckUser(){
 	}
 	
 	// 회원조회 버튼 클릭 시, revController로 요청 전달
-	let url = "/turtle/revCheckUser.do?userId=" + document.revConsultForm.userId.value;
+	let url = "/turtle/revConsultCheckUser.do?userId=" + document.revConsultForm.userId.value;
 	window.open(url, "confirm", "menubar=no, width=500, height=300");
 	
 }
@@ -53,5 +53,33 @@ function setUser(userId, userName, userHp){
 	
 	opener.document.revConsultForm.hiddenCheckUser.value = "1";
 	self.close();
+}
+
+// 관리자 상담 예약 수정 필수 체크
+function updateRevConsulCheck(){
+
+	// 트레이너 지정
+	// <input type="hidden" name="hiddenSelectTrainer" value="0"> 
+	// hiddenSelectTrainer : 담당자 지정 여부 체크(0:지정안함, 1:지정함)
+	
+	// 트레이너 지정 여부 확인
+	if(document.updateForm.trainerSelect.value == '' || document.updateForm.trainerSelect.value == null){
+		alert("담당자를 지정해주세요.");
+		document.updateForm.trainerSelect.focus();
+		return false;
+	}
+	
+	if(document.updateForm.trainerSelect.value && document.updateForm.statusType.value != '승인'){
+		alert("예약 상태를 '승인'으로 변경해주세요.");
+		document.updateForm.trainerSelect.focus();
+		return false;
+	}
+	
+	// 트레이너 지정 여부 확인
+	if(document.updateForm.statusType.value == '' || document.updateForm.statusType.value == null){
+		alert("예약 상태를 지정해주세요.");
+		document.updateForm.statusType.focus();
+		return false;
+	}
 }
 

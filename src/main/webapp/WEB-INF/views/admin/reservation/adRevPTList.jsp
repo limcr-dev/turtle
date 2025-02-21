@@ -10,7 +10,7 @@ function page() {
 </script>
 <head>
 <meta charset="UTF-8">
-<title>adRevConsultList</title>
+<title>adRevPTList</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
@@ -25,7 +25,7 @@ function page() {
 				<!-- 상단 중앙1 시작 -->
 				<div>
 					<hr>
-					<h1 align="center">상담 예약 현황</h1>
+					<h1 align="center">PT 예약 현황</h1>
 					<hr>
 				</div>
 	            <!-- 상단 중앙1 종료 -->
@@ -36,7 +36,7 @@ function page() {
 						<!-- 좌측메뉴 종료 -->
 						
 						<!-- 상담 예약 목록 시작 -->
-						<form name ="statusForm" id="statusForm" action="${path}/adRevConsultList.ad" method="post" style="width:1300px">
+						<form name ="statusForm" id="statusForm" action="${path}/adRevPTList.ad" method="post" style="width:1300px">
 							
 							<table class="table" style="width:1050px; margin:auto;">
 								<thead>
@@ -47,7 +47,7 @@ function page() {
 								        <th scope="col" style="width:15%">전화번호</th>
 								        <th scope="col" style="width:15%">예약일</th>
 								        <th scope="col" style="width:10%">예약시간</th>
-								        <th scope="col" style="width:10%">담당자</th>
+								        <th scope="col" style="width:10%">트레이너</th>
 								        <th scope="col" style="width:10%">
 								        	<select name="statusType" id="listSize" onchange="page()">
 												<option value=""
@@ -73,33 +73,31 @@ function page() {
 								<tbody>
 									<c:if test="${paging.count == 0}">
 										<tr>
-											<td colspan="8" align="center">${statusType} 상태인 예약이 존재하지 않습니다.</td>
+											<td colspan="8" align="center">예약이 존재하지 않습니다.</td>
 										</tr>
 									</c:if>
 									
 								    <c:forEach var="dto" items="${list}" >
 										<tr align="center">
-											<th scope="row">${dto.revConsultNo}</th>
+											<th scope="row">${dto.revPTNo}</th>
 									        <td>${dto.userId}</td>
 									        <td>${dto.userName}</td>
 									        <td>${dto.userHp}</td>
-									        <td>${fn:substring(dto.revConsultDate, 0, 10)}</td>
-									        <td>${fn:substring(dto.revConsultDate, 10, 16)}</td>
+									        <td>${fn:substring(dto.revPTDate, 0, 10)}</td>
+									        <td>${fn:substring(dto.revPTDate, 10, 16)}</td>
+									        <td>${dto.trainerId}</td>
+									        <td <c:if test="${dto.revPTStatus == '대기'}"> style="color:red" </c:if>>
+									        	${dto.revPTStatus}
+									        </td>
 									        <td>
-									        	<c:if test="${dto.trainerId == null}">
-									        		<p <c:if test="${dto.revConsultStatus == '대기'}"> style="color:red" </c:if>>미지정</p>
+									        	<c:if test="${dto.revPTStatus == '대기' || (dto.revPTStatus == '승인' && dto.revPTDate >= now)}">
+									        		<input type="button" value="수정" class="btn active" onclick="window.location='${path}/adRevPTDetail.ad?revPTNo=${dto.revPTNo}'">
+									        		<input type="button" value="취소" class="btn active" onclick="window.location='${path}/adRevPTDelete.ad?revPTNo=${dto.revPTNo}'">
 									        	</c:if>
-									        	<c:if test="${dto.trainerId != null}">
-									      			${dto.trainerId}
-									      		</c:if>
-									        </td>
-									        <td <c:if test="${dto.revConsultStatus == '대기'}"> style="color:red" </c:if>>
-									        	${dto.revConsultStatus}
-									        </td>
-									        <td>
-									        	<c:if test="${dto.revConsultStatus == '대기' || dto.revConsultStatus == '승인'}">
-									        		<input type="button" value="수정" class="btn active" onclick="window.location='${path}/adRevConsultDetail.ad?revConsultNo=${dto.revConsultNo}'">
-									        		<input type="button" value="취소" class="btn active" onclick="window.location='${path}/adRevConsultDelete.ad?revConsultNo=${dto.revConsultNo}'">
+									        	
+									        	<c:if test="${dto.revPTStatus == '승인' && dto.revPTDate < now}">
+									        		<input type="button" value="수정" class="btn active" onclick="window.location='${path}/adRevPTDetail.ad?revPTNo=${dto.revPTNo}'">
+									        		<input type="button" value="완료" class="btn btn-warning" onclick="window.location='${path}/adRevPTComplete.ad?revPTNo=${dto.revPTNo}&userId=${dto.userId}'">
 									        	</c:if>
 									        </td>
 									    </tr>
@@ -115,19 +113,19 @@ function page() {
 										<ul class="pagination justify-content-center">
 											<li class="page-item">
 												<c:if test="${paging.startPage > 10}">
-												    <a class="page-link" href="${path}/adRevConsultList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
+												    <a class="page-link" href="${path}/adRevPTList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
 												      <span aria-hidden="true">&laquo;</span>
 												    </a>
 											    </c:if>
 											</li>
 											
 											<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-												<li class="page-item"><a class="page-link" href="${path}/adRevConsultList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
+												<li class="page-item"><a class="page-link" href="${path}/adRevPTList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
 											</c:forEach>
 											
 											<li class="page-item">
 												<c:if test="${paging.endPage < paging.pageCount}">
-												    <a class="page-link" href="${path}/adRevConsultList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
+												    <a class="page-link" href="${path}/adRevPTList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
 												      <span aria-hidden="true">&raquo;</span>
 												    </a>
 											    </c:if>

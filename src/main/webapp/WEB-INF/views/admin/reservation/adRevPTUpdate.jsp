@@ -1,33 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/setting.jsp" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상담 예약 삭제</title>
-
-<script>
-
-</script>
+<title>adRevPTUpdate</title>
 </head>
 <body>
 	<div class="wrap">
 		<!-- header 시작 -->
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 		<!-- header 끝 -->
-		<c:if test="${deleteCnt == 1}">
+		<c:if test="${updateCnt == 1}">
 			<script type="text/javascript">
-			alert("예약 취소가 완료되었습니다.");
-			window.location="${path}/revConsultList.do?userId=${sessionID}";
+			alert("예약 수정이 완료되었습니다.");
+			window.location="${path}/adRevPTList.ad";
 		</script>
 		</c:if>
 		
-		<c:if test="${deleteCnt != 1}">
+		<c:if test="${updateCnt != 1}">
 			<script type="text/javascript">
-			alert("예약 취소에 실패하였습니다.");
-			window.location="${path}/revConsultList.do?userId=${sessionID}";
+			alert("예약 수정에 실패하였습니다.");
+			window.location="${path}/adRevPTList.ad";
 		</script>
 		</c:if>
 	</div>

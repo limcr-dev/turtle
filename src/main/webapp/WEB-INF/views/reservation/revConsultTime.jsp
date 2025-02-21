@@ -10,7 +10,8 @@
 </head>
 <body>
 	<div class="radioButtonStyle">
-		
+		<h4 style="color:#ee8432" align="center">${revDate}</h4>
+		<br>
 		<!-- 주말일 때 예약 시간 출력(09:00~17:00) -->
 		<c:if test="${dayOfWeek == 0 || dayOfWeek == 6}">
 			<label class="radioStyle">

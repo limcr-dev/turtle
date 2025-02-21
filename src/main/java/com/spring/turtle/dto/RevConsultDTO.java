@@ -2,6 +2,7 @@ package com.spring.turtle.dto;
 
 import java.sql.Timestamp;
 
+// 상담예약
 public class RevConsultDTO {
 	
 	// 멤버변수
@@ -10,16 +11,15 @@ public class RevConsultDTO {
 	private String userName;			// 예약자 이름
 	private String userHp;				// 예약자 전화번호
 	private String trainerId;			// 상담 담당 트레이너 아이디
-    private Timestamp revConsultDate;		// 예약 날짜
+    private Timestamp revConsultDate;	// 예약 날짜
     private String revConsultStatus;	// 예약 상태 - 대기, 승인, 거절
-    private String revConsultDay;		// 예약 요일(일, 월, 화 ...)
     
     // 디폴트 생성자
 	public RevConsultDTO() {}
 	
 	// 매개변수 생성자
 	public RevConsultDTO(int revConsultNo, String userId, String userName, String userHp, String trainerId,
-			Timestamp revConsultDate, String revConsultStatus, String revConsultDay) {
+			Timestamp revConsultDate, String revConsultStatus) {
 		this.revConsultNo = revConsultNo;
 		this.userId = userId;
 		this.userName = userName;
@@ -27,7 +27,6 @@ public class RevConsultDTO {
 		this.trainerId = trainerId;
 		this.revConsultDate = revConsultDate;
 		this.revConsultStatus = revConsultStatus;
-		this.revConsultDay = revConsultDay;
 	}
 	
 	// getter, setter
@@ -81,14 +80,6 @@ public class RevConsultDTO {
 	
 	public String getRevConsultStatus() {
 		return revConsultStatus;
-	}
-	
-	public void setRevConsultDay(String revConsultDay) {
-		this.revConsultDay = revConsultDay;
-	}
-	
-	public String getRevConsultDay() {
-		return revConsultDay;
 	}
 	
 	public void setRevConsultStatus(String revConsultStatus) {

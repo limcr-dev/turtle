@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상담 예약</title>
-<!-- revConsult.js -->
-<script src="${path}/resources/js/reservation/revConsult.js" defer></script>
+<title>PT 예약</title>
+<!-- revPT.js -->
+<script src="${path}/resources/js/reservation/revPT.js" defer></script>
 
 <!-- calendar.js, calender.css -->
 <script src="${path}/resources/js/reservation/calendar.js" defer></script>
@@ -36,17 +36,21 @@
 			</script>
 		</c:if>
 		
-		<h3 align="center">상담 예약 조회</h3>
+		<h3 align="center">PT 예약 조회</h3>
 		<br><br>
 			
-		<!-- 문의목록 시작 -->
-		<table class="table" style="width:1000px; margin:auto;"  align="center">
+		<!-- PT 목록 시작 -->
+		<table class="table" style="width:1000px; margin:auto;" align="center">
 			<thead>
+				<tr>
+					<td colspan="9" align="right"> PT 잔여 횟수 : ${ptCnt}</td>
+				</tr>
 			    <tr align="center">
 					<th scope="col" style="width:5%">번호</th>
 			        <th scope="col" style="width:10%">아이디</th>
 			        <th scope="col" style="width:10%">예약자</th>
 			        <th scope="col" style="width:20%">전화번호</th>
+			        <th scope="col" style="width:15%">트레이너</th>
 			        <th scope="col" style="width:15%">예약일</th>
 			        <th scope="col" style="width:10%">예약시간</th>
 			        <th scope="col" style="width:10%">상태</th>
@@ -56,21 +60,25 @@
 		    <tbody>
 		    	<c:if test="${paging.count == 0}">
 					<tr>
-						<td colspan="8" align="center">상담 예약이 존재하지 않습니다.</td>
+						<td colspan="8" align="center">예약된 PT 수업이 존재하지 않습니다.</td>
 					</tr>
 				</c:if>
 			    <c:forEach var="dto" items="${list}" >
 					<tr align="center">
-						<th scope="row">${dto.revConsultNo}</th>
+						<th scope="row">${dto.revPTNo}</th>
 				        <td>${dto.userId}</td>
 				        <td>${dto.userName}</td>
 				        <td>${dto.userHp}</td>
-				        <td>${fn:substring(dto.revConsultDate, 0, 10)}</td>
-				        <td>${fn:substring(dto.revConsultDate, 10, 16)}</td>
-				        <td>${dto.revConsultStatus}</td>
+				        <td>${dto.trainerId}</td>
+				        <td>${fn:substring(dto.revPTDate, 0, 10)}</td>
+				        <td>${fn:substring(dto.revPTDate, 10, 16)}</td>
+				        <td>${dto.revPTStatus}</td>
 				        <td>
-					        <c:if test="${dto.revConsultStatus == '대기' || dto.revConsultStatus == '승인'}">
-					        	<input type="submit" value="취소" class="btn btn-dark" onclick="window.location='${path}/revConsultDelete.do?revConsultNo=${dto.revConsultNo}'">
+					        <c:if test="${(dto.revPTStatus == '대기') || (dto.revPTStatus == '승인' && dto.revPTDate >= now)}">
+					        	<input type="submit" value="취소" class="btn btn-secondary" onclick="window.location='${path}/revPTDelete.do?revPTNo=${dto.revPTNo}'">
+					   		</c:if>
+					   		<c:if test="${dto.revPTStatus == '승인' && dto.revPTDate < now}">
+					        	<input type="submit" value="완료" class="btn btn-dark" onclick="window.location='${path}/revPTComplete.do?revPTNo=${dto.revPTNo}&userId=${dto.userId}'">
 					   		</c:if>
 				   		</td>
 				    </tr>
@@ -86,19 +94,19 @@
 				<ul class="pagination justify-content-center">
 					<li class="page-item">
 						<c:if test="${paging.startPage > 10}">
-						    <a class="page-link" href="${path}/revConsultList.do?pageNum=${paging.prev}" aria-label="Previous">
+						    <a class="page-link" href="${path}/revPTList.do?pageNum=${paging.prev}" aria-label="Previous">
 						      <span aria-hidden="true">&laquo;</span>
 						    </a>
 					    </c:if>
 					</li>
 					
 					<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-						<li class="page-item"><a class="page-link" href="${path}/revConsultList.do?pageNum=${num}">${num}</a></li>
+						<li class="page-item"><a class="page-link" href="${path}/revPTList.do?pageNum=${num}">${num}</a></li>
 					</c:forEach>
 					
 					<li class="page-item">
 						<c:if test="${paging.endPage < paging.pageCount}">
-						    <a class="page-link" href="${path}/revConsultList.do?pageNum=${paging.next}" aria-label="Next">
+						    <a class="page-link" href="${path}/revPTList.do?pageNum=${paging.next}" aria-label="Next">
 						      <span aria-hidden="true">&raquo;</span>
 						    </a>
 					    </c:if>

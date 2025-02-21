@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상담 예약 삭제</title>
+<title>PT 예약 삭제</title>
 
 <script>
 
@@ -20,14 +20,14 @@
 		<c:if test="${deleteCnt == 1}">
 			<script type="text/javascript">
 			alert("예약 취소가 완료되었습니다.");
-			window.location="${path}/revConsultList.do?userId=${sessionID}";
+			window.location="${path}/revPTList.do?userId=${sessionID}";
 		</script>
 		</c:if>
 		
 		<c:if test="${deleteCnt != 1}">
 			<script type="text/javascript">
 			alert("예약 취소에 실패하였습니다.");
-			window.location="${path}/revConsultList.do?userId=${sessionID}";
+			window.location="${path}/revPTList.do?userId=${sessionID}";
 		</script>
 		</c:if>
 	</div>

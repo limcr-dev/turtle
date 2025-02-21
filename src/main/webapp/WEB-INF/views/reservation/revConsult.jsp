@@ -46,7 +46,7 @@
 					<div class="col-md-8 animate-box">
 						<p class="fs-1">상담 예약</p>
 						<br>
-						<form name="revConsultForm" action="revConsultAction.do" method="post"
+						<form name="revConsultForm" action="revConsultInsert.do" method="post"
 							onsubmit="return revConsultCheck()">
 							
 							<!-- 회원 조회 여부 -->
@@ -70,7 +70,7 @@
 									<input type="text" name="userId" id="userId" class="form-control form-control-lg" value="${sessionID}" disabled>
 								</div>
 								<div class="col-md-2">
-									<input type="button" class="btn btn-secondary" name="userChk" value="회원인증" onclick="revCheckUser()">
+									<input type="button" class="btn btn-secondary" name="userChk" value="회원인증" onclick="revConsultCheckUser()">
 								</div>
 							</div>
 							
@@ -107,8 +107,7 @@
 										<c:if test="${dayOfWeek == null}">
 											<div align="center">날짜를 선택하세요</div>
 										</c:if>
-									</div> 
-								
+								</div> 
 							</div>
 							<br>
 							<div class="form-group" align="right">

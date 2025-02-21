@@ -44,7 +44,8 @@ td a {
 				<div class="card-body">
 				  	<h5 class="card-title">예약 관리</h5>
 				    <hr>
-				    <p class="card-text"><a href="${path}/adReservationList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">예약 현황</a></p>
+				    <p class="card-text"><a href="${path}/adRevConsultList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">상담 예약 현황</a></p>
+				    <p class="card-text"><a href="${path}/adRevPTList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">PT 예약 현황</a></p>
 				</div>
 			</div>
 			
