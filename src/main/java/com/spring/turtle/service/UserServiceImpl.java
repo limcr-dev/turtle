@@ -37,6 +37,36 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	// Email 중복확인 처리
+	@Override
+	public void emailConfirmAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - emailConfirmAction()");
+		
+		String userEmail = request.getParameter("userEmail");
+		
+		int selectCnt = dao.useremailCheck(userEmail);
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("userEmail", userEmail);
+		
+	}
+	
+	// Email 중복확인 처리
+	@Override
+	public void emailConfirmAction2(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - emailConfirmAction2()");
+		
+		String userEmail = request.getParameter("userEmail");
+		
+		model.addAttribute("userEmail", userEmail);
+		
+	}
+	
+	
+	
+	
 	// 회원가입처리
 	@Override
 	public void signInAction(HttpServletRequest request, HttpServletResponse response, Model model)

@@ -194,8 +194,16 @@
 								  </select>
 								</div>
 								<div class="col-md-2">
-									<input type="button" class="btn btn-secondary" name="emailCheck" value="이메일중복" onclick="emailCheck()">
+
+									<input type="button" class="btn btn-secondary" name="emailChk" value="이메일 중복 확인" onclick="confirmEmail()">
 								</div>
+								
+							</div>
+							<br>
+	
+							<div class="row form-group">
+								<!-- <label for="message">Message</label> -->
+								<textarea name="message" id="message" cols="30" rows="10" class="form-control form-control-lg" placeholder="체형에 대한 고민을 작성해주세요"></textarea>
 							</div>
 							<br>
 							

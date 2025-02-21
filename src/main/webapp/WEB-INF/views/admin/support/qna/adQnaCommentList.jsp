@@ -68,7 +68,7 @@
 						<tr style="background-color:#D8D8D8">
 							<th>추가문의</th>
 							<td colspan="2" align="right"style="font-size:small; width:20%; height: 5px;">
-								${dto.q_comRegdate}
+								${fn: substring(dto.q_comRegdate,0,19)}
 							</td>
 						</tr>
 						<!-- 답변내용 -->

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin page(Health)</title>
+<title>관리자 메인</title>
 <script type="text/javascript">
 $(function(){
 	$("insert").click(function(){
@@ -58,18 +58,26 @@ td a {
 					<p class="card-text"><a href="${path}/adRevPTList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">PT 예약 현황</a></p>
 				</div>
 			</div>
-			
+				
 			<div class="card text-bg-light mb-3" style="max-width: 18rem;">
 				<div class="card-body">
-					<h5 class="card-title">헬스 관리</h5>
-					<hr>
-					<p class="card-text"><a href="${path}/adHealthList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원 현황</a></p>
+				    <h5 class="card-title">헬스 관리</h5>
+				    <hr>
+				    <p class="card-text"><a href="${path}/adHealthList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원 현황</a></p>
 					<p class="card-text"><a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">트레이너 현황</a></p>
 				</div>
 			</div>
-		<!-- 메뉴목록 -->
+			
+			<div class="card text-bg-light mb-2" style="max-width: 18rem;">
+				<div class="card-body">
+				  	<h5 class="card-title">회원 관리</h5>
+				    <hr>
+				    <p class="card-text"><a href="${path}/adCustomerList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원 목록</a></p>
+				</div>
+			</div>
+			<!-- 메뉴목록 -->
 		</div>
-	</div>
+		<!-- 컨텐츠 끝 -->
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	<!-- footer 끝 -->

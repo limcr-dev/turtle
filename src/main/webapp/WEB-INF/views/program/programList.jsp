@@ -12,65 +12,36 @@
 		<!-- header 시작 -->
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 		<!-- header 끝 -->
-			<br><br>
-			<h3 align="center">프로그램</h3>
-			<br>
-			<br>
+		
+		<!-- 컨텐츠 시작 -->
+		<div id="container">
+			<div id="contents">
 			
-			<!-- 이벤트카드 목록 시작 -->
-			<div class="row" style="width:1000px; margin:auto">
-				<div class="col-md-4 ">
-					<div class="card" style="width: 18rem;">
-						<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">헬스</p>
-					    </div>
-					</div>
+			<!-- 상단 중앙1 시작 -->
+				<div>
+					<hr>
+					<h1 align="center">프로그램 안내</h1>
+					<hr>
 				</div>
-				<div class="col-md-4 ">
-					<div class="card" style="width: 18rem;">
-						<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">PT</p>
-					    </div>
-					</div>
+			<!-- 상단 중앙1 종료 -->
+			
+			<!-- 상당 중앙2 시작 -->
+			<div id="section2">
+				<!-- 프로그램 안내 목록 -->
+				<div class="container">
+			   		<div class="row col-4">
+			     		<div class="card" style="width: 100%;">
+			        		<img src="..." class="card-img-top" alt="...">
+					        <div class="card-body">
+					          <h5 class="programTitle">Card title</h5>
+					          <p class="programComment">Some quick example text.</p>
+					          <a href="#" class="btn btn-primary">등록하기</a>
+					        </div>
+			     		 </div>
+			  		</div>
 				</div>
-				<div class="col-md-4 ">
-					<div class="card" style="width: 18rem;">
-						<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">요가</p>
-					    </div>
-					</div>
-				</div>
-				
-				<br><br><br><br><br><br><br><br><br><br><br>
-				
-				<div class="col-md-4 ">
-					<div class="card" style="width: 18rem;">
-						<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">스피닝</p>
-					    </div>
-					</div>
-				</div>
-				<div class="col-md-4 ">
-					<div class="card" style="width: 18rem;">
-						<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">줌바</p>
-					    </div>
-					</div>
-				</div>
-				<div class="col-md-4 ">
-					<div class="card" style="width: 18rem;">
-						<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text">필라테스</p>
-					    </div>
-					</div>
-				</div>
-			<!-- 컨텐츠 끝 -->
+			</div>
+			</div>
 		</div>
 	</div>
 	<!-- footer 시작 -->

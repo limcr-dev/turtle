@@ -12,6 +12,9 @@ public interface NoticeDAO {
 	// 공지사항 갯수 
 	public int noticeCnt();
 	
+	// noticeShow에 따른 공지사항 갯수
+	public int noticeCntShow(Map<String, Object> map);
+	
 	// 조회수 증가
 	public void plusReadCnt(int noticeNo);
 	
@@ -26,4 +29,7 @@ public interface NoticeDAO {
 	
 	// 공지사항 삭제
 	public int deleteNotice(int noticeNo);
+	
+	// 공지사항 다중 삭제
+	public int deleteNoticeSeveral(String[] noticeMul);
 }
