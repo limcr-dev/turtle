@@ -51,17 +51,23 @@
 								<br>
 								
 								<div class="form-group" align="right">
-									<select  name="category" id="category">
-										<option value="예약관련"
-											<c:if test="${dto.faqType == '예약관련'}">selected="selected"</c:if>>예약관련</option>
+									<select  name="category" id="category" required>
+										<option value=""
+											<c:if test="${dto.faqType == '전체'}">selected="selected"</c:if>>FAQ타입</option>
 										<option value="로그인관련"
-											<c:if test="${dto.faqType == '로그인관련'}">selected="selected"</c:if>>로그인/회원가입 관련</option>
+											<c:if test="${dto.faqType == '로그인관련'}">selected="selected"</c:if>>로그인/회원가입</option>
+										<option value="예약관련"
+											<c:if test="${dto.faqType == '예약관련'}">selected="selected"</c:if>>예약</option>
 										<option value="시설관련"
-											<c:if test="${dto.faqType == '시설관련'}">selected="selected"</c:if>>시설관련</option>
+											<c:if test="${dto.faqType == '시설관련'}">selected="selected"</c:if>>시설</option>
+										<option value="결제관련"
+											<c:if test="${dto.faqType == '결제관련'}">selected="selected"</c:if>>결제 및 환불 정책</option>
 										<option value="프로그램관련"
-											<c:if test="${dto.faqType == '프로그램관련'}">selected="selected"</c:if>>프로그램 관련</option>
-										<option value="상품관련"
-											<c:if test="${dto.faqType == '상품관련'}">selected="selected"</c:if>>상품관련</option>
+											<c:if test="${dto.faqType == '프로그램관련'}">selected="selected"</c:if>>프로그램</option>
+										<option value="안전관련"
+											<c:if test="${dto.faqType == '안전관련'}">selected="selected"</c:if>>건강 및 안전</option>
+										<option value="기타"
+											<c:if test="${dto.faqType == '기타'}">selected="selected"</c:if>>기타</option>
 									</select>
 									<input type="hidden" name="hidden_faqNo" value="${dto.faqNo}">
 									<input type="submit" value="수정" class="btn active">
