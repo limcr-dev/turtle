@@ -24,6 +24,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeServiceImpl service;
 	
+	// ========================= 관리 =========================
 	// 공지 목록
 	@RequestMapping("/adNoticeList.ad")
 	public String adNoticeList(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -121,5 +122,29 @@ public class NoticeController {
 		
 		return "redirect:/adNoticeList.ad";
 	}
+	// ========================= 관리 =========================
 	
+	// ========================= 일반 =========================
+	// 공지 목록
+	@RequestMapping("/noticeList.bo")
+	public String noticeList1(HttpServletRequest request, HttpServletResponse response, Model model)
+    		throws ServletException, IOException {
+		logger.info("<<< url ==>  /noticeList.bo >>>");
+		
+		service.noticeList1(request, response, model);
+		
+		return "support/notice/noticeList";
+	}
+	
+	// 공지 상세페이지
+	@RequestMapping("/noticeDetail.bo")
+	public String noticeDetail(HttpServletRequest request, HttpServletResponse response, Model model)
+    		throws ServletException, IOException {
+		logger.info("<<< url ==>  /noticeDetail.bo >>>");
+
+		service.noticeDetail(request, response, model);
+		
+		return "support/notice/noticeDetail";
+	}
+	// ========================= 일반 =========================
 }

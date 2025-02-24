@@ -6,8 +6,8 @@
 <script>
 	$(function() {
 		// 목록
-		$("#noticeList").click(function() {
-			location.href = "${path}/noticeList.bo"
+		$("#eventList").click(function() {
+			location.href = "${path}/eventList.bo"
 		});
 	});
 </script>
@@ -35,10 +35,10 @@
 		<br>
 		<div  style="width:1000px; margin:auto" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 			<div class="btn-group me-2" role="group" aria-label="Second group">
-			    <button type="button" class="btn btn-warning">
+			    <button type="button" class="btn btn-light">
 					<a href="${path}/noticeList.bo" style="text-decoration: none; color: inherit;">공지사항</a>
 				</button>
-				<button type="button" class="btn btn-light">
+				<button type="button" class="btn btn-warning">
 					<a href="${path}/eventList.bo" style="text-decoration: none; color: inherit;">이벤트</a>
 				</button>
 				<button type="button" class="btn btn-light">
@@ -55,25 +55,19 @@
 		<!-- 상단 메뉴바 끝 -->
 		
 		<hr>
-		<h3 align="center">공지사항</h3>
+		<h3 align="center">이벤트 상세</h3>
 		<br>
 		<br>
 		
-		
-		
-		<!-- 공지글목록 시작 -->
+		<!-- 글목록 시작 -->
 		<hr style="border:3px solid orange; width:1000px; margin:auto;">
-		
-		
 		  			
 		<table class="table" style="width:1000px; margin:auto;">
 			
 			<thead>
 			    <tr>
-  				
-			
-					<th colspan="5" style="width:5%"><h4>${dto.noticeTitle}</h4></th>
-					<td align="right" colspan="5" style="width:5%"> 조회수 ${dto.noticeViews}</td>
+					<th colspan="5" style="width:5%"><h4>${dto.eventTitle}</h4></th>
+					<td align="right" colspan="5" style="width:5%"> 조회수 ${dto.eventViews}</td>
 					
 					<!-- <td align="right" colspan="5" style="width:5%">조회수 5</td> -->
 			    </tr>
@@ -81,13 +75,13 @@
 		    <tbody>
 			    <tr>
 			        <td colspan="7">
-			      	  ${dto.noticeContent}
+			      		<img src="${dto.eventImage}" width=800px> 
 			        </td>
 			    </tr>
 		    </tbody>
 		    <tr>
 		   		<td colspan="7" class="text-end">
-					<button type="button" id="noticeList" class="btn active" data-bs-toggle="button" aria-pressed="true">목록</button>	
+					<button type="button" id="eventList" class="btn active" data-bs-toggle="button" aria-pressed="true">목록</button>	
 		  		</td>
 		    </tr>
 		</table>

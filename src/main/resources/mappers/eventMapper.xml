@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+     
+<mapper namespace="com.spring.turtle.dao.EventDAO">
+
+	<!-- 이벤트 목록 -->
+	<select id="eventList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.EventDTO">
+	SELECT *
+	  FROM (SELECT A.*,
+       			   ROWNUM AS rn
+  			  FROM (SELECT * 
+          	     	  FROM event_tb
+	              	 WHERE 1=1
+					<if test="eventShow != null and eventShow != ''">
+					   AND eventShow = #{eventShow}
+					</if>
+					 ORDER BY eventRegDate DESC
+	              	) A  
+	 	    )
+	 WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 이벤트 글 갯수 -->
+	<select id="eventCnt" resultType="int"> 
+		SELECT COUNT(*)
+		FROM event_tb 
+	</select>
+	
+	<!-- eventShow에 따른 갯수 -->
+	<select id="eventCntShow" parameterType="java.util.Map" resultType="int"> 
+		SELECT COUNT(*)
+		FROM event_tb 
+		WHERE 1=1
+		<if test="eventShow != null and eventShow != ''">
+			AND eventShow = #{eventShow}
+		</if>
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="plusReadCnt" parameterType="int"> 
+		UPDATE event_tb 
+		SET eventViews = eventViews + 1 
+		WHERE eventNo = #{eventNo} 
+	</update>
+	
+	<!-- 이벤트 상세페이지 -->
+	<select id="getEventDetail" parameterType="int" resultType="com.spring.turtle.dto.EventDTO"> 
+		SELECT * 
+		FROM event_tb 
+		WHERE eventNo = #{eventNo} 
+	</select>
+	
+	<!-- 이벤트 작성 -->
+	<insert id="insertEvent" parameterType="com.spring.turtle.dto.EventDTO"> 
+		INSERT INTO event_tb (eventNo, eventWriter, eventTitle, eventStartDate, eventEndDate, eventImage) 
+		VALUES((SELECT NVL(MAX(eventNo) + 1, 1)FROM event_tb), #{eventWriter}, #{eventTitle}, #{eventStartDate}, #{eventEndDate}, #{eventImage}) 
+	</insert>
+	
+	<!-- 이벤트 수정 -->
+	<update id="updateEvent" parameterType="com.spring.turtle.dto.EventDTO"> 
+		UPDATE event_tb 
+		SET eventWriter = #{eventWriter},
+		 	eventTitle = #{eventTitle}, 
+		 	eventStartDate = #{eventStartDate}, 
+		 	eventEndDate = #{eventEndDate}, 
+		 	eventImage = #{eventImage}
+		WHERE eventNo = #{eventNo} 
+	</update>
+	
+	<!-- 이벤트 삭제 -->
+	<update id="deleteEvent" parameterType="int"> 
+		UPDATE event_tb 
+		SET eventShow = 'N' 
+		WHERE eventNo = #{eventNo} 
+	</update>
+	
+	<!-- ========================= 일반 ========================= -->
+	<!-- 이벤트 목록 -->
+	<select id="eventList1" parameterType="java.util.Map" resultType="com.spring.turtle.dto.EventDTO">
+		SELECT *
+ 			  FROM (SELECT A.*,
+              			   ROWNUM AS rn
+         			FROM (SELECT * 
+               			  FROM event_tb
+               		      WHERE eventShow = 'Y'
+						  ORDER BY eventRegDate DESC
+               		     ) A  
+        			)
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	<!-- ========================= 일반 ========================= -->
+</mapper>

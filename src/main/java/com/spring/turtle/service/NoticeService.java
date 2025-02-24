@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 public interface NoticeService {
 	
+	// ========================= 관리 =========================
 	// 공지사항 목록
 	public void noticeList(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
@@ -36,5 +37,12 @@ public interface NoticeService {
 	
 	// 공지사항 삭제 처리 - 체크박스
 	public void noticeDelete(String[] noticeMul);
+	// ========================= 관리 =========================
+	
+	// ========================= 일반 =========================
+	// 공지사항 목록
+	public void noticeList1(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
+	// ========================= 일반 =========================
 }
 
