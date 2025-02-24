@@ -51,7 +51,6 @@
 		     , userName = #{userName}
 		     , userAddress = #{userAddress}
 		     , userHp = #{userHp}
-		     , userEmail = #{userEmail}
 		     , userBirthday = #{userBirthday} 
 		 WHERE userId = #{userId} 
 	</update>

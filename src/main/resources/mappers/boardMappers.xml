@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+
+<mapper namespace="com.spring.turtle.dao.BoardDAO">
+
+	<!-- 자유게시판 목록 -->
+	<select id="boardList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.BoardDTO">
+		SELECT * 
+		  FROM (SELECT A.*, 
+		  			   rownum AS rn 
+		  		  FROM (SELECT * 
+		  		  	 	  FROM board_tb 
+		  		  	 	 <if test="sessionType != 'admin' and sessionType != 'trainer'">
+						 	WHERE boardShow = 'Y'
+						 </if>
+						 ORDER BY boardNo DESC) A ) 
+		   WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 자유게시판 갯수 -->
+	<select id="boardCnt" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) 
+		  FROM board_tb
+		  <if test="sessionType != 'admin' and sessionType != 'trainer'">
+		 	WHERE boardShow = 'Y'
+		 </if>
+	</select>
+	
+	<!--  자유게시판 상세페이지  -->
+	<select id="getDetailBoard" parameterType="int" resultType="com.spring.turtle.dto.BoardDTO"> 
+		SELECT * 
+		  FROM board_tb 
+		 WHERE boardNo = #{num} 
+	</select>
+	
+	<!-- 자유게시판 조회수 증가 -->
+	<update id="plusViewBoard" parameterType="int">
+	 	UPDATE board_tb
+		   SET boardViews = boardViews + 1
+		 WHERE boardNo = #{num}
+	 </update>
+	 
+	 
+	<!-- 자유게시판 게시글 작성 -->
+	<insert id="insertBoard" parameterType="com.spring.turtle.dto.BoardDTO"> 
+		INSERT INTO board_tb (boardNo, boardTitle, boardWriter, boardContent) 
+		VALUES ((SELECT NVL(MAX(boardNo) + 1, 1)FROM board_tb), #{boardTitle}, #{boardWriter}, #{boardContent}) 
+	</insert>
+	
+	<!-- 자유게시판 게시글 삭제 -->
+	<update id="deleteBoard" parameterType="int">
+	 	UPDATE board_tb
+		   SET boardShow = 'N'
+		 WHERE boardNo = #{num}
+	 </update>
+	
+	<!--  자유게시판 게시글 수정  -->
+	<update id="updateBoard" parameterType="com.spring.turtle.dto.BoardDTO"> 
+		UPDATE board_tb 
+		   SET boardTitle = #{boardTitle}, 
+			   boardContent = #{boardContent} 
+		 WHERE boardNo = #{boardNo} 
+	</update>
+	
+	<!--  자유게시판 댓글목록  -->
+	<select id="boardCommentList" parameterType="int" resultType="com.spring.turtle.dto.BoardCommentDTO"> 
+		SELECT * 
+		  FROM board_comment_tb 
+		 WHERE boardNo = #{num} 
+		 ORDER BY b_comNo 
+	 </select>
+	 
+	<!--  자유게시판 댓글 추가  -->
+	<insert id="insertBoardComment" parameterType="com.spring.turtle.dto.BoardCommentDTO"> 
+		INSERT INTO board_comment_tb (b_comNo, b_comWriter, boardNo, b_comContent, b_comType) 
+		VALUES ((SELECT NVL(MAX(b_comNo) + 1, 1)FROM board_comment_tb), #{b_comWriter}, #{boardNo}, #{b_comContent}, #{b_comType}) 
+	</insert>
+	
+	 <!-- 자유게시판 댓글 수 증가 -->
+	 <update id="plusBoardCommentCnt" parameterType="int">
+	 	UPDATE board_tb
+		   SET boardCommentCnt = boardCommentCnt + 1
+		 WHERE boardNo = #{num}
+	 </update>
+	 
+	<!-- 자유게시판 댓글 수정 -->
+	<update id="updateBoardComment" parameterType="com.spring.turtle.dto.BoardCommentDTO">
+		UPDATE board_comment_tb
+		   SET b_comContent = #{b_comContent}
+		 WHERE b_comNo = #{b_comNo}
+	</update>
+	 
+	  <!-- 자유게시판 댓글 삭제 -->
+	 <update id="deleteBoardComment" parameterType="java.util.Map">
+	 	DELETE FROM board_comment_tb
+	 	 WHERE boardNo = #{boardNo}
+	 	   AND b_comNo = #{b_comNo}
+	 </update>
+	 
+	  <!-- 자유게시판 댓글 수 감소 -->
+	 <update id="minusBoardCommentCnt" parameterType="int">
+	 	UPDATE board_tb
+		   SET boardCommentCnt = boardCommentCnt - 1
+		 WHERE boardNo = #{num}
+	 </update>
+	 <!-- 자유게시판 게시글 복구 -->
+	 <update id="adRestoreBoard" parameterType="int">
+	 	UPDATE board_tb
+		   SET boardShow = 'Y'
+		 WHERE boardNo = #{num}
+	 </update>
+</mapper>

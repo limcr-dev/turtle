@@ -23,7 +23,7 @@ public class Paging10 {
 	public Paging10() {}
 	
 	public Paging10(String pageNum) {
-		System.out.println("페이지넘값" + pageNum);
+		
 		// pageNum이 없는 경우(맨처음 board_list.jsp를 클릭하거나, 수정 삭제 등 다른 게시글에서 페이지를 클릭할 때) null처리되므로 1로 설정 
 		if(pageNum == null) {
 			pageNum = "1";
@@ -32,10 +32,6 @@ public class Paging10 {
 		this.pageNum = pageNum;
 		
 		currentPage = Integer.parseInt(pageNum);  // 현재페이지
-		
-		System.out.println("=====================");
-		System.out.println("pageNum => " + pageNum);
-		System.out.println("currentPage => " + currentPage);
 	}
 
 	// getter setter ---------------
@@ -143,16 +139,13 @@ public class Paging10 {
 		this.next = next;
 	}
 	
-	// getter setter E ---------------
+	// getter setter 
 	
 	public void setTotalCount(int count) {  
 		this.count = count;  // 전체 게시글 건수
 		
 		startRow = (currentPage - 1) * pageSize + 1;   // 페이지별 시작번호 => start에 해당 (1)
 		endRow =  currentPage * pageSize;    // 페이지별 끝번호 => end에 해당(10)
-		
-		System.out.println("startRow => " + startRow);
-		System.out.println("endRow => " + endRow);
 		
 		this.number = count - (currentPage - 1) * pageSize;  // 페이지번호(1)
 		
@@ -164,7 +157,6 @@ public class Paging10 {
 	public void pageCalculator() {
 		if(count > 0) {
 			pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-			System.out.println("pageCount : " + pageCount);
 			
 			startPage = 1;
 			
@@ -175,13 +167,10 @@ public class Paging10 {
 				startPage = ((int)(currentPage / 10) - 1) * 10 + 1;
 			}
 			
-			// System.out.println("startPage : " + startPage);
-			
 			pageBlock = 10;
 			endPage = startPage + pageBlock - 1;
 			
 			if(endPage > pageCount) endPage = pageCount;
-			// System.out.println("endPage : " + endPage);
 			
 			// 이전
 			if(startPage > pageSize) prev = startPage - 10;
@@ -189,9 +178,6 @@ public class Paging10 {
 			// 다음
 			if(startPage < pageCount) next = startPage + 10;
 			
-			// System.out.println("prev : " + prev);
-			// System.out.println("next : " + next);
-				
 		}
 	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface AdCustomerService {
 	
@@ -18,11 +19,23 @@ public interface AdCustomerService {
 	public void customerDetail(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
 	
+	// 회원 트레이너 지정
+	public void userToTrainer(String[] userIds)
+			throws ServletException, IOException;
+	
 	// 회원 관리자 지정
-	public void userToAdmin(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void userToAdmin(String[] userIds)
+			throws ServletException, IOException;
+	
+	// 회원 지정
+	public void updateCustomer(String[] userIds)
 			throws ServletException, IOException;
 	
 	// 회원 삭제
-	public void customerDelete(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void customerDelete(String[] userIds)
+			throws ServletException, IOException;
+	
+	// 회원 복구
+	public void customerRestore(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
 }

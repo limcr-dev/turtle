@@ -79,7 +79,7 @@
 								</tr>
 								<tr>
 									<th> 가입일 <br><br></th>
-									<td> ${dto.userRegDate} <br><br></td>
+									<td> ${fn:substring(dto.userRegDate,0,10)} <br><br></td>
 								</tr>
 							</table>
 						</form>	

@@ -55,34 +55,30 @@
             <div id="section2">
                
 				<!-- 좌측 메뉴 시작 -->                              
-				<%@ include file= "/WEB-INF/views/common/leftmenu.jsp" %>
+				<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 				<!-- 좌측메뉴 종료 -->
 				<!-- 우측매뉴 시작 -->
-				<form name ="noticeUpdateForm" method="post">
-					<table class="table">
+				<form name ="noticeUpdateForm" method="post" style="width:5000px">
+					<div class="row g-3 align-items-center">
+						<div class="col-md-1" style="text-vertical:center">
+							<h5>제목</h5>
+						</div>
+						<div class="col-md-11">
+							<input type="text" name="noticeTitle" id="noticeTitle" class="form-control form-control-lg" 
+								 value="${dto.noticeTitle}" autofocus>
+						</div>
+					</div>
+					<br>
+		
+					<div class="row form-group">
+						<textarea name="noticeContent" id="noticeContent" cols="30" rows="10" class="form-control form-control-lg">${dto.noticeContent}</textarea>
+					</div>
 					
-						<tr>
-							<th style="width: 200px"> 글제목 </th>
-							<td colspan="3" style="width: 200px; text-align:center"> 
-								<input style="width:645px" type="text" class="input" name="noticeTitle"
-									id="noticeTitle" value="${dto.noticeTitle}" size="50" placeholder="글제목 입력">
-							</td>
-						</tr>
-						<tr>
-							<th style="width: 200px"> 글내용 </th>
-							<td colspan="3" style="width: 200px; text-align:center"> 
-								<textarea rows="5" cols="93" name="noticeContent" id="noticeContent"> ${dto.noticeContent} </textarea>
-							</td>
-						</tr>
-						<tr>
-					  		<td colspan="5" class="text-end" align="center">
-					  			<input type="hidden" name="hidden_noticeNo" value="${dto.noticeNo}">
-								<button type="button" class="btn active" id="noticeSave">완료</button>
-								<button type="reset" class="btn active">초기화</button>
-								<button type="button" class="btn active" id="noticeList">목록</button>
-							</td>
-						</tr>
-					</table>
+					<div class="form-group" align="right">
+			  			<input type="hidden" name="hidden_noticeNo" value="${dto.noticeNo}">
+						<button type="reset" class="btn active">초기화</button>
+						<button type="submit" class="btn active" id="noticeSave">완료</button>
+					</div>
 				</form>
 				<br>
 				<!-- 우측메뉴 종료 -->

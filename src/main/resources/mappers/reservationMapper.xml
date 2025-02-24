@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+    
+<mapper namespace="com.spring.turtle.dao.ReservationDAO">
+	
+	<!-- ================== 상담 예약 ================== -->
+	
+	<!-- 회원 인증(사용자) -->
+	<select id="revConsultCheckUser" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM user_tb
+		 WHERE userId = #{userId}
+		   AND userPw = #{userPw}
+	</select>
+	
+	<!-- 회원 이름, 전화번호 조회(사용자)) -->
+	<select id="detailUserAction" parameterType="String" resultType="com.spring.turtle.dto.RevConsultDTO">
+		SELECT *
+		  FROM user_tb
+		 WHERE userId = #{userId}
+	</select>
+	
+	<!-- 상담 시간 체크(사용자/관리자) -->
+	<select id="revConsultDateCheck" parameterType="java.sql.Date" resultType="String">
+		SELECT SUBSTR(revConsultDate, 10, 5)
+  		  FROM revConsult_tb
+		 WHERE revConsultDate LIKE #{date} || '%'
+		   AND revConsultStatus IN ('대기', '완료', '승인')
+	</select>
+	
+	<!-- 상담 예약 등록(사용자) -->
+	<insert id="insertRevConsult" parameterType="com.spring.turtle.dto.RevConsultDTO" >
+		INSERT INTO revConsult_tb (revConsultNo, userId, userName, userHp, revConsultDate, revConsultStatus)
+		VALUES((SELECT NVL(MAX(revConsultNo) + 1, 1)FROM revConsult_tb), #{userId}, #{userName}, #{userHp}, #{revConsultDate}, '대기')
+	</insert>
+	
+	<!-- 상담 예약 목록 불러올 때 날짜 비교 후 상태 변경(대기>취소 / 승인>완료) -->
+	<update id="updateConsultStatus">
+		<![CDATA[
+	    	UPDATE revConsult_tb
+			   SET revConsultStatus = CASE 
+			                              WHEN revConsultStatus = '대기' THEN '취소'
+			                              WHEN revConsultStatus = '승인' THEN '완료'
+		                              END
+			 WHERE revConsultDate < sysdate
+			   AND revConsultStatus IN ('승인', '대기')
+		]]>
+	</update>
+	
+	<!-- 상담 예약 목록(사용자) -->
+	<select id="revConsultList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.RevConsultDTO">
+		SELECT *
+		  FROM ( SELECT A.*
+				      , rownum AS rn 
+				   FROM (SELECT * 
+				           FROM revConsult_tb 
+				          WHERE userId = #{userId}
+				          ORDER BY revConsultNo DESC) A)   
+		 WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 상담 예약 갯수(사용자) -->
+	<select id="revConsultCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM revConsult_tb
+		 WHERE userId = #{userId}
+	</select>
+	
+	<!-- 상담 예약 취소(사용자) -->
+	<update id="deleteRevConsult" parameterType="int">
+		UPDATE revConsult_tb
+		   SET revConsultStatus = '취소'
+		 WHERE revConsultNo = #{revConsultNo}
+	</update>
+	
+	<!-- 상담 예약 갯수(관리자) -->
+	<select id="adRevConsultCnt" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM revConsult_tb
+		  <if test="statusType != ''"> 
+		     WHERE revConsultStatus = #{statusType}
+		  </if> 
+	</select>
+	
+	<!-- 상담 예약 목록(관리자) -->
+	<select id="adRevConsultList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.RevConsultDTO">
+		SELECT *
+		  FROM ( SELECT A.*
+				      , rownum AS rn 
+				   FROM (SELECT * 
+				           FROM revConsult_tb 
+				          <if test="statusType != ''"> 
+						   WHERE revConsultStatus = #{statusType}
+						  </if> 
+				          ORDER BY revConsultNo DESC) A)   
+		 WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 상담 예약 상세 정보 조회(관리자) -->
+	<select id="adRevConsultDetail" parameterType="int" resultType="com.spring.turtle.dto.RevConsultDTO">
+		SELECT *
+		  FROM revConsult_tb
+		 WHERE revConsultNo = #{revConsultNo}
+	</select>
+	
+	<!-- 트레이너 목록 (관리자) -->
+	<select id="trainerList" resultType="String">
+		SELECT userId
+		  FROM user_tb
+		 WHERE userType = 'trainer'
+	</select>
+	
+	<!-- 상담 예약 수정(관리자) -->
+	<update id="adRevConsultUpdate" parameterType="com.spring.turtle.dto.RevConsultDTO">
+		UPDATE revConsult_tb
+		   SET revConsultDate = #{revConsultDate}
+		   	 , trainerId = #{trainerId}
+		   	 , revConsultStatus = #{revConsultStatus}
+		 WHERE revConsultNo = #{revConsultNo}
+	</update>
+	
+	<!-- ================== PT 예약 ================== -->
+	<!-- PT 수업 여부 확인(사용자) -->
+	<select id="checkUserPTCount" parameterType="String" resultType="int">
+		<![CDATA[
+	    	SELECT NVL(MAX(ptCnt), 0)
+			  FROM health_tb
+			 WHERE userId = #{userId}
+		]]>
+	</select>
+	
+	<!-- PT 회원 인증(사용자) -->
+	<select id="revPTCheckUser" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM user_tb
+		 WHERE userId = #{userId}
+		   AND userPw = #{userPw}
+	</select>
+	
+	<!-- PT 회원 이름, 전화번호 조회(사용자) -->
+	<select id="detailPTUserAction" parameterType="String" resultType="com.spring.turtle.dto.RevPTDTO">
+		SELECT userId
+			 , userName
+			 , userHp
+			 , trainerId
+		  FROM health_tb
+		 WHERE userId = #{userId}
+	</select>
+	
+	<!-- PT 시간 체크(사용자/관리자) -->
+	<select id="revPTDateCheck" parameterType="java.util.Map" resultType="String">
+		SELECT SUBSTR(revPTDate, 10, 5)
+  		  FROM revPT_tb
+		 WHERE revPTDate LIKE #{revDate} || '%'
+		   AND revPTStatus IN ('대기', '완료', '승인')
+		   AND trainerId = #{trainerId}
+	</select>
+	
+	<!-- PT 예약 승인(관리자) -->
+	<update id="adRevConsultApprove" parameterType="int">
+	    UPDATE revConsult_tb
+		   SET revConsultStatus = '승인'
+		 WHERE revConsultNo = #{revConsultNo}
+	</update>
+	
+	<!-- PT 예약 등록(사용자) -->
+	<insert id="insertRevPT" parameterType="com.spring.turtle.dto.RevPTDTO" >
+		INSERT INTO revPT_tb (revPTNo, userId, userName, userHp, trainerId, revPTDate, revPTStatus)
+		VALUES((SELECT NVL(MAX(revPTNo) + 1, 1)FROM revPT_tb), #{userId}, #{userName}, #{userHp}, #{trainerId}, #{revPTDate}, '대기')
+	</insert>
+	
+	<!-- PT 예약 목록 불러올 때 날짜 비교 후 상태 변경(대기>취소) -->
+	<update id="updatePTStatus">
+		<![CDATA[
+	    	UPDATE revPT_tb
+			   SET revPTStatus = '취소'
+			 WHERE revPTDate < sysdate
+			   AND revPTStatus IN ('대기')
+		]]>
+	</update>
+	
+	<!-- PT 예약 목록(사용자) -->
+	<select id="revPTList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.RevPTDTO">
+		SELECT *
+		  FROM ( SELECT A.*
+				      , rownum AS rn 
+				   FROM (SELECT * 
+				           FROM revPT_tb 
+				          WHERE userId = #{userId}
+				          ORDER BY revPTNo DESC) A)   
+		 WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- PT 예약 갯수(사용자) -->
+	<select id="revPTCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM revPT_tb
+		 WHERE userId = #{userId}
+	</select>
+	
+	<!-- PT 예약 취소(사용자) -->
+	<update id="deleteRevPT" parameterType="int">
+		UPDATE revPT_tb
+		   SET revPTStatus = '취소'
+		 WHERE revPTNo = #{revPTNo}
+	</update>
+	
+	<!-- PT 예약 상태 완료로 변경(사용자/관리자) -->
+	<update id="completeRevPT" parameterType="int">
+		UPDATE revPT_tb
+		   SET revPTStatus = '완료'
+		 WHERE revPTNo = #{revPTNo}
+	</update>
+	
+	<!-- PT 예약 상태 완료로 변경 시, PTCnt 감소(사용자/관리자) -->
+	<update id="updatePTCnt" parameterType="String">
+		UPDATE health_tb
+		   SET PTCnt = PTCnt - 1
+		 WHERE userId = #{userId}
+	</update>
+	
+	<!-- PT 예약 목록(관리자) -->
+	<select id="adRevPTList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.RevPTDTO">
+		SELECT *
+		  FROM ( SELECT A.*
+				      , rownum AS rn 
+				   FROM (SELECT * 
+				           FROM revPT_tb 
+				          WHERE trainerId = #{trainerId}
+				          <if test="statusType != ''"> 
+						    AND revPTStatus = #{statusType}
+						  </if>
+				          ORDER BY revPTNo DESC) A)   
+		 WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- PT 예약 갯수(관리자) -->
+	<select id="adRevPTCnt" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM revPT_tb
+		 WHERE trainerId = #{trainerId}
+		  <if test="statusType != ''"> 
+		   AND revPTStatus = #{statusType}
+		  </if> 
+	</select>
+	
+	<!-- PT 예약 상세 정보 조회(관리자) -->
+	<select id="adRevPTDetail" parameterType="int" resultType="com.spring.turtle.dto.RevPTDTO">
+		SELECT *
+		  FROM revPT_tb
+		 WHERE revPTNo = #{revPTNo}
+	</select>
+	
+	<!-- PT 예약 수정(관리자) -->
+	<update id="updateRevPT" parameterType="com.spring.turtle.dto.RevPTDTO">
+		UPDATE revPT_tb
+		   SET revPTDate = #{revPTDate}
+		   	 , revPTStatus = #{revPTStatus}
+		 WHERE revPTNo = #{revPTNo}
+	</update>
+	
+</mapper>

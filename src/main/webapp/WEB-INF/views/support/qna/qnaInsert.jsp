@@ -53,13 +53,13 @@
 									<h5>제목</h5>
 								</div>
 								<div class="col-md-11">
-									<input type="text" name="qnaTitle" id="qnaTitle" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
+									<input type="text" name="qnaTitle" id="qnaTitle" maxlength="33" class="form-control form-control-lg" placeholder="제목을 입력하세요" required autofocus>
 								</div>
 							</div>
 							<br>
 	
 							<div class="row form-group">
-								<textarea name="qnaContent" id="qnaContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요"></textarea>
+								<textarea name="qnaContent" id="qnaContent" cols="30" rows="10" class="form-control form-control-lg" placeholder="내용을 입력해주세요" required></textarea>
 							</div>
 							<br>
 							

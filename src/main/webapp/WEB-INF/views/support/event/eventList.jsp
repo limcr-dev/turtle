@@ -10,7 +10,6 @@
 <!-- css -->
 <link rel="stylesheet" href="${path}/resources/css/common/header.css">
 <link rel="stylesheet" href="${path}/resources/css/common/footer.css">
-
 </head>
 <body>
 	<div class="wrap">
@@ -48,120 +47,54 @@
 			<br>
 			
 			<!-- 이벤트카드 목록 시작 -->
-				<div class="row" style="width:1000px; margin:auto">
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
+			
+				<div class="row" style="width:1000px; display : flex; margin:auto">
+					<c:forEach var="dto" items="${list}">
+						<div class="col-md-4 ">
+							<div class="card" style="width: 18rem;"onclick="window.location='${path}/eventDetail.bo?eventNo=${dto.eventNo}'">
+								<img src="${dto.eventImage}" height="180px" class="card-img-top" >
+								<div class="card-body">
+									<p class="card-text">${dto.eventTitle}</p>
+									<p class="card-text"> 기간 : ${dto.eventStartDate} ~ ${dto.eventEndDate}</p>
+							    </div>
+							</div>
+							<br><br>
 						</div>
-					</div>
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					
-					<br><br><br><br><br><br><br><br><br><br><br>
-					
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					
-					<br><br><br><br><br><br><br><br><br><br><br>
-					
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					<div class="col-md-4 ">
-						<div class="card" style="width: 18rem;">
-							<img src="./resources/images/gallery-1.jpg" height="180px" class="card-img-top" alt="...">
-							<div class="card-body">
-								<p class="card-text">지금 결제하면 만원!</p>
-						    </div>
-						</div>
-					</div>
-					
-					<br><br><br><br><br><br><br><br><br><br><br>
+					</c:forEach>
 				</div>
+				
 			<!-- 이벤트카드 목록 시작 -->
 			
 			<!-- 페이지컨트롤 시작 -->
-				<div style="width:1000px; margin:auto" >
+			<c:if test="${paging.count != 0}">
+				<div style="width:920px; margin:auto" >
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
-							<li class="page-item">
-							    <a class="page-link" href="#" aria-label="Previous">
-							      <span aria-hidden="true">&laquo;</span>
-							    </a>
+					    	<li class="page-item">
+					        	<c:if test="${paging.startPage > 10}">
+					    			<a class="page-link" href="${path}/eventList.bo?pageNum=${paging.prev}" aria-label="Previous">
+					      				<span aria-hidden="true">&laquo;</span>
+					    			</a>
+					 			</c:if>
 							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
+						
+							<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+							<li class="page-item"><a class="page-link" href="${path}/eventList.bo?pageNum=${num}">${num}</a></li>
+							</c:forEach>
+					
 							<li class="page-item">
-							    <a class="page-link" href="#" aria-label="Next">
-							      <span aria-hidden="true">&raquo;</span>
-							    </a>
-						    </li>
+					   			<c:if test="${paging.endPage < paging.pageCount}">
+					    			<a class="page-link" href="${path}/eventList.bo?pageNum=${paging.next}" aria-label="Next">
+					      				<span aria-hidden="true">&raquo;</span>
+					    			</a>
+					 			</c:if>
+							</li>
 						</ul>
 					</nav>
 				</div>
+			</c:if>
 			<!-- 페이지컨트롤 끝 -->
 		<!-- 컨텐츠 끝 -->
-		<p align="center">
-			SELECT *<br>
-				FROM event_tb<br>
-				WHERE eventNo = eventNo <br>
-				AND eventShow = 'Y' <br>
-				AND eventNo >= start <br>
-				AND eventNo <= end <br>
-		</p>
 	</div>
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

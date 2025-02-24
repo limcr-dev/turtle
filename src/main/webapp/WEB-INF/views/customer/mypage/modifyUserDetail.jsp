@@ -55,6 +55,16 @@
 							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
+									이메일
+								</div>
+								<div class="col-md-10">
+									${dto.getUserEmail()}
+								</div>
+							</div>
+							<br>
+							
+							<div class="row g-3 align-items-center">
+								<div class="col-md-2">
 									비밀번호
 								</div>
 								<div class="col-md-10">
@@ -156,35 +166,6 @@
 								<div class="col-md-10">
 									<input type="date" id="userBirthday" name="userBirthday" class="form-control form-control-lg" value="${dto.userBirthday}" placeholder="생년월일을 입력하세요" required>
 								</div>
-							</div>
-							<br>
-							
-							<div class="row g-3 align-items-center">
-								<div class="col-md-2">
-									이메일
-								</div>
-								<div class="col-md-3">
-								<c:set var="emArr" value="${fn:split(dto.getUserEmail(),'@')}" />
-								  <label class="visually-hidden" for="specificSizeInputName">Name</label>
-								  <input type="text" class="form-control form-control-lg" id="userEmail1" name="userEmail1" value="${emArr[0]}" placeholder="이메일" required>
-								</div>
-								<div class="col-md-4">
-								  <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
-								  <div class="input-group">
-								    <div class="input-group-text">@</div>
-								    <input type="text" class="form-control form-control-lg" id="userEmail2" name="userEmail2" value="${emArr[1]}" placeholder="이메일 주소">
-								  </div>
-								</div>
-								<div class="col-md-3">
-								  <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-								  <select class="form-select  form-select-lg" id="userEmail3" name="userEmail3" onchange="u_selectEmailChk()">
-								    <option selected>선택</option>
-								    <option value="naver.com">네이버</option>
-								    <option value="google.com">구글</option>
-								    <option value="daum.net">다음</option>
-								    <option value="nate.com">네이트</option>
-								  </select>
-								</div> 
 							</div>
 							<br>
 							

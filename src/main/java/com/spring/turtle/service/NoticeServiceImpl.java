@@ -23,6 +23,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeDAOImpl dao;
 	
+	// ========================= 관리 =========================
 	// 공지사항 목록
 	@Override
 	public void noticeList(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -30,16 +31,27 @@ public class NoticeServiceImpl implements NoticeService{
 		System.out.println("서비스 - noticeList()");
 		
 		String pageNum = request.getParameter("pageNum");
+		String noticeShow = request.getParameter("noticeShow");
 		
 		Paging10 paging = new Paging10(pageNum);
-		int total = dao.noticeCnt();
+		int total = 0;
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (noticeShow != null && !noticeShow.isEmpty()) {
+			map.put("noticeShow", noticeShow);
+			// noticeShow에 따른 공지사항 갯수
+			total = dao.noticeCntShow(map);
+	    } else {
+	    	// 전체 갯수
+	    	total = dao.noticeCnt();
+	    }
+
 		paging.setTotalCount(total);
 		
 		int start = paging.getStartRow();
 		int end = paging.getEndRow();
 		
-		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -47,6 +59,7 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
+		model.addAttribute("noticeShow", noticeShow);
 	}
 
 	// 공지사항 상세페이지
@@ -127,12 +140,50 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 삭제 처리
 	@Override
-	public void noticeDelete(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void noticeDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {
-		System.out.println("서비스 - noticeDelete()");
+		System.out.println("서비스 - noticeDeleteAction()");
 		
 		int noticeNo = Integer.parseInt(request.getParameter("hidden_noticeNo"));
 		
 		dao.deleteNotice(noticeNo);
 	}
+	
+	// 공지사항 다중 삭제
+	@Override
+	public void noticeDelete(String[] noticeMul) {
+		System.out.println("서비스 - noticeDelete()");
+		
+		dao.deleteNoticeSeveral(noticeMul);
+	}
+	// ========================= 관리 =========================
+	
+	// ========================= 일반 =========================
+	// 공지사항 목록
+	@Override
+	public void noticeList1(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		System.out.println("서비스 - noticeList1()");
+		
+		String pageNum = request.getParameter("pageNum");
+		
+		Paging10 paging = new Paging10(pageNum);
+		int total = dao.noticeCnt();
+
+		paging.setTotalCount(total);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int start = paging.getStartRow();
+		int end = paging.getEndRow();
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<NoticeDTO> list = dao.noticeList1(map);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+	}
+	// ========================= 일반 =========================
 }

@@ -15,6 +15,7 @@ public class NoticeDAOImpl implements NoticeDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
 
+	// ========================= 관리 =========================
 	// 공지사항 목록
 	@Override
 	public List<NoticeDTO> noticeList(Map<String, Object> map) {
@@ -32,6 +33,16 @@ public class NoticeDAOImpl implements NoticeDAO{
 		
 		int total = sqlSession.selectOne("com.spring.turtle.dao.NoticeDAO.noticeCnt");
 				
+		return total;
+	}
+	
+	// noticeShow에 따른 공지사항 갯수
+	@Override
+	public int noticeCntShow(Map<String, Object> map) {
+		System.out.println("DAO - customerCntShow()");
+		
+		int total = sqlSession.selectOne("com.spring.turtle.dao.NoticeDAO.noticeCntShow", map);
+		
 		return total;
 	}
 
@@ -82,4 +93,25 @@ public class NoticeDAOImpl implements NoticeDAO{
 		
 		return deleteCnt;
 	}
+	
+	// 공지사항 다중 삭제
+	@Override
+	public int deleteNoticeSeveral(String[] noticeMul) {
+		System.out.println("DAO - deleteNotice()");
+		
+		int deleteCnt = sqlSession.update("com.spring.turtle.dao.NoticeDAO.deleteNoticeSeveral", noticeMul);
+		
+		return deleteCnt;
+	}
+	// ========================= 관리 =========================
+	
+	// ========================= 일반 =========================
+	public List<NoticeDTO> noticeList1(Map<String, Object> map){
+		System.out.println("DAO - noticeList1()");
+		
+		List<NoticeDTO> list = sqlSession.selectList("com.spring.turtle.dao.NoticeDAO.noticeList1", map);
+		
+		return list;
+	}
+	// ========================= 일반 =========================
 }

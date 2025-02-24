@@ -24,12 +24,11 @@
 					</div>
 					
 					<div class="col-md-6 animate-box">
-						<p class="fs-1">회원 탈퇴 비밀번호 인증</p>
+						<p class="fs-1">회원 탈퇴 인증</p>
 						<br>
 						<form name="passwordform" action="deleteUserAction.do" method="post">
 							<div class="row g-3 align-items-center">
 								<div class="col-md-3" >
-									아이디
 								</div>
 								<div class="col-md-9">
 									<span style="color: #ff8000"><b>${sessionScope.sessionID}</b></span>님 비밀번호를 입력해주세요.
