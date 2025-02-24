@@ -16,68 +16,7 @@
 
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<script type="text/javascript">
    
-    // 메일 발송 후 지난 시간
-    let current_time = 0;
-    // 인증 유효 시간 
-    let minutes,seconds;
-    let timer_thread;
-
-    // 인증코드 유효시간 카운트다운 및 화면 출력
-    function timer_start(){
-        
-        // 인증코드 유효성 true
-        code_valid = true;
-        // 현재 발송 시간 초기화
-        current_time = 0
-        // 300초(10분)
-        let count = 600
-
-        timer.innerHTML = "10:00"
-        // 1초마다 실행
-        timer_thread = setInterval(function () {
-            
-            minutes = parseInt(count / 60, 10);
-            seconds = parseInt(count % 60, 10);
-    
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            timer.innerHTML  = minutes + ":" + seconds;
-
-            // 타이머 끝
-            if (--count < 0) {
-                timer_stop();
-                // code msg "인증코드가 만료되었습니다."
-                code_msg.textContent = "인증코드가 만료되었습니다.";
-            }
-            current_time++
-        }, 1000);
-    } 
-
-    // 타이머 종료
-    function timer_stop(){
-        // 타이머 종료
-        clearInterval(timer_thread)
-        // 유효시간 만료
-		code_valid = false
-    }
-
-    // 인증코드가 유효하면 true, 만료되었다면 false 반환
-    function iscodeValid(){
-        return code_valid;
-    }
-
-    // 인증코드 발송 후 60초 확인 : 60초 이후 true, 60초 이전 false
-    function isRerequest(){
-        return  current_time>=60?true:false;
-    } 
-  
-}
-
-</script>
-
 </head>
 <body>
 	<div class="wrap">
