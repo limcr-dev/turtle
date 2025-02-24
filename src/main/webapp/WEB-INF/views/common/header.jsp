@@ -18,7 +18,7 @@
 		<!-- 상단 메뉴 -->
 		<ul class="navbar_menu">
 			<li><a href="${path}/facility.do">내부시설</a></li>
-			<li><a href="${path}/productList.do">상품</a></li>
+			<li><a href="${path}/productList.do">헬스식단</a></li>
 			<li><a href="${path}/programList.do">프로그램</a></li>
 			<li><a href="${path}/reservation.do">예약</a></li>
 			<li class="dropdown">

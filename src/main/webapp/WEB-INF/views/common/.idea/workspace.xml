@@ -1,63 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30287b9d-aaea-4d33-a11d-463108770929" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/BoardDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/BoardDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/FaqDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/FaqDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/BoardService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/BoardServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/FaqService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/FaqServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../resources/mappers/faqMappers.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../admin/support/faq/adFaqDetail.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../admin/support/faq/adFaqInsert.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../admin/support/faq/adFaqUpdate.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../admin/support/qna/adQnaCommentList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../admin/support/qna/adQnaDetailAction.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/MAP.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/temporary/001.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/temporary/002.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/temporary/003.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/temporary/004.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/temporary/005.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/turtle_tittle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../resources/images/turttlegym_.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../../pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/controller/FaqController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/controller/FaqController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/controller/QnaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/controller/QnaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/QnaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/QnaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/QnaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dao/QnaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dto/FaqDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dto/FaqDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/QnaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/QnaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/QnaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/QnaServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../java/com/spring/turtle/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../resources/mappers/qnaMappers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../resources/mappers/qnaMappers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../resources/mappers/userMappers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../resources/mappers/userMappers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin/common/adMainLeft.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/common/adMainLeft.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin/support/faq/adFaqList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/support/faq/adFaqList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin/support/qna/adQnaList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/support/qna/adQnaList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/main.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/setting.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/customer/join.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/customer/join.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/mypage/mypage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/mypage/mypage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/faq/faqList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../support/faq/faqList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/qna/qnaCommentEdit.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/qna/qnaCommentList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../support/qna/qnaCommentList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/qna/qnaDetailAction.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../support/qna/qnaDetailAction.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/qna/qnaInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../support/qna/qnaInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/qna/qnaList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../support/qna/qnaList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../support/qna/qnaUpdate.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../support/qna/qnaUpdate.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../resources/css/common/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../resources/css/common/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../resources/css/common/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../resources/css/common/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../resources/css/common/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../resources/css/common/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../resources/images/chatbot.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../resources/images/chatbot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../resources/js/join/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../resources/js/join/join.js" afterDir="false" />
-    </list>
+    <list default="true" id="30287b9d-aaea-4d33-a11d-463108770929" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,10 +10,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2tDDYiwJVuCg5scYqzK3Iy75suP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -79,7 +23,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging topic__cbo"
+    "git-widget-placeholder": "topic__cbo5"
   }
 }]]></component>
   <component name="SharedIndexes">

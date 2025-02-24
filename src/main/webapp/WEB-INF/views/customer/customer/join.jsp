@@ -24,6 +24,7 @@
 		document.querySelector('input[name="roadFullAddr"]').value = roadFullAddr;
 		document.querySelector('input[name="userAddress"]').value = roadFullAddr;
 	}
+	
 </script>
 
 <body>
@@ -117,19 +118,19 @@
 									전화번호
 								</div>
 								<div class="col-md-2">
-									<input type="text" id="userHp1" name="userHp1" class="form-control form-control-lg">
+									<input type="text" id="userHp1" name="userHp1" class="form-control form-control-lg" required>
 								</div>
 								
 								<div class="col-md-1" align="center">-</div>
 								
 								<div class="col-md-3">
-									<input type="text" id="userHp2" name="userHp2" class="form-control form-control-lg">
+									<input type="text" id="userHp2" name="userHp2" class="form-control form-control-lg" required>
 								</div>
 								
 								<div class="col-md-1" align="center">-</div>
 								
 								<div class="col-md-3">		
-									<input type="text" id="userHp3" name="userHp3" class="form-control form-control-lg">
+									<input type="text" id="userHp3" name="userHp3" class="form-control form-control-lg" required>
 								</div>
 							</div>
 							<br>
@@ -188,25 +189,18 @@
 								  <select class="form-select  form-select-lg" id="userEmail3" name="userEmail3" onchange="selectEmailChk()">
 								    <option selected>선택</option>
 								    <option value="naver.com">네이버</option>
-								    <option value="google.com">구글</option>
+								    <option value="gmail.com">구글</option>
 								    <option value="daum.net">다음</option>
 								    <option value="nate.com">네이트</option>
 								  </select>
 								</div>
 								<div class="col-md-2">
-
 									<input type="button" class="btn btn-secondary" name="emailChk" value="이메일 중복 확인" onclick="confirmEmail()">
 								</div>
 								
 							</div>
 							<br>
 	
-							<div class="row form-group">
-								<!-- <label for="message">Message</label> -->
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control form-control-lg" placeholder="체형에 대한 고민을 작성해주세요"></textarea>
-							</div>
-							<br>
-							
 							<div class="form-group" align="right">
 								<input type="submit" value="회원가입" class="btn btn-dark">
 								<input type="reset" value="초기화" class="btn btn-dark">

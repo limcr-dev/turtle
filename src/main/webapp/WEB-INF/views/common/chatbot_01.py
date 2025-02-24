@@ -10,6 +10,7 @@ st.title("Turtle Gym chatbot")
 
 st.link_button("회원 가입", "http://localhost/turtle/join.do")
 st.link_button("상담 예약", "http://localhost/turtle/reservation.do")
+st.link_button("1:1 문의", "http://localhost/turtle/qnaList.bo")
 
 # turtlegym_info 파일 경로
 file_path = "turtlegym_info.csv"

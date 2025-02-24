@@ -97,47 +97,17 @@
 							<div class="row g-3 align-items-center">
 								<div class="col-md-12" align="center">
 									<span style="color: #ff8000"><b>${userEmail}</b></span>는 이미 가입된 이메일 입니다. </span>
-									<br>
-									<input type="text" name="userEmail" id="userEmail" class="form-control form-control-lg" value=${userEmail} }>
-									
-									<br><br>
+									<br><br>												
 								</div>
 							</div>
 							<div class="row g-3 align-items-center">
-								<div class="col-md-3" >
-									다른 이메일로 가입하시려면 새로운 이메일 주소를 입력하여 주세요.
-								<div class="row g-3 align-items-center">
-								<div class="col-md-2">
-									이메일
+								<div class="col-md-12" >
+									다른 이메일 주소를 입력하여 주세요.
 								</div>
-								<div class="col-md-3">
-								
-								  <label class="visually-hidden" for="specificSizeInputName">Name</label>
-								  <input type="text" class="form-control form-control-lg" id="userEmail1" name="userEmail1" placeholder="이메일" required>
-								</div>
-								<div class="col-md-4">
-								  <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
-								  <div class="input-group">
-								    <div class="input-group-text">@</div>
-								    <input type="text" class="form-control form-control-lg" id="userEmail2" name="userEmail2" placeholder="이메일 주소" required>
-								  </div>
-								</div>
-								<div class="col-md-3">
-								  <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-								  <select class="form-select  form-select-lg" id="userEmail3" name="userEmail3" onchange="selectEmailChk()">
-								    <option selected>선택</option>
-								    <option value="naver.com">네이버</option>
-								    <option value="google.com">구글</option>
-								    <option value="daum.net">다음</option>
-								    <option value="nate.com">네이트</option>
-								  </select>
-								</div>
-							</div>
 							</div>
 							<br>
 							<div class="form-group" align="right">
 								<input type="button" class="btn btn-dark" name="emailChk" value="확인" onclick="confirmEmail2()">
-								<input type="reset" class="btn btn-dark" value="초기화">
 							</div>
 							</c:if>
 							
@@ -149,27 +119,38 @@
 									<br> 이메일 인증을 진행해 주세요.
 									<br><br>
 									
-									<div class="col-md-2" align="center">
-										<input type="button" class="btn btn-secondary" name="emailChk" value="인증 메일 전송" onclick="sendEmail()">
+									<div class="col-md-12" align="center">
+										<input type="button" class="btn btn-secondary" id="emailChk" name="emailChk" value="인증 메일 전송" onclick="sendEmail()">
 									</div>
 									<br><br>
 								</div>
 							</div>
 							<br>
+							<div class="col-md-12" align="center">
 								<span class="code_msg">이메일 인증 코드를 입력해주세요.</span>
+							</div>
 							<br>
 							<div class="input_container">
 				                <!-- 이메일 인증 입력창 -->
-				                <input type="text" id="auth_input" name="auth_input" class="input input_auth">
+				                <div class="col-md-12" align="center">
+				                	<input type="text" id="auth_input" name="auth_input" align="center" class="input input_auth">
+				                </div>
 				            </div>
 				            <br>
-							<input type="button" class="btn btn-dark" name="emailauth" value="인증 확인" onclick="confirmAuth()">
+				            <div class="col-md-12" align="center">
+								<input type="button" align="center" class="btn btn-dark" name="emailauth" value="인증 확인" onclick="confirmAuth()">
+							</div>
 							<br><br>
 							<div class="ResendMail">
-					            <span>인증코드를 받지 못하셨나요?</span>
-					            <br><br>					            
-					            <input type="button" class="btn btn-secondary" name="resend" value="인증 메일 재전송" onclick="sendEmail()">  
+								<div class="col-md-12" align="center">
+					            	<span>인증코드를 받지 못하셨나요?</span>
+					            </div>	
+					            <br>
+					            <div class="col-md-12" align="center">					            
+					            	<input type="button" class="btn btn-secondary" id="resend" name="resend" align="center" value="인증 메일 재전송" onclick="sendEmail2()">
+					            </div>  
 					        </div>
+					        <br>
 							<div class="form-group" align="right">
 								<input type="button" class="btn btn-dark" value="확인" onclick="setUserEmail('${userEmail}')">
 							</div>
