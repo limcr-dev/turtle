@@ -81,7 +81,7 @@
 		SELECT COUNT(*)
 		  FROM revConsult_tb
 		  <if test="statusType != ''"> 
-		   WHERE revConsultStatus = #{statusType}
+		     WHERE revConsultStatus = #{statusType}
 		  </if> 
 	</select>
 	
@@ -222,7 +222,7 @@
 		 WHERE userId = #{userId}
 	</update>
 	
-	<!-- PT 예약 갯수(관리자) -->
+	<!-- PT 예약 목록(관리자) -->
 	<select id="adRevPTList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.RevPTDTO">
 		SELECT *
 		  FROM ( SELECT A.*
