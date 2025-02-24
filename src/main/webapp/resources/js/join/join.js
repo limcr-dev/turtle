@@ -67,24 +67,19 @@ function confirmEmail(){
 		 document.inputform.userEmail1.focus();
 		 return false;
 	}
-	
-	// 중복확인 버튼 클릭시 컨트롤러로 url을 전달, 컨트롤러에 추가
-<<<<<<< HEAD
-	if(!document.inputform.userEmail1.value || !document.inputform.userEmail2.value){
-		alert("이메일을 정확하게 입력하세요!");
-		document.inputform.userEmail1.focus();
-		return false;
+	else{
+		// 중복확인 버튼 클릭시 컨트롤러로 url을 전달, 컨트롤러에 추가
+		if(!document.inputform.userEmail1.value || !document.inputform.userEmail2.value){
+			alert("이메일을 정확하게 입력하세요!");
+			document.inputform.userEmail1.focus();
+			return false;
+		}
+		else {
+			userEmail = document.inputform.userEmail1.value + "@" + document.inputform.userEmail2.value
+			let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
+			window.open(url, "confirm", "menubar=no, width=600, height=500");
+		}
 	}
-	else {
-		userEmail = document.inputform.userEmail1.value + "@" + document.inputform.userEmail2.value
-		let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
-		window.open(url, "confirm", "menubar=no, width=600, height=500");
-	}
-=======
-	userEmail = document.inputform.userEmail1.value + "@" + document.inputform.userEmail2.value;
-	let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
-	window.open(url, "confirm", "menubar=no, width=600, height=500");
->>>>>>> ac244e107c47ea1680f5e8a4005629b08af334c5
 }
 
 // 창에서 한번더 체크--id
@@ -103,10 +98,9 @@ function dublechk(){
 
 // 이메일 중복확인창에서 중복 확인 버튼 클릭시
 function confirmEmail2(){
-<<<<<<< HEAD
 	self.close();
 }
-	
+
 
 function confirmEmail3(){
 	if(!document.inputform.userEmail1.value || !document.inputform.userEmail2.value){
@@ -120,12 +114,6 @@ function confirmEmail3(){
 		let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
 		window.open(url, "confirm", "menubar=no, width=600, height=500");
 	}
-=======
-	// 중복확인 버튼 클릭시 컨트롤러로 url을 전달, 컨트롤러에 추가
-	userEmail = document.confirmform.userEmail1.value + "@" + document.confirmform.userEmail2.value;
-	let url = "/turtle/emailConfirmAction.do?userEmail=" + userEmail;
-	window.open(url, "confirm", "menubar=no, width=600, height=500");
->>>>>>> ac244e107c47ea1680f5e8a4005629b08af334c5
 }
 
 // 인증코드 발송 버튼 클릭시
