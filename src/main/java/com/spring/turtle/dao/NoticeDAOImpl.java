@@ -15,6 +15,7 @@ public class NoticeDAOImpl implements NoticeDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
 
+	// ========================= 관리 =========================
 	// 공지사항 목록
 	@Override
 	public List<NoticeDTO> noticeList(Map<String, Object> map) {
@@ -102,4 +103,15 @@ public class NoticeDAOImpl implements NoticeDAO{
 		
 		return deleteCnt;
 	}
+	// ========================= 관리 =========================
+	
+	// ========================= 일반 =========================
+	public List<NoticeDTO> noticeList1(Map<String, Object> map){
+		System.out.println("DAO - noticeList1()");
+		
+		List<NoticeDTO> list = sqlSession.selectList("com.spring.turtle.dao.NoticeDAO.noticeList1", map);
+		
+		return list;
+	}
+	// ========================= 일반 =========================
 }

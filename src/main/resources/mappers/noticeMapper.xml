@@ -6,12 +6,9 @@
      
 <mapper namespace="com.spring.turtle.dao.NoticeDAO">
 
+	<!-- ========================= 관리 ========================= -->
 	<!-- 공지사항 목록 -->
 	<select id="noticeList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.NoticeDTO">
-		<!-- SELECT * 
-		FROM notice_tb 
-		WHERE noticeNo BETWEEN #{start} AND #{end} 
-		ORDER BY noticeRegDate DESC  -->
 		SELECT *
  			  FROM (SELECT A.*,
               			   ROWNUM AS rn
@@ -31,9 +28,6 @@
 	<select id="noticeCnt" resultType="int"> 
 		SELECT COUNT(*)
 		FROM notice_tb 
-		<!-- <if test="noticeShow != null and noticeShow != ''">
-			WHERE noticeShow = #{noticeShow}
-		</if> -->
 	</select>
 	
 	<!-- noticeShow에 따른 공지사항 갯수 -->
@@ -91,4 +85,24 @@
         	#{noticeNo}
     	</foreach>
 	</update>
+	<!-- ========================= 관리 ========================= -->
+	
+	<!-- ========================= 일반 ========================= -->
+	<!-- 공지사항 목록 -->
+	<select id="noticeList1" parameterType="java.util.Map" resultType="com.spring.turtle.dto.NoticeDTO">
+		SELECT *
+ 			  FROM (SELECT A.*,
+              			   ROWNUM AS rn
+         			FROM (SELECT * 
+               			  FROM notice_tb
+               		      WHERE 1=1
+					          <if test="noticeShow != null and noticeShow != ''">
+							      AND noticeShow = #{noticeShow}
+							  </if>
+						  ORDER BY noticeRegDate DESC
+               		     ) A  
+        			)
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	<!-- ========================= 일반 ========================= -->
 </mapper>

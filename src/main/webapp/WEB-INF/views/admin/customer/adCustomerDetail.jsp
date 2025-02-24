@@ -83,7 +83,12 @@
 							</tr>
 							<tr>
 								<th scope="col">성별</th>
-								<td><%-- ${dto.userGender} --%></td>
+								<c:if test="${dto.userGender == 'M'}">
+									<td>남성</td>
+								</c:if>
+								<c:if test="${dto.userGender == 'F'}">
+									<td>여성</td>
+								</c:if>
 							</tr>
 							<tr>
 								<th scope="col">주소</th>
@@ -116,7 +121,7 @@
 							<tr>
 								<th scope="col">삭제 여부</th>
 								<c:if test="${dto.userShow == 'Y'}">
-									<td>삭제 안됐슈</td>
+									<td>-</td>
 								</c:if>
 								
 								<c:if test="${dto.userShow == 'N'}">

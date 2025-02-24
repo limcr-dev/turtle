@@ -6,6 +6,7 @@ import java.util.Map;
 import com.spring.turtle.dto.NoticeDTO;
 
 public interface NoticeDAO {
+	// ========================= 관리 =========================
 	// 공지사항 목록
 	public List<NoticeDTO> noticeList(Map<String, Object> map);
 	
@@ -32,4 +33,9 @@ public interface NoticeDAO {
 	
 	// 공지사항 다중 삭제
 	public int deleteNoticeSeveral(String[] noticeMul);
+	// ========================= 관리 =========================
+	
+	// ========================= 일반 =========================
+	public List<NoticeDTO> noticeList1(Map<String, Object> map);
+	// ========================= 일반 =========================
 }
