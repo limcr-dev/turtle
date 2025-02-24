@@ -59,7 +59,8 @@ function setUserid(userId, userName, userHp){
 
 
 
-// 선택된 라디오 버튼에 따라 표시할 필드를 결정하는 함수
+  
+ // 선택된 라디오 버튼에 따라 표시할 필드를 결정하는 함수
 function toggleInputs() {
   var healthStatus = document.querySelector('input[name="healthStatus"]:checked').value;
   
@@ -67,12 +68,12 @@ function toggleInputs() {
   var dateInputRow = document.getElementById('dateInputRow');
   var trainerRow = document.getElementById('trainerRow');
   var ptCountRow = document.getElementById('ptCountRow');
-  var autoDateButtons = document.getElementById('autoDateButtons');
+  
   
   // "헬스" 선택 시 등록 기간 표시
   if (healthStatus == "헬스") {
     dateInputRow.style.display = "block";
-    autoDateButtons.style.display = "block";  // 자동 설정 버튼 보이기
+  
     trainerRow.style.display = "none";
     ptCountRow.style.display = "none";
   } 
@@ -81,7 +82,7 @@ function toggleInputs() {
     trainerRow.style.display = "block";
     ptCountRow.style.display = "block";
     dateInputRow.style.display = "block";
-    autoDateButtons.style.display = "none";  // P.T 상태일 때 자동 설정 버튼 숨기기
+ 
   }
 }
 
@@ -119,8 +120,3 @@ const healthEndDate = document.getElementById('healthEndDate').value;
   
   // 남은 일수를 페이지에 출력
   document.getElementById('dateDifference').textContent = daysRemaining;
-  
-  
-
-  
- 

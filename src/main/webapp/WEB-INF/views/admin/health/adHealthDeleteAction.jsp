@@ -48,12 +48,11 @@
     			
     		</div>
     	</div>
-     <!-- footer 시작 -->
-	<div class="footer_wrap">
-    	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-	</div>
-     <!-- footer 끝 -->
-      
    </div>
+<!-- footer 시작 -->
+<div class="footer_wrap">
+   	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+</div>
+<!-- footer 끝 -->
 </body>
 </html>

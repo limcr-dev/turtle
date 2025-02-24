@@ -34,28 +34,29 @@ td a {
 		<h3 align="center">관리자 메뉴</h3>
 		<br>
 		<br>
-			
+	
 		<!-- 메뉴목록 -->
-		
+
 		<div align="center">
 			<div class="card text-bg-light mb-3" style="max-width: 18rem;">
 				<div class="card-body">
-				    <h5>게시판</h5>
-				    <hr color= orange >
-				    <p class="card-text"><a href="${path}/adNoticeList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">공지사항</a></p>
-				  	<p class="card-text"><a href="${path}/adEventList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">이벤트</a></p>
-				  	<p class="card-text"><a href="${path}/adBoardList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">자유게시판</a></p>
-				  	<p class="card-text"><a href="${path}/adFaqList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">FAQ</a></p>
-				  	<p class="card-text"><a href="${path}/adQnaList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">1:1문의</a></p>
+					<h5>게시판</h5>
+					<hr color= orange >
+					<p class="card-text"><a href="${path}/adNoticeList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">공지사항</a></p>
+					<p class="card-text"><a href="${path}/adEventList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">이벤트</a></p>
+					<p class="card-text"><a href="${path}/adBoardList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">자유게시판</a></p>
+					<p class="card-text"><a href="${path}/adFaqList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">FAQ</a></p>
+					<p class="card-text"><a href="${path}/adQnaList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">1:1문의</a></p>
 				</div>
 			</div>
-			
+		
 			<div class="card text-bg-light mb-3" style="max-width: 18rem;">
 				<div class="card-body">
-		  			<h5 class="card-title">예약 관리</h5>
-				    <hr>
-				    <p class="card-text"><a href="${path}/adReservationList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">예약 현황</a></p>
-				  </div>
+					<h5 class="card-title">예약 관리</h5>
+					<hr>
+					<p class="card-text"><a href="${path}/adRevConsultList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">상담 예약 현황</a></p>
+					<p class="card-text"><a href="${path}/adRevPTList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">PT 예약 현황</a></p>
+				</div>
 			</div>
 				
 			<div class="card text-bg-light mb-3" style="max-width: 18rem;">

@@ -24,6 +24,23 @@ public class HealthController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HealthController.class);
 	
+	// 헬스 등록(회원용)
+	@RequestMapping("/healthJoin.do")
+	public String healthJoin(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /healthJoin.ad >>>");
+		service.healthJoin(request, response, model);
+		return "health/healthJoin";
+	}
+	
+	// 헬스 등록 처리(회원용)
+	@RequestMapping("/healthJoinAction.do")
+	public String healthJoinAction(MultipartHttpServletRequest request, HttpServletResponse response, Model model)
+		throws ServletException, IOException {
+		logger.info("<<< url ==>  /healthJoinAction.do>>>");
+		service.healthJoinAction(request, response, model);
+		return "health/healthJoinAction";
+	}
 	// 헬스회원 목록
 	@RequestMapping("/adHealthList.ad")
 	public String adHealthList(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -32,6 +49,25 @@ public class HealthController {
 		
 		service.healthListAction(request, response, model);
 		return "admin/health/adHealthList";
+	}
+	
+	// 미결제 헬스회원 목록
+	@RequestMapping("/adHealthUnPayList.ad")
+	public String adHealthUnPayList(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adHealthUnPayList.ad >>>");
+		
+		service.healthUnPayListAction(request, response, model);
+		return "admin/health/adHealthUnPayList";
+	}
+
+	@RequestMapping("/adHealthApproveAction.ad")
+	public String adHealthApproveAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adHealthApproveAction.ad >>>");
+		
+		service.healthUnPayListApprove(request, response, model);
+		return "admin/health/adHealthApproveAction";
 	}
 	
 	// // 헬스회원 등록시(Id 조회)

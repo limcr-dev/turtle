@@ -39,10 +39,7 @@
 						</if>
 						ORDER BY qnaNo DESC) A ) 
 		WHERE rn BETWEEN #{start} AND #{end} 
-		
 	</select>
-	<!-- 1대1문의 처리상태 선택 -->
-	
 	
 	<!--  1대1문의 갯수  -->
 	<select id="qnaCnt" parameterType="java.util.Map" resultType="int">

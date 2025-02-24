@@ -97,24 +97,23 @@
 							</div>
 							
 							<hr><br>
-							<!-- 등록 기간 (헬스 선택 시) -->
+							
+							<!-- 등록 기간 -->
 							<div class="row g-3 align-items-center" id="dateInputRow" style="display: none;">
-							  <div class="col-md-2">
-							    등록 기간
-							  </div>
+							  <div class="col-md-2">등록 기간</div>
 							  <div class="col-md-5 d-flex align-items-center gap-2">
-							    <input type="date" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg">
+							    <input type="date" id="healthStartDate" name="healthStartDate" class="form-control form-control-lg" onchange="calculateDays()">
 							    <span>~</span>
-							    <input type="date" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg">
+							    <input type="date" id="healthEndDate" name="healthEndDate" class="form-control form-control-lg" onchange="calculateDays()">
 							  </div>
+							  
 							</div>
 							
+							<br>
 							
-							<!-- 선생님 선택 (P.T 선택 시) -->
+							<!-- P.T 선생님 선택 -->
 							<div class="row g-3 align-items-center" id="trainerRow" style="display: none;">
-							  <div class="col-md-2">
-							    P.T 선생님
-							  </div>
+							  <div class="col-md-2">P.T 선생님</div>
 							  <div class="col-md-5 d-flex align-items-center gap-2">
 							    <select class="form-select form-select-lg" name="trainerId" id="trainerId">
 							      <c:forEach var="list" items="${list}">
@@ -124,23 +123,20 @@
 							  </div>
 							</div>
 							
-							<!-- P.T 등록 횟수 (P.T 선택 시) -->
 							<br>
+							
+							<!-- P.T 등록 횟수 -->
 							<div class="row g-3 align-items-center" id="ptCountRow" style="display: none;">
-								<div class="col-md-2">
-									P.T 등록 횟수
-								</div>
-								<div class="col-md-3">
-								  <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-								  <select class="form-select  form-select-lg" id="ptCnt" name="ptCnt">
-								    <option value=0>횟수</option>
-									<option value=12>12회</option>
-									<option value=24>24회</option>
-									<option value=36>36회</option>
-								  </select>
-								</div>
+							  <div class="col-md-2">P.T 등록 횟수</div>
+							  <div class="col-md-3">
+							    <select class="form-select form-select-lg" id="ptCnt" name="ptCnt">
+							      <option value="0">횟수</option>
+							      <option value="12">12회</option>
+							      <option value="24">24회</option>
+							      <option value="36">36회</option>
+							    </select>
+							  </div>
 							</div>
-							<br>
 							
 							<div class="form-group" align="right">
 								<input class="btn btn-light" type="submit" value="등록">

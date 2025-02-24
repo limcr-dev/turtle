@@ -39,7 +39,7 @@
 					<!-- FAQ 상세페이지 시작 -->
 					<input type="hidden" name="hidden_faqNo" value="${dto.faqNo}">
 					<form name ="detailForm" id="detailForm" action="${path}/adfaqList.ad" method="post" style="width:1300px">
-						<table class="table" style="width:900px; margin:auto;">
+						<table class="table" style="width:1050px; margin:auto;">
 							<thead>
 								<tr>
 									<td colspan="7" align="right">
