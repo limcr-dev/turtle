@@ -94,31 +94,33 @@ $(function(){
 			<!-- 공지글목록 시작 -->
 			
 			<!-- 페이지컨트롤 시작 -->
-			<div style="width:1000px; margin:auto" >
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<c:if test="${paging.startPage > 10}">
-							    <a class="page-link" href="${path}/boardList.bo?pageNum=${paging.prev}" aria-label="Previous">
-							      <span aria-hidden="true">&laquo;</span>
-							    </a>
-						    </c:if>
-						</li>
-						
-						<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-							<li class="page-item"><a class="page-link" href="${path}/boardList.bo?pageNum=${num}">${num}</a></li>
-						</c:forEach>
-						
-						<li class="page-item">
-							<c:if test="${paging.endPage < paging.pageCount}">
-							    <a class="page-link" href="${path}/boardList.bo?pageNum=${paging.next}" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-							    </a>
-						    </c:if>
-					    </li>
-					</ul>
-				</nav>
-			</div>
+			<c:if test="${paging.count != 0}">
+				<div style="width:1000px; margin:auto" >
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li class="page-item">
+								<c:if test="${paging.startPage > 10}">
+								    <a class="page-link" href="${path}/boardList.bo?pageNum=${paging.prev}" aria-label="Previous">
+								      <span aria-hidden="true">&laquo;</span>
+								    </a>
+							    </c:if>
+							</li>
+							
+							<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+								<li class="page-item"><a class="page-link" href="${path}/boardList.bo?pageNum=${num}">${num}</a></li>
+							</c:forEach>
+							
+							<li class="page-item">
+								<c:if test="${paging.endPage < paging.pageCount}">
+								    <a class="page-link" href="${path}/boardList.bo?pageNum=${paging.next}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+								    </a>
+							    </c:if>
+						    </li>
+						</ul>
+					</nav>
+				</div>
+			</c:if>
 			<!-- 페이지컨트롤 끝 -->
 		<!-- 컨텐츠 끝 -->
 	</div>
