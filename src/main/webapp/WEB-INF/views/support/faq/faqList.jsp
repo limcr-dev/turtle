@@ -52,11 +52,13 @@
 		<!-- 질문카테고리 시작 -->
 		<div  style="width:1000px; margin:auto">
 			<br>
-			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=예약관련'">예약관련</button>
-			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=로그인관련'">로그인/회원가입 관련</button>
-			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=시설관련'">시설관련</button>
-			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=프로그램관련'">프로그램 관련</button>
-			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=상품관련'">상품관련</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=로그인관련'">로그인/회원가입</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=예약관련'">예약</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=시설관련'">시설</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=결제관련'">결제 및 환불 정책</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=프로그램관련'">프로그램</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=안전관련'">건강 및 안전</button>
+			<button type="button" class="btn btn-secondary"onclick="window.location='${path}/faqList.bo?category=기타'">기타</button>
 			<br><br>
 		</div>
 		<!-- 질문카테고리 끝 -->

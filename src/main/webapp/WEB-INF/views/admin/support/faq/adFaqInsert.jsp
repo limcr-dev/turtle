@@ -48,19 +48,23 @@
 								<br>
 								
 								<div class="form-group" align="right">
-									<select  name="category" id="category" required>
+									<select  name="category" id="category" onchange="page()">
 										<option value=""
-											<c:if test="${category == ''}">selected="selected"</c:if>>FAQ타입</option>
-										<option value="예약관련"
-											<c:if test="${category == '예약관련'}">selected="selected"</c:if>>예약관련</option>
+											<c:if test="${category == '전체'}">selected="selected"</c:if>>FAQ타입</option>
 										<option value="로그인관련"
-											<c:if test="${category == '로그인관련'}">selected="selected"</c:if>>로그인/회원가입 관련</option>
+											<c:if test="${category == '로그인관련'}">selected="selected"</c:if>>로그인/회원가입</option>
+										<option value="예약관련"
+											<c:if test="${category == '예약관련'}">selected="selected"</c:if>>예약</option>
 										<option value="시설관련"
-											<c:if test="${category == '시설관련'}">selected="selected"</c:if>>시설관련</option>
+											<c:if test="${category == '시설관련'}">selected="selected"</c:if>>시설</option>
+										<option value="결제관련"
+											<c:if test="${category == '결제관련'}">selected="selected"</c:if>>결제 및 환불 정책</option>
 										<option value="프로그램관련"
-											<c:if test="${category == '프로그램관련'}">selected="selected"</c:if>>프로그램 관련</option>
-										<option value="상품관련"
-											<c:if test="${category == '상품관련'}">selected="selected"</c:if>>상품관련</option>
+											<c:if test="${category == '프로그램관련'}">selected="selected"</c:if>>프로그램</option>
+										<option value="안전관련"
+											<c:if test="${category == '안전관련'}">selected="selected"</c:if>>건강 및 안전</option>
+										<option value="기타"
+											<c:if test="${category == '기타'}">selected="selected"</c:if>>기타</option>
 									</select>
 									<input type="submit" value="작성" class="btn active">
 									<input type="reset" value="초기화" class="btn active">
