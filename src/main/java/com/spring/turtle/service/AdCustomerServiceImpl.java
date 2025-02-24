@@ -1,7 +1,6 @@
 package com.spring.turtle.service;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.turtle.dao.AdCustomerDAOImpl;
 import com.spring.turtle.dto.UserDTO;
@@ -34,9 +32,6 @@ public class AdCustomerServiceImpl implements AdCustomerService{
 		String pageNum = request.getParameter("pageNum");
 		String userType = request.getParameter("userType");
 		String userShow = request.getParameter("userShow");
-		
-		System.out.println("userType널값이면 히든으로>>>>>>>>>>>>>>>>>>>>" + userType);
-		System.out.println("userShow널값이면 히든으로>>>>>>>>>>>>>>>>>>>>" + userShow);
 		
 		Paging10 paging = new Paging10(pageNum);
 		int total = 0; 

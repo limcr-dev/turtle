@@ -15,7 +15,15 @@ public class HealthDAOImpl implements HealthDAO{
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
+	// 헬스회원 등록 신청(회원용)
+	@Override
+	public int healthJoin(HealthDTO dto) {
+		System.out.println("HealthDAOImpl - healthInsert");
+		
+		return sqlSession.insert("com.spring.turtle.dao.HealthDAO.healthJoin",dto);
+	}
+	
 	//헬스 회원 목록(갯수)
 	@Override
 	public int healthCnt() {
@@ -32,10 +40,26 @@ public class HealthDAOImpl implements HealthDAO{
 		
 		List<HealthDTO> list = sqlSession.selectList("com.spring.turtle.dao.HealthDAO.healthList", map);
 		
-		System.out.println("list(DAO)" + list);
-		
 		return list;
 
+	}
+	
+	// 헬스 미결제회원 목록
+	@Override
+	public List<HealthDTO> healthUnPayList(Map<String, Object> map) {
+		System.out.println("HealthDAOImpl - healthUnPayList");
+		
+		List<HealthDTO> list = sqlSession.selectList("com.spring.turtle.dao.HealthDAO.healthUnPayList", map);
+		
+		return list;
+	}
+	
+	// 헬스 미결제 회원 승인
+	@Override
+	public int healthUnPayUpdate(int healthNo) {
+		
+		
+		return sqlSession.update("com.spring.turtle.dao.HealthDAO.healthUnPayUpdate", healthNo);
 	}
 	
 	// 헬스회원 등록시(Id 조회)
@@ -60,9 +84,7 @@ public class HealthDAOImpl implements HealthDAO{
 	public int healthInsert(HealthDTO dto) {
 		System.out.println("HealthDAOImpl - healthInsert");
 		
-		int insertCnt = sqlSession.insert("com.spring.turtle.dao.HealthDAO.healthInsert",dto);
-		System.out.println("insertCnt" + insertCnt);
-		return insertCnt;
+		return sqlSession.insert("com.spring.turtle.dao.HealthDAO.healthInsert",dto);
 	}
 
 	// 헬스회원 상세페이지
@@ -77,9 +99,8 @@ public class HealthDAOImpl implements HealthDAO{
 	@Override
 	public int healthUpdate(HealthDTO dto) {
 		System.out.println("HealthDAOImpl - healthUpdate");
-		int updateCnt = sqlSession.update("com.spring.turtle.dao.HealthDAO.healthUpdate", dto);
-		System.out.println("updateCnt" + updateCnt);
-		return updateCnt;
+		
+		return sqlSession.update("com.spring.turtle.dao.HealthDAO.healthUpdate", dto);
 	}
 	
 	//헬스회원 삭제
@@ -87,11 +108,9 @@ public class HealthDAOImpl implements HealthDAO{
 	public int healthDelete(int healthNo) {
 		System.out.println("HealthDAOImpl - healthDelete");
 		
-		int deleteCnt = sqlSession.delete("com.spring.turtle.dao.HealthDAO.healthDelete", healthNo);
-		return deleteCnt;
+		return sqlSession.delete("com.spring.turtle.dao.HealthDAO.healthDelete", healthNo);
 	}
 	
 	
-
 
 }

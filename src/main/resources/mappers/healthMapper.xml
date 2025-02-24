@@ -5,6 +5,12 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
      
 <mapper namespace="com.spring.turtle.dao.HealthDAO">
+	
+	<!-- 헬스회원 등록 신청(회원용) -->
+	<insert id="healthJoin" parameterType="com.spring.turtle.dto.HealthDTO">
+	INSERT INTO health_tb(healthNo, userId, userName, userHp, ptCnt, healthStartDate, healthEndDate, healthShow, healthStatus, trainerId)
+	VALUES ((SELECT NVL(MAX(healthNo)+1, 1) FROM health_tb), #{userId}, #{userName}, #{userHp}, #{ptCnt}, #{healthStartDate}, #{healthEndDate}, 'N', #{healthStatus}, #{trainerId})
+	</insert>
 
 	<!-- 헬스회원 목록(갯수) -->
 	<select id="healthCnt" resultType="int"> 
@@ -13,16 +19,38 @@
      WHERE healthShow = 'Y'
 	</select>
 	
+	<!-- 헬스 미등록 회원 목록 -->
+	<select id="healthUnPayList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.HealthDTO">
+	SELECT * 
+		FROM (SELECT A.*, 
+					 rownum AS rn 
+				FROM (SELECT * 
+						FROM health_tb 
+						WHERE healthShow ='N'
+						<if test="statusType != ''"> 
+						  AND healthStatus = #{statusType}
+						</if>
+						ORDER BY healthNo DESC) A ) 
+		WHERE rn BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<!-- 헬스 미등록 회원 승인 -->
+	<update id="healthUnPayUpdate" parameterType="int">
+	UPDATE health_tb
+	   SET healthShow = 'Y'       
+     WHERE healthNo = #{healthNo}      
+	</update>
+	
 	<!-- 헬스회원 목록 -->
 	<select id="healthList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.HealthDTO">
-		   	 
 		   	 SELECT * 
 		FROM (SELECT A.*, 
 					 rownum AS rn 
 				FROM (SELECT * 
 						FROM health_tb 
+						WHERE healthShow ='Y'
 						<if test="statusType != ''"> 
-						  WHERE healthStatus = #{statusType}
+						  AND healthStatus = #{statusType}
 						</if>
 						ORDER BY healthNo DESC) A ) 
 		WHERE rn BETWEEN #{start} AND #{end} 
@@ -43,7 +71,7 @@
 	</select>
 	
 	<!-- 헬스회원 등록 -->
-	<insert id="healthInsert" parameterType="com.spring.turtle.dto.UserDTO">
+	<insert id="healthInsert" parameterType="com.spring.turtle.dto.HealthDTO">
 	INSERT INTO health_tb(healthNo, userId, userName, userHp, healthImg, ptCnt, healthStartDate, healthEndDate, healthShow, healthStatus, trainerId)
 	VALUES ((SELECT NVL(MAX(healthNo)+1, 1) FROM health_tb), #{userId}, #{userName}, #{userHp}, #{healthImg}, #{ptCnt}, #{healthStartDate}, #{healthEndDate}, 'Y', #{healthStatus}, #{trainerId})
 	</insert>
