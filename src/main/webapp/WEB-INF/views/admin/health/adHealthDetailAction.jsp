@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adHealthInsert</title>
+<title>adHealthDetailAction</title>
 
 <!-- join.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
@@ -51,7 +51,7 @@
 							<p class="fs-4">${dto.userId}</p>
 						</div>
 						<div class="col-md-5">
-						 <p align="center">남은 일수: <span class="fs-4" id="dateDifference">0</span>일</p>
+						 <p align="center">남은 일수: <span class="fs-4" id="dateDifference"></span></p>
 						</div>
 					</div>
 					<br>
@@ -153,16 +153,7 @@
 							
 					<!-- 등록 기간 자동 설정 버튼 -->
 					<br>
-					<div class="row g-3 align-items-center" id="autoDateButtons" style="display: none;">
-					  <div class="col-md-2"></div>
-					  <div class="col-md-10">
-					    <button type="button" class="btn btn-light" onclick="setAutoDate(3)">3개월</button>
-					    <button type="button" class="btn btn-light" onclick="setAutoDate(6)">6개월</button>
-					    <button type="button" class="btn btn-light" onclick="setAutoDate(12)">12개월</button>
-					  </div>
-					</div>
-							
-							
+						
 					<!-- 선생님 선택 (P.T 선택 시) -->
 					<div class="row g-3 align-items-center" id="trainerRow" style="display: none;">
 					  <div class="col-md-2">

@@ -29,7 +29,46 @@ public class HealthServiceImpl implements HealthService{
 
 	@Autowired
 	private HealthDAOImpl dao;
-
+	
+	// 헬스 트레이너 목록
+	@Override
+	public void healthJoin(HttpServletRequest request, HttpServletResponse response, Model model)
+		throws ServletException, IOException {
+		List<String> list = dao.trainerList();
+		model.addAttribute("list", list);
+		
+	}
+	
+	// 헬스 회원 등록 
+	@Override
+	public void healthJoinAction(HttpServletRequest request, HttpServletResponse response, Model model)
+		throws ServletException, IOException {
+		System.out.println("HealthServiceImpl - healthListAction");	
+	
+		
+		
+		
+			
+			HealthDTO dto = new HealthDTO();
+			
+			
+			
+			dto.setUserName(request.getParameter("hiddenuserName"));
+			dto.setUserId(request.getParameter("hiddenUserid"));
+			dto.setUserHp(request.getParameter("hiddenuserHp"));
+			
+			
+			dto.setHealthStartDate(Date.valueOf(request.getParameter("healthStartDate")));
+			dto.setHealthEndDate(Date.valueOf(request.getParameter("healthEndDate")));
+			dto.setPtCnt(Integer.parseInt(request.getParameter("ptCnt")));
+			dto.setHealthStatus(request.getParameter("healthStatus"));
+			dto.setTrainerId(request.getParameter("trainerId"));
+			
+			
+			
+			int insertCnt = dao.healthJoin(dto);
+			model.addAttribute("insertCnt", insertCnt);
+}			
 	//헬스회원 목록
 	@Override
 	public void healthListAction(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -63,6 +102,53 @@ public class HealthServiceImpl implements HealthService{
 			model.addAttribute("statusType", statusType);
 			model.addAttribute("list", list);
 			model.addAttribute("paging", paging);
+	}
+	
+	//헬스 미결제회원 목록
+	@Override
+	public void healthUnPayListAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		
+		System.out.println("HealthServiceImpl - healthUnPayListAction");
+		
+		String pageNum = request.getParameter("pageNum");
+		
+		Paging10 paging = new Paging10(pageNum);
+		int total = dao.healthCnt();
+		paging.setTotalCount(total);
+		
+		int start = paging.getStartRow();
+		int end = paging.getEndRow();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		String statusType = "";
+		if(request.getParameter("statusType") != null) {
+			statusType = request.getParameter("statusType");
+		}
+		map.put("statusType", statusType);
+		
+		List<HealthDTO> list = dao.healthUnPayList(map);
+		
+		
+		model.addAttribute("statusType", statusType);
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		
+		
+	}
+
+	// 헬스 미결제 회원 승인
+	@Override
+	public void healthUnPayListApprove(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		
+		int healthNo = Integer.parseInt(request.getParameter("healthNo"));
+		int updateCnt = dao.healthUnPayUpdate(healthNo);
+		model.addAttribute("updateCnt", updateCnt);
+		
 	}
 	
 	// 헬스회원 등록시(Id 조회)
@@ -177,17 +263,13 @@ public class HealthServiceImpl implements HealthService{
 	
 		String hiddenPageNum =  request.getParameter("hiddenPageNum"); 
 		int hiddenHealthNo = Integer.parseInt(request.getParameter("hiddenHealthNo"));
-		System.out.println("hiddenHealtNo" + hiddenHealthNo);
 		String hiddenHmImg = request.getParameter("hiddenHmImg");
-		System.out.println("hiddenHmImg" + hiddenHmImg);
 		
 		MultipartFile file = request.getFile("hmImg");
 		
 		
 		String saveDir = request.getSession().getServletContext().getRealPath("/resources/images/healthMember/");
-		System.out.println("saveDir =" + saveDir);
 		String realDir = "D:\\DEV\\workspace_team_pj\\team_pj\\turtle\\src\\main\\webapp\\resources\\images\\healthMember\\";
-		System.out.println("realDir =" + realDir);
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -235,10 +317,7 @@ public class HealthServiceImpl implements HealthService{
 			dto.setUserHp(userHp);
 			dto.setHealthImg(hm_Img);
 			
-			System.out.println(userHp);
-			System.out.println(hm_Img);
 			
-		    System.out.println("dto :" + dto);
 			
 			dto.setPtCnt(Integer.parseInt(request.getParameter("ptCnt")));
 			dto.setHealthStartDate(Date.valueOf(request.getParameter("healthStartDate")));
@@ -247,7 +326,6 @@ public class HealthServiceImpl implements HealthService{
 			
 			int updateCnt = dao.healthUpdate(dto);
 			model.addAttribute("updateCnt", updateCnt);
-			System.out.println("Update count: " + updateCnt);
 		
 		model.addAttribute("hiddenPageNum", hiddenPageNum);
 		model.addAttribute("hiddenHealthNo", hiddenHealthNo);
@@ -265,6 +343,9 @@ public class HealthServiceImpl implements HealthService{
 		model.addAttribute("deleteCnt", deleteCnt);
 	}
 
+	
+
+	
 	
 
 

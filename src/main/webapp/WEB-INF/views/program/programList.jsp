@@ -26,21 +26,8 @@
 			<!-- 상단 중앙1 종료 -->
 			
 			<!-- 상당 중앙2 시작 -->
-			<div id="section2">
-				<!-- 프로그램 안내 목록 -->
-				<div class="container">
-			   		<div class="row col-4">
-			     		<div class="card" style="width: 100%;">
-			        		<img src="..." class="card-img-top" alt="...">
-					        <div class="card-body">
-					          <h5 class="programTitle">Card title</h5>
-					          <p class="programComment">Some quick example text.</p>
-					          <a href="#" class="btn btn-primary">등록하기</a>
-					        </div>
-			     		 </div>
-			  		</div>
-				</div>
-			</div>
+				
+				
 			</div>
 		</div>
 	</div>

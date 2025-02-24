@@ -9,6 +9,7 @@
 </head>
 <body>
 	<script type="text/javascript">
+	
 		setTimeout(function(){
 			window.location="${path}/main.do";
 		});

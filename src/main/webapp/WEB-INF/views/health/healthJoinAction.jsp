@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adHealthDetailAction</title>
+<title>HealthJoinAction</title>
 
-<!-- join.js -->
-<script src="${path}/resources/js/health/insert.js" defer></script>
+
 </head>
 <body>
 <div class="wrap">
@@ -22,25 +21,25 @@
     		<div id= "contents">
     			
     			<div id="section1">
-    				<h1 align="center">헬스회원 삭제 처리</h1>
+    				<h1 align="center">헬스회원 등록 처리</h1>
     			</div>
     			
     			<div id="section2">
     				
-    				<c:if test= "${deleteCnt == 1}">
+    				<c:if test= "${insertCnt == 1}">
     					<script type="text/javascript">
     						setTimeout(function(){
-    							alert("회원 삭제 되었습니다");
-    							window.location="${path}/adHealthList.ad";
+    							alert("회원 등록신청이 완료 되었습니다");
+    							window.location="${path}/main.do";
     						}, 1000);
     					</script>
     				</c:if>
     				
-    				<c:if test="${deleteCnt != 1}">
+    				<c:if test="${insertCnt != 1}">
     					<script type="text/javascript">
 	    					setTimeout(function() {
-	                  			alert("회원 삭제 실패되었습니다");
-	                  			window.location="${path}/adHealthList.ad";
+	                  			alert("회원 등록신청이 실패되었습니다");
+	                  			window.location="${path}healthJoin.do";
 	                  		}, 1000);
     					</script>
     				</c:if>
@@ -48,11 +47,12 @@
     			
     		</div>
     	</div>
+     <!-- footer 시작 -->
+	<div class="footer_wrap">
+    	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
+     <!-- footer 끝 -->
+      
    </div>
-<!-- footer 시작 -->
-<div class="footer_wrap">
-   	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-</div>
-<!-- footer 끝 -->
 </body>
 </html>

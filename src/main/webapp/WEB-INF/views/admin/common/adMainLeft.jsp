@@ -54,7 +54,9 @@ td a {
 				    <h5 class="card-title">헬스 관리</h5>
 				    <hr>
 				    <p class="card-text"><a href="${path}/adHealthList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원 현황</a></p>
+				    <p class="card-text"><a href="${path}/adHealthUnPayList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">미결제 회원 현황</a></p>
 				  	<p class="card-text"><a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">트레이너 현황</a></p>
+				  	
 				</div>
 			</div>
 			
