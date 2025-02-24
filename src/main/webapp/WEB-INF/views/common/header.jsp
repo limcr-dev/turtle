@@ -18,11 +18,8 @@
 		<!-- 상단 메뉴 -->
 		<ul class="navbar_menu">
 			<li><a href="${path}/facility.do">내부시설</a></li>
-<<<<<<< HEAD
 			<li><a href="${path}/productList.do">헬스식단</a></li>
-=======
 			<li><a href="${path}/healthJoin.do">헬스등록</a></li>
->>>>>>> ac244e107c47ea1680f5e8a4005629b08af334c5
 			<li><a href="${path}/programList.do">프로그램</a></li>
 			<li><a href="${path}/reservation.do">예약</a></li>
 			<li class="dropdown">
