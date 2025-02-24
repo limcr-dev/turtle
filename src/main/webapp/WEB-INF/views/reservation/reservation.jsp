@@ -21,7 +21,7 @@
 			</div>
 			<div class="col-md-5 ">
 				<div class="card" style="width: 500px 18rem;">
-					<img src="./resources/images/gallery-1.jpg" height="300px" class="card-img-top" alt="...">
+					<img src="./resources/images/revConsult.png" height="300px" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title"><b>상담 예약</b></h5>
 						<p class="card-text">
@@ -37,8 +37,8 @@
 						</p>
 						
 						<div align="right">
-							<a href="${path}/revConsult.do" class="btn btn-primary">예약하기</a>
-							<a href="${path}/revConsultList.do" class="btn btn-primary">예약조회</a>
+							<a href="${path}/revConsult.do" class="btn btn-dark">예약하기</a>
+							<a href="${path}/revConsultList.do" class="btn btn-secondary">예약조회</a>
 						</div>
 						
 				    </div>
@@ -46,7 +46,7 @@
 			</div>
 			<div class="col-md-5 ">
 				<div class="card" style="width: 500px 18rem;">
-					<img src="./resources/images/gallery-1.jpg" height="300px" class="card-img-top" alt="...">
+					<img src="./resources/images/revPT.png" height="300px" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title"><b>피티 예약</b></h5>
 						<p class="card-text">
@@ -62,8 +62,8 @@
 						</p>
 						
 						<div align="right">
-							<a href="${path}/revPT.do" class="btn btn-primary">예약하기</a>
-							<a href="${path}/revPTList.do" class="btn btn-primary">예약조회</a>
+							<a href="${path}/revPT.do" class="btn btn-dark">예약하기</a>
+							<a href="${path}/revPTList.do" class="btn btn-secondary">예약조회</a>
 						</div>
 				    </div>
 				</div>
