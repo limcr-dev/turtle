@@ -70,31 +70,33 @@ function page() {
 						</table>
 						<!-- 페이지컨트롤 시작 -->
 						<br>
-						<div style="width:900px; margin:auto" >
-							<nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-									<li class="page-item">
-										<c:if test="${paging.startPage > 10}">
-										    <a class="page-link" href="${path}/adBoardList.ad?pageNum=${paging.prev}" aria-label="Previous">
-										      <span aria-hidden="true">&laquo;</span>
-										    </a>
-									    </c:if>
-									</li>
-									
-									<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-										<li class="page-item"><a class="page-link" href="${path}/adBoardList.ad?pageNum=${num}">${num}</a></li>
-									</c:forEach>
-									
-									<li class="page-item">
-										<c:if test="${paging.endPage < paging.pageCount}">
-										    <a class="page-link" href="${path}/adBoardList.ad?pageNum=${paging.next}" aria-label="Next">
-										      <span aria-hidden="true">&raquo;</span>
-										    </a>
-									    </c:if>
-								    </li>
-								</ul>
-							</nav>
-						</div>
+						<c:if test="${paging.count != 0}">
+							<div style="width:900px; margin:auto" >
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item">
+											<c:if test="${paging.startPage > 10}">
+											    <a class="page-link" href="${path}/adBoardList.ad?pageNum=${paging.prev}" aria-label="Previous">
+											      <span aria-hidden="true">&laquo;</span>
+											    </a>
+										    </c:if>
+										</li>
+										
+										<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+											<li class="page-item"><a class="page-link" href="${path}/adBoardList.ad?pageNum=${num}">${num}</a></li>
+										</c:forEach>
+										
+										<li class="page-item">
+											<c:if test="${paging.endPage < paging.pageCount}">
+											    <a class="page-link" href="${path}/adBoardList.ad?pageNum=${paging.next}" aria-label="Next">
+											      <span aria-hidden="true">&raquo;</span>
+											    </a>
+										    </c:if>
+									    </li>
+									</ul>
+								</nav>
+							</div>
+						</c:if>
 						<!-- 페이지컨트롤 끝 -->
 					</form>
 					<!-- 게시글 목록 끝 -->
