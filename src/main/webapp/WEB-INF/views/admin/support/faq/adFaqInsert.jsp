@@ -48,7 +48,7 @@
 								<br>
 								
 								<div class="form-group" align="right">
-									<select  name="category" id="category" onchange="page()">
+									<select  name="category" id="category" required>
 										<option value=""
 											<c:if test="${category == '전체'}">selected="selected"</c:if>>FAQ타입</option>
 										<option value="로그인관련"
