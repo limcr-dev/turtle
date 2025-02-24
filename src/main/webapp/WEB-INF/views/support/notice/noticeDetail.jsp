@@ -3,6 +3,14 @@
 <%@ include file="/WEB-INF/views/common/setting.jsp" %>
 <!DOCTYPE html>
 <html>
+<script>
+	$(function() {
+		// 목록
+		$("#noticeList").click(function() {
+			location.href = "${path}/noticeList.bo"
+		});
+	});
+</script>
 <style>
 	#customAccordionButton:focus {
 	    box-shadow: none !important; /* 기본 부트스트랩 효과 제거 */
@@ -51,31 +59,40 @@
 		<br>
 		<br>
 		
+		
+		
 		<!-- 공지글목록 시작 -->
 		<hr style="border:3px solid orange; width:1000px; margin:auto;">
 		
+		
+		  			
 		<table class="table" style="width:1000px; margin:auto;">
+			
 			<thead>
 			    <tr>
-					<th colspan="5" style="width:5%"><h4>글제목</h4></th>
-					<td align="right" colspan="5" style="width:5%">조회수 5</td>
+  				
+			
+					<th colspan="5" style="width:5%"><h4>${dto.noticeTitle}</h4></th>
+					<td align="right" colspan="5" style="width:5%"> 조회수 ${dto.noticeViews}</td>
+					
+					<!-- <td align="right" colspan="5" style="width:5%">조회수 5</td> -->
 			    </tr>
 		    </thead>
 		    <tbody>
 			    <tr>
 			        <td colspan="7">
-			      	  글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
+			      	  ${dto.noticeContent}
 			        </td>
 			    </tr>
 		    </tbody>
+		    <tr>
+		   		<td colspan="7" class="text-end">
+					<button type="button" id="noticeList" class="btn active" data-bs-toggle="button" aria-pressed="true">목록</button>	
+		  		</td>
+		    </tr>
 		</table>
 		<!-- 공지글목록 시작 -->
 		<!-- 컨텐츠 끝 -->
-		<p align="center">
-			SELECT *<br>
-				FROM notice_tb<br>
-				WHERE noticeNo = noticeNo<br>
-		</p>
 	</div>
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

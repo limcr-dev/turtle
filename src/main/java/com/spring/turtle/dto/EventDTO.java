@@ -1,14 +1,16 @@
 package com.spring.turtle.dto;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class EventDTO {
 	
 	// 멤버변수
 	private int eventNo;			// 번호
-	private String eventWiter;		// 이름
+	private String eventWriter;		// 이름
 	private String eventTitle;		// 제목
-	private String eventContent;	// 내용
+	private Date eventStartDate;	// 시작날짜
+	private Date eventEndDate;		// 끝날짜
 	private Timestamp eventRegdate;	// 등록일자
 	private String eventShow;		// 삭제유무
 	private int eventViews;			// 조회수
@@ -19,7 +21,6 @@ public class EventDTO {
 		super();
 	}
 
-	// getter, setter
 	public int getEventNo() {
 		return eventNo;
 	}
@@ -28,12 +29,12 @@ public class EventDTO {
 		this.eventNo = eventNo;
 	}
 
-	public String getEventWiter() {
-		return eventWiter;
+	public String getEventWriter() {
+		return eventWriter;
 	}
 
-	public void setEventWiter(String eventWiter) {
-		this.eventWiter = eventWiter;
+	public void setEventWriter(String eventWriter) {
+		this.eventWriter = eventWriter;
 	}
 
 	public String getEventTitle() {
@@ -44,12 +45,20 @@ public class EventDTO {
 		this.eventTitle = eventTitle;
 	}
 
-	public String getEventContent() {
-		return eventContent;
+	public Date getEventStartDate() {
+		return eventStartDate;
 	}
 
-	public void setEventContent(String eventContent) {
-		this.eventContent = eventContent;
+	public void setEventStartDate(Date eventStartDate) {
+		this.eventStartDate = eventStartDate;
+	}
+
+	public Date getEventEndDate() {
+		return eventEndDate;
+	}
+
+	public void setEventEndDate(Date eventEndDate) {
+		this.eventEndDate = eventEndDate;
 	}
 
 	public Timestamp getEventRegdate() {
@@ -84,11 +93,11 @@ public class EventDTO {
 		this.eventImage = eventImage;
 	}
 
-	// toString 
 	@Override
 	public String toString() {
-		return "EventDTO [eventNo=" + eventNo + ", eventWiter=" + eventWiter + ", eventTitle=" + eventTitle
-				+ ", eventContent=" + eventContent + ", eventRegdate=" + eventRegdate + ", eventShow=" + eventShow
-				+ ", eventViews=" + eventViews + ", eventImage=" + eventImage + "]";
+		return "EventDTO [eventNo=" + eventNo + ", eventWriter=" + eventWriter + ", eventTitle=" + eventTitle
+				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", eventRegdate="
+				+ eventRegdate + ", eventShow=" + eventShow + ", eventViews=" + eventViews + ", eventImage="
+				+ eventImage + "]";
 	}
 }

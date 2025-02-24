@@ -46,7 +46,7 @@
 							</div>
 							<br>
 							<div class="form-group" align="right">
-								<input type="submit" class="btn btn-dark" value="확인">
+								<input type="submit" class="btn btn-dark" value="확인" onclick="dublechk()">
 								<input type="reset" class="btn btn-dark" value="초기화">
 							</div>
 							</c:if>
