@@ -62,24 +62,20 @@ function updateRevConsulCheck(){
 	// <input type="hidden" name="hiddenSelectTrainer" value="0"> 
 	// hiddenSelectTrainer : 담당자 지정 여부 체크(0:지정안함, 1:지정함)
 	
-	// 트레이너 지정 여부 확인
-	if(document.updateForm.trainerSelect.value == '' || document.updateForm.trainerSelect.value == null){
-		alert("담당자를 지정해주세요.");
-		document.updateForm.trainerSelect.focus();
-		return false;
-	}
-	
-	if(document.updateForm.trainerSelect.value && document.updateForm.statusType.value != '승인'){
-		alert("예약 상태를 '승인'으로 변경해주세요.");
-		document.updateForm.trainerSelect.focus();
-		return false;
-	}
-	
-	// 트레이너 지정 여부 확인
+	// 예약 상태 여부 확인
 	if(document.updateForm.statusType.value == '' || document.updateForm.statusType.value == null){
 		alert("예약 상태를 지정해주세요.");
 		document.updateForm.statusType.focus();
 		return false;
+	}else{
+		// 승인 시 트레이너 지정 여부 확인
+		if(document.updateForm.statusType.value == '승인'){
+			if(document.updateForm.trainerSelect.value == '' || document.updateForm.trainerSelect.value == null){
+				alert("예약을 승인하려면 담당자를 지정해주세요.");
+				document.updateForm.trainerSelect.focus();
+				return false;
+			}
+		}
 	}
 }
 
