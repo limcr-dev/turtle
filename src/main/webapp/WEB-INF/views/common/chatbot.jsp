@@ -6,51 +6,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>챗봇</title>
-<style>
-        /* 챗봇 버튼 스타일 */
-         #chatbot-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: url('webapp/resources/images/chatbot.png') no-repeat center;
-            background-size: cover;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* 챗봇 창 스타일 */
-        #chatbot-container {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 300px;
-            height: 300px;
-            background: white;
-            border: 1px solid #ccc;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        #close-chatbot {
-            text-align: right;
-            padding: 5px;
-            cursor: pointer;
-        }
-    </style>
+       
 </head>
 <body>
+<div class="kakaoChannel">	
+	<img src="resources/images/turtle_tittle.png" style="width :180px; height : 120px">
+	<b> 터틀짐</b>
+	<br>
+	
+<!-- 카카오톡 챗봇 버튼 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+  integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
 
-    <!-- 챗봇 버튼 -->
-    <button id="chatbot-button"></button>
+<div id="chat-channel-button"></div>
+<script>
+  Kakao.Channel.createChatButton({
+    container: '#chat-channel-button',
+    channelPublicId: '_RxhAsn',
+  });
+</script>
+</div>
+	
+<!-- 카카오톡 채널 추가 버튼 -->
 
-    <!-- 챗봇 창 -->
-    <div id="chatbot-container">
-        <div id="close-chatbot">❌</div>
-        <iframe src="/chatbot" width="100%" height="100%" frameborder="0"></iframe>
-    </div>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+  integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+<div id="add-channel-button"></div>
+
+<script>
+  Kakao.Channel.createAddChannelButton({
+    container: '#add-channel-button',
+    channelPublicId: '_RxhAsn',
+  });
+</script>
 
     <script>
         document.getElementById('chatbot-button').addEventListener('click', function() {
