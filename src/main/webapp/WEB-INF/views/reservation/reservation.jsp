@@ -37,8 +37,13 @@
 						</p>
 						
 						<div align="right">
-							<a href="${path}/revConsult.do" class="btn btn-dark">예약하기</a>
-							<a href="${path}/revConsultList.do" class="btn btn-secondary">예약조회</a>
+							<c:if test="${sessionType.equals('admin') || sessionType.equals('trainer')}">
+								<input class="btn btn-warning" type="button" value="관리자" onclick="window.location='${path}/adMain.ad'">
+							</c:if>
+							<c:if test="${sessionType==null || sessionType.equals('user')}">
+								<a href="${path}/revConsult.do" class="btn btn-dark">예약하기</a>
+								<a href="${path}/revConsultList.do" class="btn btn-secondary">예약조회</a>
+							</c:if>
 						</div>
 						
 				    </div>
@@ -62,8 +67,13 @@
 						</p>
 						
 						<div align="right">
-							<a href="${path}/revPT.do" class="btn btn-dark">예약하기</a>
-							<a href="${path}/revPTList.do" class="btn btn-secondary">예약조회</a>
+							<c:if test="${sessionType.equals('admin') || sessionType.equals('trainer')}">
+								<input class="btn btn-warning" type="button" value="관리자" onclick="window.location='${path}/adMain.ad'">
+							</c:if>
+							<c:if test="${sessionType==null || sessionType.equals('user')}">
+								<a href="${path}/revPT.do" class="btn btn-dark">예약하기</a>
+								<a href="${path}/revPTList.do" class="btn btn-secondary">예약조회</a>
+							</c:if>
 						</div>
 				    </div>
 				</div>

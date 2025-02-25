@@ -115,6 +115,7 @@ public class ReservationServiceImpl implements ReservationService {
 		String pageNum = request.getParameter("pageNum");
 		String userId = (String)request.getSession().getAttribute("sessionID");
 		
+		if(userId != null) {
 		// 사용자가 예약한 목록만 불러오기 위해 매개변수로 userId 전달
 		int total = dao.revConsultCnt(userId);
 		
@@ -137,7 +138,9 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
-		
+		}else {
+			return;
+		}
 	}
 
 	// 상담 예약 목록(관리자)
@@ -371,33 +374,35 @@ public class ReservationServiceImpl implements ReservationService {
 		String pageNum = request.getParameter("pageNum");
 		String userId = (String)request.getSession().getAttribute("sessionID");
 		
-		int total = dao.revPTCnt(userId);
-		
-		Paging10 paging = new Paging10(pageNum);
-		paging.setTotalCount(total);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		int start = paging.getStartRow();
-		int end = paging.getEndRow();
-		
-		map.put("userId", userId);
-		map.put("start", start);
-		map.put("end", end);
-		
-		// 현재날짜와 예약날짜 비교하여 예약 상태 변경
-		dao.updatePTStatus();
-		
-		List<RevPTDTO> list = dao.revPTList(map);
-		int ptCnt = dao.checkUserPTCount(userId);
-		
-		// jsp에서 현재 시간과 예약일을 비교하기 위한 변수
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-
-		model.addAttribute("ptCnt", ptCnt);
-		model.addAttribute("list", list);
-		model.addAttribute("paging", paging);
-		model.addAttribute("now", now);
+		if(userId != null) {
+			int total = dao.revPTCnt(userId);
+			
+			Paging10 paging = new Paging10(pageNum);
+			paging.setTotalCount(total);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			int start = paging.getStartRow();
+			int end = paging.getEndRow();
+			
+			map.put("userId", userId);
+			map.put("start", start);
+			map.put("end", end);
+			
+			// 현재날짜와 예약날짜 비교하여 예약 상태 변경
+			dao.updatePTStatus();
+			
+			List<RevPTDTO> list = dao.revPTList(map);
+			int ptCnt = dao.checkUserPTCount(userId);
+			
+			// jsp에서 현재 시간과 예약일을 비교하기 위한 변수
+			Timestamp now = new Timestamp(System.currentTimeMillis());
+	
+			model.addAttribute("ptCnt", ptCnt);
+			model.addAttribute("list", list);
+			model.addAttribute("paging", paging);
+			model.addAttribute("now", now);
+		}
 	}
 
 	// PT 예약 취소(사용자/관리자)
