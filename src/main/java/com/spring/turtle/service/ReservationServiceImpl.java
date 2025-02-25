@@ -89,8 +89,12 @@ public class ReservationServiceImpl implements ReservationService {
 		// 예약 날짜와 시간 값 받아서 Timestamp로 형변환
 		String revDate = request.getParameter("hiddenRevDate");
 		String revTime = request.getParameter("revTime");
+		if(revTime == null) {
+			return;
+		}
 		String revConsultDate = revDate + " " + revTime + ":00.0";
 		
+		System.out.println(revConsultDate);
 		Timestamp ts = Timestamp.valueOf(revConsultDate);
 		
 		RevConsultDTO dto = new RevConsultDTO();
@@ -289,6 +293,7 @@ public class ReservationServiceImpl implements ReservationService {
 		// userId와 userPw의 input값 저장
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
+		RevPTDTO dto = null;
 		
 		// userPw 입력값이 있을 때 인증 진행
 		if(userPw != null) {
@@ -298,15 +303,14 @@ public class ReservationServiceImpl implements ReservationService {
 			
 			// 회원 인증 결과 selectCnt에 저장 후 전달
 			int selectCnt = dao.revPTCheckUser(map);
-			  
 			// 회원 인증 성공 시 user 정보 불러오기
 			if(selectCnt == 1) {
-				RevPTDTO dto = dao.detailPTUserAction(userId);
-				model.addAttribute("dto", dto);
+				dto = dao.detailPTUserAction(userId);
 			}
 			model.addAttribute("selectCnt", selectCnt);
 		}
 		model.addAttribute("userId", userId);
+		model.addAttribute("dto", dto);
 	}
 	
 	// PT 시간 체크(사용자/관리자)
@@ -416,7 +420,7 @@ public class ReservationServiceImpl implements ReservationService {
 		int deleteCnt = dao.deleteRevPT(revPTNo);
 		
 		model.addAttribute("deleteCnt", deleteCnt);
-	}
+	}                                               
 	
 	// PT 상태 완료로 변경(사용자)
 	@Override

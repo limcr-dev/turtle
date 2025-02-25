@@ -57,7 +57,7 @@
 							<input type="hidden" name="hiddenUserName" value="">
 							<input type="hidden" name="hiddenUserHp" value="">
 							
-							<input type="hidden" name="hiddenRevTime" value=" ">
+							<input type="hidden" name="hiddenRevTime" value="">
 							<input type="hidden" name="hiddenRevDate" value="${revDate}">
 							
 							
