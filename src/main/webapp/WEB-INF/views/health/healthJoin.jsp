@@ -17,6 +17,15 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 		<!-- header 끝 -->
 		<br>
+		<!-- 세션이 없는 경우 : 예약 불가로 alert창 띄운 후, 로그인 페이지로 이동 -->
+      <c:if test="${sessionScope.sessionID == null}">
+         <script type="text/javascript">
+            alert("로그인 후 이용해주세요.");
+            window.location="${path}/login.do"
+         </script>
+      </c:if>
+     <!-- 세션이 있는 경우 : 예약 가능 -->
+	<c:if test="${sessionScope.sessionID != null}">
 		<div id="fh5co-contact">
 			<div class="container">
 				<div class="row">
@@ -43,7 +52,8 @@
 									아이디
 								</div>
 								<div class="col-md-8">
-									<input type="text" name="userId" id="userId" class="form-control form-control-lg" placeholder="아이디를 입력하세요" required autofocus>
+				
+									<input type="text" name="userId" id="userId" class="form-control form-control-lg" value="${sessionID}" readonly>
 								</div>
 								<div class="col-md-2">
 									<input type="button" class="btn btn-light" name="dubChk" value="아이디 조회" onclick="searchId()">
@@ -155,7 +165,9 @@
 				</div>
 			</div>
 		</div>
+	</c:if>
 	</div>
+	
 		<br>
 		
 	<!-- footer 시작 -->
