@@ -66,7 +66,7 @@
 				<c:forEach var="dto" items="${list}" varStatus="status">
 					<tr>
 						<td style="text-align:center;">${startNum - status.index}</td>
-						<td style="text-align:center; width:500px; vertical-align:middle;">
+						<td style="text-align:left; width:500px; vertical-align:middle;">
 							<a style="color:black;" href="${path}/noticeDetail.bo?noticeNo=${dto.noticeNo}">${dto.noticeTitle}</a>
 						</td>
 						<td style="text-align:center; width:200px; vertical-align:middle;">${dto.noticeWriter}</td>
