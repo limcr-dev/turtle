@@ -48,19 +48,6 @@
 			});
 		});
 		
-		
-		/* function getSelectedNotice() {
-			var selectedNotice = [];
-			$(".selectCheck:checked").each(function() {
-				selectedNotice.push($this). val());
-			});
-	
-			if(selectedNotice.length == 0) {
-				alert("선택된 글이 없습니다.");
-				return;
-			}
-		} */
-		
 		// 삭제
 		$("#deleteNotice").click(function(){
 			if(getSelectedNotice() != null){
@@ -95,7 +82,7 @@
 					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 					<!-- 좌측메뉴 종료 -->
 					<!-- 우측매뉴 시작 -->
-					<form name="noticeListForm" method="post">
+					<form name="noticeListForm" method="post" style="width:7000px">
 						<table class="table">
 							<thead>
 								<tr>
@@ -116,9 +103,9 @@
 							<tbody class="table-group-divider">
 								<c:forEach var="dto" items="${list}">
 									<tr>
-										<td style="text-align:left"><input type="checkbox" class="selectCheck" value="${dto.noticeNo}"></td>
+										<td style="text-align:left; vertical-align:middle;"><input type="checkbox" class="selectCheck" value="${dto.noticeNo}"></td>
 										<%-- <td style="text-align:left">${dto.noticeNo}</td> --%>
-										<td style="text-align:center; width:500px; vertical-align:middle;">
+										<td style="text-align:left; width:500px; vertical-align:middle;">
 											<a style="color:black;" href="${path}/adNoticeDetail.ad?noticeNo=${dto.noticeNo}">${dto.noticeTitle}</a>
 										</td>
 										<td style="text-align:center; width:200px; vertical-align:middle;">${dto.noticeWriter}</td>
