@@ -126,7 +126,7 @@
 					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
 					<!-- 좌측메뉴 종료 -->
 					<!-- 우측매뉴 시작 -->
-					<form name ="customerListForm" method="post" style="width:5500px;">
+					<form name ="customerListForm" method="post" style="width:7000px;">
 						<table class="table">
 							<thead>
 								<tr>
@@ -167,7 +167,7 @@
 										<c:if test="${dto.userGender == 'M'}" >
 											<td style="width:300px; text-align:left">남자</td>
 										</c:if> --%>
-										<td style="width:400px; text-align:center; vertical-align:middle;">${dto.userRegDate}</td>
+										<td style="width:400px; text-align:center; vertical-align:middle;">${fn:substring(dto.userRegDate, 0, 16)}</td>
 										<c:if test="${dto.userType == 'admin'}" >
 											<td style="width:200px; text-align:center; vertical-align:middle;">관리자</td>
 										</c:if>

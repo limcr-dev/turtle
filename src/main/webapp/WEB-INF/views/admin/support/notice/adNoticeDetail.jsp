@@ -66,7 +66,7 @@
 				<!-- 좌측메뉴 종료 -->
 				<!-- 우측매뉴 시작 -->
 				<form name ="noticeDetailForm" method="post" style="width:4300px; font-size:10pt;">
-					<table class="table" style="width: 920px"><!-- class="table table-bordered"  -->
+					<table class="table" style="width: 1020px"><!-- class="table table-bordered"  -->
 						<thead>
 							<div class="form-group" align="right">
 								<input type="hidden" name="hidden_noticeNo" value="${dto.noticeNo}">
@@ -81,11 +81,11 @@
 								<th scope="col"> No. </th>
 									<td style="text-align:left">${dto.noticeNo}</td>
 									
-									<th scope="col"> 작성자 </th>
-									<td style="text-align:left">${dto.noticeWriter}</td>
-									
 									<th scope="col"> 제목 </th>
 									<td style="text-align:left">${dto.noticeTitle}</td>
+									
+									<th scope="col"> 작성자 </th>
+									<td style="text-align:left">${dto.noticeWriter}</td>
 									
 									<th scope="col"> 등록일자 </th>
 									<td style="text-align:left">${dto.noticeRegdate}</td>
@@ -95,7 +95,7 @@
 								</tr>
 								<tr>
 									<th scope="col"> 내용 </th>
-									<td colspan="8" style="text-align:center">${dto.noticeContent} </td>
+									<td colspan="10" style="text-align:left">${dto.noticeContent} </td>
 								</tr>
 						</tbody>
 					</table>
