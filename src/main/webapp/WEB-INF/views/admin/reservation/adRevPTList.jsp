@@ -92,7 +92,6 @@ function page() {
 									        <td>
 									        	<c:if test="${dto.revPTStatus == '대기' || (dto.revPTStatus == '승인' && dto.revPTDate >= now)}">
 									        		<input type="button" value="수정" class="btn active" onclick="window.location='${path}/adRevPTDetail.ad?revPTNo=${dto.revPTNo}'">
-									        		<input type="button" value="취소" class="btn active" onclick="window.location='${path}/adRevPTDelete.ad?revPTNo=${dto.revPTNo}'">
 									        	</c:if>
 									        	
 									        	<c:if test="${dto.revPTStatus == '승인' && dto.revPTDate < now}">
