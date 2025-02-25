@@ -42,7 +42,7 @@ td a {
 						<hr>
 						<p class="card-text"><a href="${path}/adCustomerList.ad?userType=admin" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">관리자 목록</a></p>
 						<p class="card-text"><a href="${path}/adCustomerList.ad?userType=trainer" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">트레이너 목록</a></p>
-						<p class="card-text"><a href="${path}/adCustomerList.ad?userType=user" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원 목록</a></p>
+						<p class="card-text"><a href="${path}/adCustomerList.ad" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원 목록</a></p>
 					</div>
 				</div>
 				
