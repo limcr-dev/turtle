@@ -24,7 +24,13 @@
 					<hr>
 				</div>
 			<!-- 상단 중앙1 종료 -->
-			
+				<div align="center">
+					<br>
+					<img src="resources/images/detail.jpg">
+					<br>
+				</div>
+				
+				
 			<!-- 상당 중앙2 시작 -->
 				
 				

@@ -24,7 +24,6 @@
 		<div class="area_black" style="background-color:black;">	<!-- 블랙 메인 구역 -->
 			<div class="btn_chatbot">
 				<img src="resources/images/chatbot.png" style="width :200px; height : 200px;" onclick="openChat()" /><br>
-				<img src="resources/images/kakao.png" style="width :200px; height : 100px;" onclick="window.location='${path}chatbot.do'" />
 			</div>
 			<div class="container-fluid">
 				<div class="row">	
@@ -88,8 +87,8 @@
 			<a class="content_sub" href="${path}/programList.do">
 				<img width="150px" height="200px" src="resources/images/two-boxing-gloves.svg"><br><span id="main_category-text">프로그램</span></a>
 			
-			<a class="content_sub" href="${path}/facility.do">
-				<img width="150px" height="200px" src="resources/images/exercise.svg"><br><span id="main_category-text">내부시설</span></a>
+			<a class="content_sub" href="${path}/healthJoin.do">
+				<img width="150px" height="200px" src="resources/images/exercise.svg"><br><span id="main_category-text">헬스등록</span></a>
 				
 			<a class="content_sub" href="${path}/reservation.do">
 				<img width="150px" height="200px" src="resources/images/dumbbell.svg"><br><span id="main_category-text">예약</span></a>
