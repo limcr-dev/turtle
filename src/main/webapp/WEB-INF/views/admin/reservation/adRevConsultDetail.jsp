@@ -11,7 +11,6 @@
    	.btn btn-light{
   		background-color:orange-500;
   	} 
-  	
 </style>
 
 <head>
@@ -61,135 +60,132 @@
 					</div>
 					<c:if test="${dto == null || dto == ''}">
 						<script type="text/javascript">
-							alert("조회 실패.");
+							alert("상담 예약 조회에 실패하였습니다.");
 							window.location="${path}/adRevConsultList.ad";
 						</script>
 					</c:if>
 					
 					<c:if test="${dto != null || dto != ''}">
-					<!-- 문의내용 시작 -->
-					<input type="hidden" name="hidden_revConsultNo" value="${dto.revConsultNo}">
-					<form name ="updateForm" id="updateForm" action="adRevConsultUpdate.ad?revConsultNo=${dto.revConsultNo}" method="post" onsubmit="return updateRevConsulCheck()"
-						style="width:1300px; align:center;">
-							
-						<table class="table" style="width:900px; margin:auto;" >
-						    <tr align="center">
-								<th width="30%">예약 번호</th>
-								<td width="70%" align="center">${dto.revConsultNo}</td>
-						    </tr>
-						    <tr align="center">
-								<th>상태</th>
-								<td align="center">
-									<select  name="statusType" id="listSize">
-										<option value=""
-											<c:if test="${dto.revConsultStatus == ''}">selected="selected"</c:if>>상태
-										</option>
-										<option value="대기"
-											<c:if test="${dto.revConsultStatus == '대기'}">selected="selected"</c:if>>대기
-										</option>
-										<option value="승인"
-											<c:if test="${dto.revConsultStatus == '승인'}">selected="selected"</c:if>>승인
-										</option>
-										<option value="완료"
-											<c:if test="${dto.revConsultStatus == '완료'}">selected="selected"</c:if>>완료
-										</option>
-										<option value="취소"
-											<c:if test="${dto.revConsultStatus == '취소'}">selected="selected"</c:if>>취소
-										</option>
-									</select>
-								</td>
-						    </tr>
-						    <tr align="center">
-								<th>회원 아이디</th>
-								<td colspan="3" align="center">
-									${dto.userId}
-									<input type="hidden" id="hiddenUserId" name="hiddenUserId" value="${dto.userId}">
-								</td>
-						    </tr>
-						    <tr align="center">
-								<th>회원 이름</th>
-								<td colspan="3" align="center">
-									${dto.userName}
-									<input type="hidden" id="hiddenUserName" name="hiddenUserName" value="${dto.userName}">	
-								</td>
-						    </tr>
-						    
-						    <tr align="center">
-								<th>회원 전화번호</th>
-								<td colspan="3" align="center">
-									${dto.userHp}
-									<input type="hidden" id="hiddenUserHp" name="hiddenUserHp" value="${dto.userHp}">
-								</td>
-						    </tr>
-						    
-						    <tr align="center">
-								<th>담당자</th>
-								<td colspan="3" align="center">
-									<select name="trainerSelect" id="listSize" onchange="selectTrainer()">
-										<option value=""
-											<c:if test="${dto.trainerId == '' || dto.trainerId == null}"> selected="selected"</c:if>>
-											담당자 지정
-										</option>
-										<c:forEach var="trainer" items="${trainerList}" >
-											<option value="${trainer}"
-												<c:if test="${dto.trainerId == trainer}"> selected="selected"</c:if>>
-												${trainer}
+						<input type="hidden" name="hidden_revConsultNo" value="${dto.revConsultNo}">
+						<form name ="updateForm" id="updateForm" action="adRevConsultUpdate.ad?revConsultNo=${dto.revConsultNo}" method="post" onsubmit="return updateRevConsulCheck()"
+							style="width:1300px; align:center;">
+								
+							<table class="table" style="width:900px; margin:auto;" >
+							    <tr align="center">
+									<th width="30%">예약 번호</th>
+									<td width="70%" align="center">${dto.revConsultNo}</td>
+							    </tr>
+							    <tr align="center">
+									<th>상태</th>
+									<td align="center">
+										<select  name="statusType" id="listSize">
+											<option value=""
+												<c:if test="${dto.revConsultStatus == ''}">selected="selected"</c:if>>상태
 											</option>
-										</c:forEach>
-									</select>
-								</td>
-						    </tr>
-						    
-						    <tr align="center">
-								<th>상담일</th>
-								<td colspan="3" align="center">
-									${fn:substring(dto.revConsultDate, 0, 10)}
-									<input type="hidden" name="hiddenRevDate" value="${fn:substring(dto.revConsultDate, 0, 10)}">
-								</td>
-						    </tr>
-						    
-						    <tr align="center">
-								<th>상담시간</th>
-								<td colspan="3" align="center">
-									${fn:substring(dto.revConsultDate, 10, 16)}
-									<input type="hidden" name="hiddenRevTime" value="${fn:substring(dto.revConsultDate, 10, 16)}">
-								</td>
-						    </tr>
-						    
-						    
-						</table>
-						<br>
-						<table style="width:900px; margin:auto;" >
-						    <tr align="center">
-						    	<td colspan="2" align="center"><b> 수정할 예약 날짜와 시간을 선택하세요</b><br></td>
-						    </tr>
-						    <tr align="center">
-						    	<td align="center" >
-						    		<div style="width:700px" id="calendar" style="display:flex">
-										<!-- FullCalendar 띄우는 부분 -->
-									</div>
-								</td>
-								<td align="center" >
-									<div style="width:200px" id="revTimeShow" >
-										<c:if test="${dayOfWeek == null}">
-											<div align="center">날짜를 선택하세요</div>
-										</c:if>
-									</div> 
-						    	</td>
-						    </tr>
-						    <tr>
-						   		<td colspan="2" class="text-end">
-						   			<div>
-						   				<input type="submit" value="수정" class="btn active"/>
-						   				<input type="button" value="목록" class="btn active" onclick="window.location='${path}/adRevConsultList.ad'"/>
-						   			</div>
-						  		</td>
-						    </tr>
-						</table>
-					</form>
-					<!-- 문의내용 끝 -->
+											<option value="대기"
+												<c:if test="${dto.revConsultStatus == '대기'}">selected="selected"</c:if>>대기
+											</option>
+											<option value="승인"
+												<c:if test="${dto.revConsultStatus == '승인'}">selected="selected"</c:if>>승인
+											</option>
+											<option value="완료"
+												<c:if test="${dto.revConsultStatus == '완료'}">selected="selected"</c:if>>완료
+											</option>
+											<option value="취소"
+												<c:if test="${dto.revConsultStatus == '취소'}">selected="selected"</c:if>>취소
+											</option>
+										</select>
+									</td>
+							    </tr>
+							    <tr align="center">
+									<th>회원 아이디</th>
+									<td colspan="3" align="center">
+										${dto.userId}
+										<input type="hidden" id="hiddenUserId" name="hiddenUserId" value="${dto.userId}">
+									</td>
+							    </tr>
+							    <tr align="center">
+									<th>회원 이름</th>
+									<td colspan="3" align="center">
+										${dto.userName}
+										<input type="hidden" id="hiddenUserName" name="hiddenUserName" value="${dto.userName}">	
+									</td>
+							    </tr>
+							    
+							    <tr align="center">
+									<th>회원 전화번호</th>
+									<td colspan="3" align="center">
+										${dto.userHp}
+										<input type="hidden" id="hiddenUserHp" name="hiddenUserHp" value="${dto.userHp}">
+									</td>
+							    </tr>
+							    
+							    <tr align="center">
+									<th>담당자</th>
+									<td colspan="3" align="center">
+										<select name="trainerSelect" id="listSize" onchange="selectTrainer()">
+											<option value=""
+												<c:if test="${dto.trainerId == '' || dto.trainerId == null}"> selected="selected"</c:if>>
+												담당자 지정
+											</option>
+											<c:forEach var="trainer" items="${trainerList}" >
+												<option value="${trainer}"
+													<c:if test="${dto.trainerId == trainer}"> selected="selected"</c:if>>
+													${trainer}
+												</option>
+											</c:forEach>
+										</select>
+									</td>
+							    </tr>
+							    
+							    <tr align="center">
+									<th>상담일</th>
+									<td colspan="3" align="center">
+										${fn:substring(dto.revConsultDate, 0, 10)}
+										<input type="hidden" name="hiddenRevDate" value="${fn:substring(dto.revConsultDate, 0, 10)}">
+									</td>
+							    </tr>
+							    
+							    <tr align="center">
+									<th>상담시간</th>
+									<td colspan="3" align="center">
+										${fn:substring(dto.revConsultDate, 10, 16)}
+										<input type="hidden" name="hiddenRevTime" value="${fn:substring(dto.revConsultDate, 10, 16)}">
+									</td>
+							    </tr>
+							    
+							    
+							</table>
+							<br>
+							<table style="width:900px; margin:auto;" >
+							    <tr align="center">
+							    	<td colspan="2" align="center"><b> 수정할 예약 날짜와 시간을 선택하세요</b><br></td>
+							    </tr>
+							    <tr align="center">
+							    	<td align="center" >
+							    		<div style="width:700px" id="calendar" style="display:flex">
+											<!-- FullCalendar 띄우는 부분 -->
+										</div>
+									</td>
+									<td align="center" >
+										<div style="width:200px" id="revTimeShow" >
+											<c:if test="${dayOfWeek == null}">
+												<div align="center">날짜를 선택하세요</div>
+											</c:if>
+										</div> 
+							    	</td>
+							    </tr>
+							    <tr>
+							   		<td colspan="2" class="text-end">
+							   			<div>
+							   				<input type="submit" value="수정" class="btn active"/>
+							   				<input type="button" value="목록" class="btn active" onclick="window.location='${path}/adRevConsultList.ad'"/>
+							   			</div>
+							  		</td>
+							    </tr>
+							</table>
+						</form>
 					</c:if>
-					<!-- 컨텐츠 끝 -->
 				</div>
 			</div>
 		</div>

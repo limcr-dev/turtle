@@ -49,7 +49,7 @@ public interface HealthService {
 	//헬스회원 수정
 	public void healthUpdateAction(MultipartHttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;
-
+	
 	//헬스회원 삭제
 	public void healthDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException;

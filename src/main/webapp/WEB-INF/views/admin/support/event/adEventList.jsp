@@ -78,7 +78,7 @@
 										<td>
 											<img src="${dto.eventImage}" style="position:relative; width:100px; height:50px; overflow: hidden">
 										</td> 
-										<td style="text-align:center; width:500px; vertical-align:middle;">
+										<td style="text-align:left; width:500px; vertical-align:middle;">
 											<a style="color:black;" href="${path}/adEventDetail.ad?eventNo=${dto.eventNo}">${dto.eventTitle}</a>
 										</td>
 										<td style="text-align:center; width:200px; vertical-align:middle;">${dto.eventWriter}</td>

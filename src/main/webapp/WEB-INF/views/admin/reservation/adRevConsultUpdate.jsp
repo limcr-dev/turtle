@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adRevConsultUpdate</title>
+<title>상담 예약 수정</title>
 </head>
 <body>
 	<div class="wrap">

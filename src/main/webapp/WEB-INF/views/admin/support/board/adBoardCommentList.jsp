@@ -42,16 +42,13 @@
 							
 							<script type="text/javascript">
 								function commentUpdateBox${dto.b_comNo}(){
-									alert("test1");
 									let editBox = '<div style="display: flex; align-items: center;">' +
 							        			      '<textarea style="width: 650px; margin-right: 10px;" name="b_comContent_re" id="b_comContent_re${dto.b_comNo}">' + '${dto.b_comContent}' + '</textarea>' +
 							                     	  '<button type="submit" class="btn active" id="boardInsert${dto.b_comNo}">수정</button>' +
 							                      '</div>';
-							                      alert("test3");
 									$('#commentUpdate${dto.b_comNo}').html(editBox);
 									
 									$('#boardInsert' + ${dto.b_comNo}).click(function(){
-										alert("test2");
 										$('form[name="CommentList${dto.b_comNo}"]').submit();
 									});
 								}

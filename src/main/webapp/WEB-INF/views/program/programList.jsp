@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>program Page</title>
+<title>헬스장 안내</title>
 </head>
 <body>
 	<div class="wrap">
@@ -20,14 +20,17 @@
 			<!-- 상단 중앙1 시작 -->
 				<div>
 					<hr>
-					<h1 align="center">프로그램 안내</h1>
+					<h1 align="center">헬스장 안내</h1>
 					<hr>
 				</div>
 			<!-- 상단 중앙1 종료 -->
-			
+				<div align="center">
+					<br>
+					<img src="resources/images/detail.jpg">
+					<br>
+				</div>
+				
 			<!-- 상당 중앙2 시작 -->
-				
-				
 			</div>
 		</div>
 	</div>

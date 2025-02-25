@@ -21,16 +21,12 @@
     	<div id="cotainer">
     		<div id= "contents">
     			
-    			<div id="section1">
-    				<h1 align="center">헬스회원 등록 처리</h1>
-    			</div>
-    			
     			<div id="section2">
     				
     				<c:if test= "${insertCnt == 1}">
     					<script type="text/javascript">
     						setTimeout(function(){
-    							alert("회원 등록 되었습니다");
+    							alert("헬스 회원을 등록하였습니다.");
     							window.location="${path}/adHealthList.ad";
     						}, 1000);
     					</script>
@@ -39,13 +35,12 @@
     				<c:if test="${insertCnt != 1}">
     					<script type="text/javascript">
 	    					setTimeout(function() {
-	                  			alert("회원 등록 실패되었습니다");
+	                  			alert("헬스 회원 등록에 실패하였습니다.");
 	                  			window.location="${path}/adHealthInsert.ad";
 	                  		}, 1000);
     					</script>
     				</c:if>
     			</div>
-    			
     		</div>
     	 </div>
     </div>

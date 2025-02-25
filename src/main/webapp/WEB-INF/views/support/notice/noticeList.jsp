@@ -78,7 +78,7 @@
 			</tbody>
 		</table>
 		<!-- 공지글목록 시작 -->
-		
+		<br>
 		<!-- 페이지컨트롤 시작 -->
 		<div style="width:920px; margin:auto" >
 			<nav aria-label="Page navigation example">

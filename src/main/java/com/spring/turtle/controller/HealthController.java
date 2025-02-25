@@ -41,6 +41,7 @@ public class HealthController {
 		service.healthJoinAction(request, response, model);
 		return "health/healthJoinAction";
 	}
+	
 	// 헬스회원 목록
 	@RequestMapping("/adHealthList.ad")
 	public String adHealthList(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -125,7 +126,7 @@ public class HealthController {
 		return "admin/health/adHealthDeleteAction";
 	}
 	
-	//헬스회원 삭제
+	//헬스회원 승인 취소
 	@RequestMapping("/adHealthCancleAction")
 	public String adHealthCancleAction(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws ServletException, IOException {

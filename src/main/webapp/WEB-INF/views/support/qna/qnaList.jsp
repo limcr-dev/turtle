@@ -82,7 +82,7 @@ td a {
 			    <tbody>
 				    <c:if test="${paging.count == 0}">
 						<tr>
-							<td colspan="8" align="center">상담 예약이 존재하지 않습니다.</td>
+							<td colspan="8" align="center">문의 내역이 존재하지 않습니다.</td>
 						</tr>
 					</c:if>
 			    
@@ -103,7 +103,7 @@ td a {
 					</c:if>
 				</tbody>
 			</table>
-			
+			<br>
 			<!-- 페이지컨트롤 시작 -->
 			<c:if test="${paging.count != 0}">
 				<div style="width:1000px; margin:auto" >

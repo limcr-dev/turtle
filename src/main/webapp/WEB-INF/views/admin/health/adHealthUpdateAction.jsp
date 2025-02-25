@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adHealthDetailAction</title>
+<title>헬스 회원 정보 수정</title>
 
-<!-- join.js -->
+<!-- insert.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
 </head>
 <body>
@@ -20,17 +20,11 @@
 	    <!-- header 끝 --> 
 	    	<div id="cotainer">
 	    		<div id= "contents">
-	    			
-	    			<div id="section1">
-	    				<h1 align="center">헬스회원 수정 처리</h1>
-	    			</div>
-	    			
 	    			<div id="section2">
-	    				
 	    				<c:if test= "${updateCnt == 1}">
 	    					<script type="text/javascript">
 	    						setTimeout(function(){
-	    							alert("회원 수정 되었습니다");
+	    							alert("회원 정보가 수정되었습니다.");
 	    							window.location="${path}/adHealthList.ad?pageNum=${hiddenPageNum}";
 	    						}, 1000);
 	    					</script>
@@ -39,7 +33,7 @@
 	    				<c:if test="${updateCnt != 1}">
 	    					<script type="text/javascript">
 		    					setTimeout(function() {
-		                  			alert("회원 수정 실패되었습니다");
+		                  			alert("회원 정보 수정에 실패하였습니다.");
 		                  			window.location="${path}/adHealthDetailAction.ad?healthNo=${hiddenHealthNo}&pageNum=${hiddenPageNum}";
 		                  		}, 1000);
 	    					</script>

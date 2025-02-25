@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>헬스 회원 승인</title>
+<title>헬스 회원 삭제</title>
 
 <!-- join.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
@@ -20,22 +20,22 @@
     <!-- header 끝 --> 
     	<div id="cotainer">
     		<div id= "contents">
-    			
     			<div id="section2">
-    				<c:if test= "${updateCnt == 1}">
+    				
+    				<c:if test= "${deleteCnt == 1}">
     					<script type="text/javascript">
     						setTimeout(function(){
-    							alert("헬스 등록이 승인되었습니다");
-    							window.location="${path}/adHealthList.ad";
+    							alert("승인 취소되었습니다.");
+    							window.location="${path}/adHealthUnPayList.ad";
     						}, 1000);
     					</script>
     				</c:if>
     				
-    				<c:if test="${updateCnt != 1}">
+    				<c:if test="${deleteCnt != 1}">
     					<script type="text/javascript">
 	    					setTimeout(function() {
-	                  			alert("헬스 등록에 실패하였습니다");
-	                  			window.location="${path}/adHealthUnPayList.ad";
+	                  			alert("승인취소 실패되었습니다.");
+	                  			window.location="${path}/adHealthList.ad";
 	                  		}, 1000);
     					</script>
     				</c:if>

@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- join.js -->
+<!-- insert.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
-<title>adHealthList</title>
+<title>헬스 회원 목록</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 <script type="text/javascript">
 function page() {
@@ -71,39 +71,47 @@ function page() {
 									</th>
 									<th scope="col" style="width:10%; text-align:center;">설정</th>
 								</tr>
-							</thead>							
+							</thead>
+														
 							<tbody>
 								<c:forEach var='dto' items="${list}">
 									<tr>
 										<td style="vertical-align: middle;">${dto.healthNo}</td>
-										<td><img src = "${dto.healthImg}" width="100px"></td>
+										<td style="vertical-align: middle;">
+											<c:if test="${dto.healthImg == null}">
+												<p style="color:gray">미등록</p>
+											</c:if>
+											
+											<c:if test="${dto.healthImg != null}">
+												<img src = "${dto.healthImg}" width="100px">
+											</c:if>
+										</td>
 										<td style="vertical-align: middle;">${dto.userName}</td>
 										<td style="vertical-align: middle;">${dto.userHp}</td>
 										<td style="vertical-align: middle;">${dto.healthStatus}</td>
 										<td style="vertical-align: middle;">
 										    ${dto.healthStartDate} ~ <span class="healthEndDate">${dto.healthEndDate}</span>
-										    <br>
-										   
 										</td>
 										<td>
 											<div>
-											<input class="btn btn-light" type="button" value="상세내용"
-											onclick="window.location = '${path}/adHealthDetailAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
+												<input class="btn btn-light" type="button" value="상세"
+												onclick="window.location = '${path}/adHealthDetailAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
 											</div>
 											<br>
 											<div>
-											<input class="btn btn-light" type="button" value="삭제"
-											onclick="window.location = '${path}/adHealthDeleteAction.ad?healthNo=${dto.healthNo}'">
+												<input class="btn btn-light" type="button" value="삭제"
+												onclick="window.location = '${path}/adHealthDeleteAction.ad?healthNo=${dto.healthNo}'">
 											</div>											
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
-								<tr>
-	                               <td colspan=11" align="center">
-	                                  <input type="button" class="btn btn-light" value="등록" id="btnInsert">
-	                               </td>
-                            	</tr>					
+							
+							<tr>
+                               <td colspan="11" align="center" >
+                                  <input type="button" class="btn btn-light" value="회원 등록" id="btnInsert">
+                               </td>
+                           	</tr>					
 						</table>						
 						<br>
 						<div style="width:900px; margin:auto" >
