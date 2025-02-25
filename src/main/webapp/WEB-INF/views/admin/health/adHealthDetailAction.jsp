@@ -161,9 +161,10 @@
 					  </div>
 					  <div class="col-md-5 d-flex align-items-center gap-2">
 					    <select class="form-select form-select-lg" name="trainerId" id="trainerId">
-					      <c:forEach var="list" items="${list}">
-					        <option value="${list.userId}">${list.userId}</option>
-					      </c:forEach>
+					    	<option value="">선택</option>
+						     <c:forEach var="userId" items="${list}">
+						        <option value="${userId}" <c:if test="${dto.trainerId == userId}">selected="selected"</c:if>>${userId}</option>
+						     </c:forEach>
 					    </select>
 					  </div>
 					</div>

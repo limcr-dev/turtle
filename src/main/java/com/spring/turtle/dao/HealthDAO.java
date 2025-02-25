@@ -41,6 +41,7 @@ public interface HealthDAO {
 	// 헬스회원 삭제
 	public int healthDelete(int healthNo);
 	
-	
+	// 등록회원 확인
+	public int isInserted(String userId);
 
 }

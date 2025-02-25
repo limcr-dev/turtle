@@ -25,7 +25,7 @@
     				<c:if test= "${deleteCnt == 1}">
     					<script type="text/javascript">
     						setTimeout(function(){
-    							alert("헬스 회원을 삭제하였습니다.");
+    							alert("승인 취소되었습니다.");
     							window.location="${path}/adHealthUnPayList.ad";
     						}, 1000);
     					</script>
@@ -34,7 +34,7 @@
     				<c:if test="${deleteCnt != 1}">
     					<script type="text/javascript">
 	    					setTimeout(function() {
-	                  			alert("헬스 회원 삭제를 실패하였습니다.");
+	                  			alert("승인취소 실패되었습니다.");
 	                  			window.location="${path}/adHealthList.ad";
 	                  		}, 1000);
     					</script>

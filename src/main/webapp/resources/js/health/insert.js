@@ -3,25 +3,12 @@
  */
  
 // adHealthInsert.jsp - P.T 횟수 체크
-function selectPtCntChk(){
-	// 이메일 주소를 select박스로 선택하면 그 값이 userEmail2로 들어가도록 한다.
-	if(document.inputform.ptCnt2.value == "0"){ // 직접입력
-		document.inputform.ptCnt1.value == ""; 
-		document.inputform.ptCnt1.focus();
-		return false;
-	}
-	else{
-		document.inputform.ptCnt1.value = document.inputform.ptCnt2.value;
-		return false;
-	}
-	
-}
 
 // 회원 조회
 function searchId(){
 	
 	if(!document.inputform.userId.value){
-		alret("아이디를 입력하세요!!");
+		alert("아이디를 입력하세요!!");
 		document.inputform.userId.focus();
 		return false;
 	}
@@ -30,19 +17,42 @@ function searchId(){
 	let url = "/turtle/adIdConfirmAction.ad?userId=" + document.inputform.userId.value;
 	window.open(url, "confirm", "menubar=no, width=500, height=400");
 }
- 
 
-// 3. 자식창에서 부모창으로 userid값을 전달 => 사용가능한 id를 찾은 경우
-/*
-	opener : window 객체의 open() 메서드로 열린 자식창(=중복확인창)에서 부모창(=회원가입창)에 접근할 때 사용
-	hiddenUserid : 중복확인 버튼 클릭여부 체크(0:클릭안함, 1:클릭함)
-	self.close(); // 자식창 닫기
-*/
+function signInCheck() {
+  // 상태(헬스 또는 P.T) 선택 여부 확인
+  const healthStatusChecked = document.querySelector('input[name="healthStatus"]:checked');
+  
+   if (!healthStatusChecked) {
+    alert("등록을 선택해주세요. (헬스 또는 P.T)");
+    return false; // 제출 방지
+  }
+  
+  if (!document.inputform.healthStartDate.value) {
+    alert("시작일을 지정해주세요");
+    return false; // 제출 방지
+  }
+  
+   if (!document.inputform.healthEndDate.value) {
+    alert("종료일을 지정해주세요");
+    return false; // 제출 방지
+  }
+  
+  if (document.inputform.trainerId.value == 0 && document.inputform.healthStatus.value == 'PT') {
+    alert("담당 트레이너를 지정해주세요");
+    return false; // 제출 방지
+  }
+  
+  if (document.inputform.ptCnt.value == 0 && document.inputform.healthStatus.value == 'PT') {
+    alert("PT횟수를 지정해주세요");
+    return false; // 제출 방지
+  }
+  // 다른 검증 로직이 있으면 여기에 추가
+  return true; // 검증 통과 시 제출 진행
+}
+
 
 function setUserid(userId, userName, userHp){
 	// alert(userid);
-	
-	
 	
 	opener.document.inputform.hiddenSearchId.value= "1";
 	
@@ -56,8 +66,6 @@ function setUserid(userId, userName, userHp){
 	opener.document.inputform.hiddenuserHp.value= userHp;
 	self.close();
 }
-
-
 
   
  // 선택된 라디오 버튼에 따라 표시할 필드를 결정하는 함수

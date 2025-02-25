@@ -110,7 +110,11 @@ public class HealthDAOImpl implements HealthDAO{
 		
 		return sqlSession.delete("com.spring.turtle.dao.HealthDAO.healthDelete", healthNo);
 	}
-	
-	
 
+	@Override
+	public int isInserted(String userId) {
+		System.out.println("HealthDAOImpl - isInserted");
+		return sqlSession.selectOne("com.spring.turtle.dao.HealthDAO.isInserted", userId);
+	}
+	
 }

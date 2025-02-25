@@ -18,7 +18,9 @@
 		<!-- header 끝 -->
 		<br>
 		<div id="fh5co-contact">
+		
 			<div class="container">
+				<div id="contents">
 				<div class="row">
 					<div class="col-md-2">
 					</div>		
@@ -112,8 +114,9 @@
 							  <div class="col-md-2">P.T 선생님</div>
 							  <div class="col-md-5 d-flex align-items-center gap-2">
 							    <select class="form-select form-select-lg" name="trainerId" id="trainerId">
-							      <c:forEach var="list" items="${list}">
-							        <option value="${list.userId}">${list.userId}</option>
+							      <option value="">선택</option>
+							      <c:forEach var="userId" items="${list}">
+							        <option value="${userId}">${userId}</option>
 							      </c:forEach>
 							    </select>
 							  </div>
@@ -145,6 +148,7 @@
 			</div>
 		</div>
 	</div>
+</div>	
 <br>
 		
 <!-- footer 시작 -->
