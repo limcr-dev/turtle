@@ -29,18 +29,17 @@
 		<br>
 		
 		<!-- 세션이 없는 경우 : 예약 불가로 alert창 띄운 후, 로그인 페이지로 이동 -->
-		<c:if test="${sessionScope.sessionID == null || sessionID == ''}">
+		<c:if test="${sessionScope.sessionID == null || sessionScope.sessionID == ''}">
 			<script type="text/javascript">
 				alert("로그인 후 이용해주세요.");
 				window.location="${path}/login.do"
 			</script>
 		</c:if>
 		
-		<h3 align="center">상담 예약 조회</h3>
-		<br><br>
-			
-		<!-- 문의목록 시작 -->
 		<c:if test="${sessionScope.sessionID != null}">
+			<h3 align="center">상담 예약 조회</h3>
+			<br><br>
+			
 			<table class="table" style="width:1000px; margin:auto;"  align="center">
 				<thead>
 				    <tr align="center">

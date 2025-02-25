@@ -31,6 +31,12 @@
 		$("#eventList").click(function() {
 			location.href = "${path}/adEventList.ad"
 		});
+		
+		// 날짜 지정(시작날짜 이전은 지정x)
+		$("#eventStartDate").change(function() {
+	        const startDate = $(this).val();
+	        $("#eventEndDate").attr("min", startDate);
+	    });
 	});
 </script>
 </head>
@@ -70,13 +76,14 @@
 					<br>
 					
 					<div class="row g-3 align-items-center">
-						<input type="date" id="eventStartDate" name="eventStartDate" class="form-control form-control-lg" required>
+						<div class="col-md-1"><h5>기간</h5></div>
+						<div class="col-md-11 d-flex align-items-center gap-2">
+							<input type="date" id="eventStartDate" name="eventStartDate" class="form-control form-control-lg" required>
+							<input type="date" id="eventEndDate" name="eventEndDate" class="form-control form-control-lg" min={availableDay} required>
+							
+						</div>
 					</div>
-					
-					<div class="row g-3 align-items-center">
-						<input type="date" id="eventEndDate" name="eventEndDate" class="form-control form-control-lg"required>
-					</div>
-					
+					<br>
 					<div class="row form-group">
 						<hr>
 						<div class="addImage" id="addImage">

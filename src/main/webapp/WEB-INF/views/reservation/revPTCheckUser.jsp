@@ -51,7 +51,7 @@
 						</c:if>
 						
 						<!-- 회원 인증 성공 -->
-						<c:if test="${selectCnt == 1}">
+						<c:if test="${selectCnt != 0 && dto != null}">
 							<div class="row g-3 align-items-center">
 								<div class="col-md-12" align="center">
 									<span style="color: #ff8000"><b>${userId}</b></span>님 인증 성공했습니다.

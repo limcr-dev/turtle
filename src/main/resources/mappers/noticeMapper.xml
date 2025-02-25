@@ -95,10 +95,7 @@
               			   ROWNUM AS rn
          			FROM (SELECT * 
                			  FROM notice_tb
-               		      WHERE 1=1
-					          <if test="noticeShow != null and noticeShow != ''">
-							      AND noticeShow = #{noticeShow}
-							  </if>
+               		      WHERE noticeShow = 'Y'
 						  ORDER BY noticeRegDate DESC
                		     ) A  
         			)

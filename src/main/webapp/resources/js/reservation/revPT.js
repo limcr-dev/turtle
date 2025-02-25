@@ -29,16 +29,19 @@ function revPTCheck(){
 		return false;
 	}
 	
-	// 날짜, 시간 체크 여부 확인
-	if(document.revPTForm.revTime.value == null || document.revPTForm.revTime.value == ""){
-		alert("날짜와 시간을 선택해주세요.");
-		document.revPTForm.revTime.focus();
+	// 날짜 체크 여부 확인
+	if(document.revPTForm.hiddenRevDate.value == null || document.revPTForm.hiddenRevDate.value == ""){
+		alert("날짜를 선택해주세요.");
 		return false;
-	} else {
-		document.revPTForm.hiddenRevTime.value = document.revPTForm.revTime.value;
 	}
 	
+	// 시간 체크 여부 확인
+	if(document.revPTForm.revTime.value == null || document.revPTForm.revTime.value == ""){
+		alert("시간을 선택해주세요.");
+		return false;
+	}
 }
+
 	
 // 비밀번호 인증 성공 시, userId를 부모창으로 전달
 function setUser(userId, userName, userHp, trainerId){
