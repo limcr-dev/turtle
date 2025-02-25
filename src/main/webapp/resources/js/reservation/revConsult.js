@@ -29,15 +29,17 @@ function revConsultCheck(){
 		return false;
 	}
 	
-	// 날짜, 시간 체크 여부 확인
-	if(document.revConsultForm.revTime.value == null || document.revConsultForm.revTime.value == ""){
-		alert("날짜와 시간을 선택해주세요.");
-		document.revConsultForm.revTime.focus();
+	// 날짜 체크 여부 확인
+	if(document.revConsultForm.hiddenRevDate.value == null || document.revConsultForm.hiddenRevDate.value == ""){
+		alert("날짜를 선택해주세요.");
 		return false;
-	} else {
-		document.revConsultForm.hiddenRevTime.value = document.revConsultForm.revTime.value;
 	}
 	
+	// 시간 체크 여부 확인
+	if(document.revConsultForm.revTime.value == null || document.revConsultForm.revTime.value == ""){
+		alert("시간을 선택해주세요.");
+		return false;
+	}
 }
 	
 // 비밀번호 인증 성공 시, userId를 부모창으로 전달
