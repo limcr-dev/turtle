@@ -27,7 +27,7 @@ integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqrupt
 <script src="${path}/resources/js/common/main.js" defer></script>
 
 <!-- js -->
-<script src="https://kit.fontawesome.com/2735f685d7.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/b1df6f007a.js" crossorigin="anonymous"></script>
 
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
