@@ -67,8 +67,13 @@ public class HealthServiceImpl implements HealthService{
          dto.setPtCnt(Integer.parseInt(request.getParameter("ptCnt")));
          
          dto.setHealthStatus(request.getParameter("healthStatus"));
-         dto.setTrainerId(request.getParameter("trainerId"));
          
+         String trainerId = request.getParameter("trainerId");
+         
+         if(trainerId != null && trainerId != "") {
+        	 dto.setTrainerId(trainerId);
+         }
+        
          int insertCnt = dao.healthJoin(dto);
          System.out.println("insertCnt = " + insertCnt);
          model.addAttribute("insertCnt", insertCnt);
@@ -224,17 +229,21 @@ public class HealthServiceImpl implements HealthService{
          dto.setHealthEndDate(Date.valueOf(request.getParameter("healthEndDate")));
          dto.setPtCnt(Integer.parseInt(request.getParameter("ptCnt")));
          dto.setHealthStatus(request.getParameter("healthStatus"));
-         dto.setTrainerId(request.getParameter("trainerId"));
          
+         String trainerId = request.getParameter("trainerId");
          
+         if(trainerId != null && trainerId != "") {
+        	 dto.setTrainerId(trainerId);
+         }
          
          int insertCnt = dao.healthInsert(dto);
          model.addAttribute("insertCnt", insertCnt);
+         
          }catch(IOException e) {
-         e.printStackTrace();
+        	 e.printStackTrace();
          }finally {
-         if(fis != null)fis.close();
-         if(fos != null)fos.close();
+	         if(fis != null)fis.close();
+	         if(fos != null)fos.close();
          }
       
       
@@ -329,6 +338,11 @@ public class HealthServiceImpl implements HealthService{
          dto.setHealthStartDate(Date.valueOf(request.getParameter("healthStartDate")));
          dto.setHealthEndDate(Date.valueOf(request.getParameter("healthEndDate")));
          dto.setHealthStatus(request.getParameter("healthStatus"));
+         String trainerId = request.getParameter("trainerId");
+         
+         if(trainerId != null && trainerId != "") {
+        	 dto.setTrainerId(trainerId);
+         }
          
          int updateCnt = dao.healthUpdate(dto);
          model.addAttribute("updateCnt", updateCnt);

@@ -64,7 +64,7 @@
 	</select>
 	
 	<!-- 헬스트레이너 목록 -->
-	<select id="trainerList" resultType="com.spring.turtle.dto.UserDTO">
+	<select id="trainerList" resultType="String">
 		SELECT userId
 		  FROM user_tb
 		 WHERE userType = 'trainer'
@@ -92,7 +92,8 @@
 	              ptCnt = #{ptCnt},   
 	    healthStartDate = #{healthStartDate},    
 	      healthEndDate = #{healthEndDate},           
-	       healthStatus = #{healthStatus}     
+	       healthStatus = #{healthStatus},
+	       trainerId = #{trainerId}
 	     WHERE healthNo = #{healthNo}      
 	</update>
 

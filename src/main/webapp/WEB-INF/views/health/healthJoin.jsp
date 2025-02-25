@@ -134,9 +134,9 @@
 								  </div>
 								  <div class="col-md-5 d-flex align-items-center gap-2">
 								    <select class="form-select form-select-lg" name="trainerId" id="trainerId">
-								      <option value="0">선택</option>
-								      <c:forEach var="list" items="${list}">
-								        <option value="${list.userId}">${list.userId}</option>
+								      <option value="">선택</option>
+								      <c:forEach var="userId" items="${list}">
+								        <option value="${userId}">${userId}</option>
 								      </c:forEach>
 								    </select>
 								  </div>
