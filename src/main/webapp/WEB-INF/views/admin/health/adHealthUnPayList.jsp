@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- join.js -->
+<!-- insert.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
-<title>adHealthList</title>
+<title>헬스 회원 미결제 목록</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 <script type="text/javascript">
 function page() {
@@ -25,7 +25,7 @@ function page() {
 
 </head>
 <body>
-	<div class="wrap"> <!-- 스타일을 해주려고 class명을 지정함  -->
+	<div class="wrap">
 		<!-- header 시작 -->
 		<%@include file= "/WEB-INF/views/common/header.jsp"%>
 		<!-- header 끝 -->
@@ -37,7 +37,7 @@ function page() {
 				<!-- 상단 중앙1 시작 -->
 				<div>
 					<hr>
-					<h1 align="center">헬스 등록 승인 목록</h1>
+					<h1 align="center">헬스 회원 미결제 목록</h1>
 					<hr>
 				</div>
 				<!-- 상단 중앙1 종료 -->
@@ -54,7 +54,6 @@ function page() {
 							<thead>
 								<tr>
 									<th scope="col" style="width:10%; text-align:center;">등록번호</th>
-									<th scope="col" style="width:10%; text-align:center;">회원 이미지</th>
 									<th scope="col" style="width:10%; text-align:center;">이름</th>
 									<th scope="col" style="width:20%; text-align:center;">전화번호</th>
 									<th scope="col" style="width:10%; text-align:center;">
@@ -76,24 +75,22 @@ function page() {
 								<c:forEach var='dto' items="${list}">
 									<tr>
 										<td style="vertical-align: middle;">${dto.healthNo}</td>
-										<td><img src = "${dto.healthImg}" width="100px"></td>
 										<td style="vertical-align: middle;">${dto.userName}</td>
 										<td style="vertical-align: middle;">${dto.userHp}</td>
 										<td style="vertical-align: middle;">${dto.healthStatus}</td>
 										<td style="vertical-align: middle;">
 										    ${dto.healthStartDate} ~ <span class="healthEndDate">${dto.healthEndDate}</span>
 										    <br>
-										   
 										</td>
 										<td>
 											<div>
 											<input class="btn btn-light" type="button" value="승인"
-											onclick="window.location = '${path}/adHealthApproveAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
+											onclick="window.location='${path}/adHealthApproveAction.ad?healthNo=${dto.healthNo}&pageNum=${paging.currentPage}'">
 											</div>
 											<br>
 											<div>
 											<input class="btn btn-light" type="button" value="승인취소"
-											onclick="window.location = '${path}/adHealthApproveAction.ad?healthNo=${dto.healthNo}'">
+											onclick="window.location='${path}/adHealthDeleteAction.ad?healthNo=${dto.healthNo}'">
 											</div>											
 										</td>
 									</tr>

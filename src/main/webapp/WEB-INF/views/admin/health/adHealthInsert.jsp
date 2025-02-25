@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adHealthInsert</title>
+<title>헬스 회원 등록</title>
 
 <!-- join.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
@@ -23,12 +23,11 @@
 					<div class="col-md-2">
 					</div>		
 					<div class="col-md-8 animate-box">
-						<p class="fs-1" align="center">헬스회원 등록</p>
+						<p class="fs-1" align="center">헬스 회원 등록</p>
 						<br>
 						
 						<form name="inputform" action="adHealthInsertAction.ad" method="post" enctype="multipart/form-data"
 						onsubmit="return signInCheck()">
-							
 							
 							<input type="hidden" name="hiddenSearchId" value="0">
 							
@@ -49,7 +48,6 @@
 							</div>
 							<br>
 							
-							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
 									이름
@@ -59,7 +57,6 @@
 								</div>
 							</div>
 							<br>
-							
 							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
@@ -80,7 +77,6 @@
 								</div>
 							</div>
 							<br>
-							
 							
 							<div class="row g-3 align-items-center">
 							  <div class="col-md-2">상태</div>
@@ -149,10 +145,10 @@
 			</div>
 		</div>
 	</div>
-		<br>
+<br>
 		
-	<!-- footer 시작 -->
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-	<!-- footer 끝 -->
+<!-- footer 시작 -->
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<!-- footer 끝 -->
 </body>
 </html>

@@ -11,7 +11,6 @@
    	.btn btn-light{
   		background-color:orange-500;
   	} 
-  	
 </style>
 
 <head>

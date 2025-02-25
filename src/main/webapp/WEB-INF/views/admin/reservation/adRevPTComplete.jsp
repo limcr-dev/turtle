@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PT 예약 삭제</title>
+<title>PT 예약 완료</title>
 
 <script>
 

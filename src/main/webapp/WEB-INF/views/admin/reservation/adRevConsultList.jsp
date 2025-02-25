@@ -10,7 +10,7 @@ function page() {
 </script>
 <head>
 <meta charset="UTF-8">
-<title>adRevConsultList</title>
+<title>상담 예약 목록</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
@@ -106,7 +106,7 @@ function page() {
 									</c:forEach>
 								</tbody>
 							</table>
-							
+							<br>
 							<c:if test="${paging.count != 0}">	
 								<!-- 페이지컨트롤 시작 -->
 								<br>
