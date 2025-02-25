@@ -45,26 +45,17 @@ public class HealthServiceImpl implements HealthService{
 		throws ServletException, IOException {
 		System.out.println("HealthServiceImpl - healthListAction");	
 	
-		
-		
-		
-			
 			HealthDTO dto = new HealthDTO();
-			
-			
 			
 			dto.setUserName(request.getParameter("hiddenuserName"));
 			dto.setUserId(request.getParameter("hiddenUserid"));
 			dto.setUserHp(request.getParameter("hiddenuserHp"));
-			
 			
 			dto.setHealthStartDate(Date.valueOf(request.getParameter("healthStartDate")));
 			dto.setHealthEndDate(Date.valueOf(request.getParameter("healthEndDate")));
 			dto.setPtCnt(Integer.parseInt(request.getParameter("ptCnt")));
 			dto.setHealthStatus(request.getParameter("healthStatus"));
 			dto.setTrainerId(request.getParameter("trainerId"));
-			
-			
 			
 			int insertCnt = dao.healthJoin(dto);
 			model.addAttribute("insertCnt", insertCnt);

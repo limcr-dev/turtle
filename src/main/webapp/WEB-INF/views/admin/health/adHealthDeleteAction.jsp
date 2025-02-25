@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adHealthDetailAction</title>
+<title>헬스 회원 삭제</title>
 
 <!-- join.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
@@ -20,17 +20,12 @@
     <!-- header 끝 --> 
     	<div id="cotainer">
     		<div id= "contents">
-    			
-    			<div id="section1">
-    				<h1 align="center">헬스회원 삭제 처리</h1>
-    			</div>
-    			
     			<div id="section2">
     				
     				<c:if test= "${deleteCnt == 1}">
     					<script type="text/javascript">
     						setTimeout(function(){
-    							alert("회원 삭제 되었습니다");
+    							alert("헬스 회원을 삭제하였습니다.");
     							window.location="${path}/adHealthList.ad";
     						}, 1000);
     					</script>
@@ -39,7 +34,7 @@
     				<c:if test="${deleteCnt != 1}">
     					<script type="text/javascript">
 	    					setTimeout(function() {
-	                  			alert("회원 삭제 실패되었습니다");
+	                  			alert("헬스 회원 삭제를 실패하였습니다.");
 	                  			window.location="${path}/adHealthList.ad";
 	                  		}, 1000);
     					</script>

@@ -38,7 +38,6 @@
 						<form name="inputform" action="healthJoinAction.do" method="post" enctype="multipart/form-data"
 						onsubmit="return signInCheck()">
 							
-							
 							<input type="hidden" name="hiddenSearchId" value="0">
 							
 							<input type="hidden" name="hiddenUserid" value="">
@@ -52,7 +51,6 @@
 									아이디
 								</div>
 								<div class="col-md-8">
-				
 									<input type="text" name="userId" id="userId" class="form-control form-control-lg" value="${sessionID}" readonly>
 								</div>
 								<div class="col-md-2">
@@ -60,7 +58,6 @@
 								</div>
 							</div>
 							<br>
-							
 							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
@@ -71,7 +68,6 @@
 								</div>
 							</div>
 							<br>
-							
 							
 							<div class="row g-3 align-items-center">
 								<div class="col-md-2">
@@ -98,8 +94,6 @@
 							</div>
 							
 							<hr><br>
-							
-							
 							
 							<div class="row g-3 align-items-center" id="dateInputRow"  style="display: none;">
 							 

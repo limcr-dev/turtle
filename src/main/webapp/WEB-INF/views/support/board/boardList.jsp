@@ -91,8 +91,7 @@ $(function(){
 					</tr>
 				    </tbody>
 				</table>
-			<!-- 공지글목록 시작 -->
-			
+			<br>
 			<!-- 페이지컨트롤 시작 -->
 			<c:if test="${paging.count != 0}">
 				<div style="width:1000px; margin:auto" >

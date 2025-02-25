@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adRevPTUpdate</title>
+<title>PT 예약 수정</title>
 </head>
 <body>
 	<div class="wrap">

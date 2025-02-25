@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adHealthDetailAction</title>
+<title>헬스 회원 상세 정보</title>
 
 <!-- join.js -->
 <script src="${path}/resources/js/health/insert.js" defer></script>
@@ -24,7 +24,7 @@
 					<div class="col-md-2">
 					</div>		
 					<div class="col-md-8 animate-box">
-						<p class="fs-1" align="center">헬스회원 상세내용</p>
+						<p class="fs-1" align="center">헬스 회원 상세 정보</p>
 						<br>
 					
 					<form name="inputform" action="adHealthUpdateAction.ad" method="post" enctype="multipart/form-data">

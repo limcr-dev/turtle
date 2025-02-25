@@ -10,7 +10,7 @@ function page() {
 </script>
 <head>
 <meta charset="UTF-8">
-<title>adRevPTList</title>
+<title>PT 예약 현황</title>
 <link rel="stylesheet" href="${path}/resources/css/common/leftbar.css">
 </head>
 <body>
@@ -25,7 +25,7 @@ function page() {
 				<!-- 상단 중앙1 시작 -->
 				<div>
 					<hr>
-					<h1 align="center">PT 예약 현황</h1>
+					<h1 align="center">PT 예약 목록</h1>
 					<hr>
 				</div>
 	            <!-- 상단 중앙1 종료 -->
