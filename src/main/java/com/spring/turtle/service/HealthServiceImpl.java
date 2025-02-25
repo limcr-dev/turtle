@@ -39,19 +39,12 @@ public class HealthServiceImpl implements HealthService{
 		
 	}
 	
-	// 헬스 회원 등록 
+	// 헬스 미등록 회원 등록 
 	@Override
 	public void healthJoinAction(HttpServletRequest request, HttpServletResponse response, Model model)
 		throws ServletException, IOException {
-		System.out.println("HealthServiceImpl - healthListAction");	
-	
-		
-		
-		
-			
+		System.out.println("HealthServiceImpl - healthListAction");
 			HealthDTO dto = new HealthDTO();
-			
-			
 			
 			dto.setUserName(request.getParameter("hiddenuserName"));
 			dto.setUserId(request.getParameter("hiddenUserid"));

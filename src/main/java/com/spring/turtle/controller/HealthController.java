@@ -125,4 +125,12 @@ public class HealthController {
 		return "admin/health/adHealthDeleteAction";
 	}
 	
+	//헬스회원 삭제
+	@RequestMapping("/adHealthCancleAction")
+	public String adHealthCancleAction(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException {
+		logger.info("<<< url ==>  /adHealthCancleAction.ad >>>");
+		service.healthDeleteAction(request, response, model);
+		return "admin/health/adHealthCancleAction";
+	}
 }
