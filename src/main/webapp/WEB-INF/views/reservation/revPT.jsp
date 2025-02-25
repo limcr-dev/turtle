@@ -41,7 +41,7 @@
 			<!-- PT 미등록 회원 -->
 			<c:if test="${ptCnt == 0}">
 				<script type="text/javascript">
-					alert("PT 등록 후 이용해주세요.");
+					alert("PT 승인 후 이용해주세요.");
 					window.location="${path}/main.do"
 				</script>
 			</c:if>

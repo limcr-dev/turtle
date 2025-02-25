@@ -30,7 +30,7 @@
 								alert("잘못된 비밀번호입니다.")
 								</script>
 							</c:if>
-							
+							 
 							<div class="row g-3 align-items-center">
 								<div class="col-md-12" align="center">
 									<span style="color: #ff8000"><b>${userId}</b></span>님 회원 인증 해주세요.

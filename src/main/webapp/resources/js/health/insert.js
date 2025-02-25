@@ -19,35 +19,40 @@ function searchId(){
 }
 
 function signInCheck() {
-  // 상태(헬스 또는 P.T) 선택 여부 확인
-  const healthStatusChecked = document.querySelector('input[name="healthStatus"]:checked');
+	// 상태(헬스 또는 P.T) 선택 여부 확인
+	const healthStatusChecked = document.querySelector('input[name="healthStatus"]:checked');
   
-   if (!healthStatusChecked) {
-    alert("등록을 선택해주세요. (헬스 또는 P.T)");
-    return false; // 제출 방지
-  }
+	if(document.inputform.hiddenSearchId.value == 0){
+		alert("아이디를 조회해주세요");
+		return false;
+	}
+	
+	if (!healthStatusChecked) {
+		alert("등록을 선택해주세요. (헬스 또는 P.T)");
+		return false; // 제출 방지
+	}
   
-  if (!document.inputform.healthStartDate.value) {
-    alert("시작일을 지정해주세요");
-    return false; // 제출 방지
-  }
+	if (!document.inputform.healthStartDate.value) {
+		alert("시작일을 지정해주세요");
+		return false; // 제출 방지
+	}
   
-   if (!document.inputform.healthEndDate.value) {
-    alert("종료일을 지정해주세요");
-    return false; // 제출 방지
-  }
+	if (!document.inputform.healthEndDate.value) {
+		alert("종료일을 지정해주세요");
+		return false; // 제출 방지
+	}
   
-  if (document.inputform.trainerId.value == 0 && document.inputform.healthStatus.value == 'PT') {
-    alert("담당 트레이너를 지정해주세요");
-    return false; // 제출 방지
-  }
+	if (document.inputform.trainerId.value == 0 && document.inputform.healthStatus.value == 'PT') {
+		alert("담당 트레이너를 지정해주세요");
+		return false; // 제출 방지
+	}
   
-  if (document.inputform.ptCnt.value == 0 && document.inputform.healthStatus.value == 'PT') {
-    alert("PT횟수를 지정해주세요");
-    return false; // 제출 방지
-  }
-  // 다른 검증 로직이 있으면 여기에 추가
-  return true; // 검증 통과 시 제출 진행
+	if (document.inputform.ptCnt.value == 0 && document.inputform.healthStatus.value == 'PT') {
+		alert("PT횟수를 지정해주세요");
+		return false; // 제출 방지
+	}
+	// 다른 검증 로직이 있으면 여기에 추가
+	return true; // 검증 통과 시 제출 진행
 }
 
 
