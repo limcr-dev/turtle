@@ -85,7 +85,7 @@
 		<div class="content_main">
 			
 			<a class="content_sub" href="${path}/programList.do">
-				<img width="150px" height="200px" src="resources/images/two-boxing-gloves.svg"><br><span id="main_category-text">프로그램</span></a>
+				<img width="150px" height="200px" src="resources/images/two-boxing-gloves.svg"><br><span id="main_category-text">헬스장 안내</span></a>
 			
 			<a class="content_sub" href="${path}/healthJoin.do">
 				<img width="150px" height="200px" src="resources/images/exercise.svg"><br><span id="main_category-text">헬스등록</span></a>

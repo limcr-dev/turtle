@@ -8,6 +8,11 @@ function signInCheck() {
   // 상태(헬스 또는 P.T) 선택 여부 확인
   const healthStatusChecked = document.querySelector('input[name="healthStatus"]:checked');
   
+  	if(document.inputform.hiddenSearchId.value == 0){
+		alert("아이디를 조회해주세요");
+		return false;
+	}
+	
    if (!healthStatusChecked) {
     alert("등록을 선택해주세요. (헬스 또는 P.T)");
     return false; // 제출 방지
