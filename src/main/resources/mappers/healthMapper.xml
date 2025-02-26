@@ -13,10 +13,23 @@
 	</insert>
 
 	<!-- 헬스회원 목록(갯수) -->
-	<select id="healthCnt" resultType="int"> 
+	<select id="healthCnt" parameterType="java.util.Map" resultType="int"> 
 		SELECT COUNT(*) 
 	      FROM health_tb
 	     WHERE healthShow = 'Y'
+	     <if test="statusType != null and statusType != ''"> 
+		  AND healthStatus = #{statusType}
+		</if>
+	</select>
+	
+	<!-- 헬스회원 미결제 목록(갯수) -->
+	<select id="healthUnPayCnt" parameterType="java.util.Map" resultType="int"> 
+		SELECT COUNT(*) 
+	      FROM health_tb
+	     WHERE healthShow = 'N'
+	     <if test="statusType != null and statusType != ''"> 
+		  AND healthStatus = #{statusType}
+		</if>
 	</select>
 	
 	<!-- 헬스 미등록 회원 목록 -->
