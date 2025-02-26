@@ -12,10 +12,13 @@ public interface HealthDAO {
 	public int healthJoin(HealthDTO dto);
 	
 	//헬스 회원 목록(갯수)
-	public int healthCnt();
+	public int healthCnt(Map<String, Object> map);
 		
 	// 헬스회원 목록
 	public List<HealthDTO> healthList(Map<String, Object> map);
+	
+	//헬스 미결제 회원 목록(갯수)
+	public int healthUnPayCnt(Map<String, Object> map);
 	
 	// 헬스 미결제 회원 목록
 	public List<HealthDTO> healthUnPayList(Map<String, Object> map);
