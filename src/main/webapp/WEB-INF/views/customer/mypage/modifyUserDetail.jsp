@@ -48,7 +48,8 @@
 									아이디
 								</div>
 								<div class="col-md-10">
-									${sessionID}
+									${dto.userId}
+									<input type="hidden" id="hiddenUserId" name="hiddenUserId" value="${dto.userId}">
 								</div>
 							</div>
 							<br>
