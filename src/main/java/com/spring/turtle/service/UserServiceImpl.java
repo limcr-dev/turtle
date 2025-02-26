@@ -64,9 +64,6 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	
-	
-	
 	// 회원가입처리
 	@Override
 	public void signInAction(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -79,7 +76,6 @@ public class UserServiceImpl implements UserService {
 		dto.setUserName(request.getParameter("userName"));
 		dto.setUserGender(request.getParameter("userGender"));
 		dto.setUserBirthday(Date.valueOf(request.getParameter("userBirthday")));
-		System.out.println(request.getParameter("userBirthday"));
 		dto.setUserAddress(request.getParameter("userAddress"));
 		
 		String userHp1 = request.getParameter("userHp1");
@@ -174,38 +170,44 @@ public class UserServiceImpl implements UserService {
 		System.out.println("서비스 - modifyUserAction()");
 		
 		UserDTO dto = new UserDTO();
-		String userId = (String)request.getSession().getAttribute("sessionID");
+		String userId = request.getParameter("hiddenUserId");
+		String sessionID = (String)request.getSession().getAttribute("sessionID");
 		
-		dto.setUserPw(request.getParameter("userPw"));
-		dto.setUserName(request.getParameter("userName"));
-		dto.setUserAddress(request.getParameter("userAddress"));
-		dto.setUserBirthday(Date.valueOf(request.getParameter("userBirthday")));
-		
-		String userHp1 = request.getParameter("userHp1");
-		String userHp2 = request.getParameter("userHp2");
-		String userHp3 = request.getParameter("userHp3");
-		String userHp = "";
-		if(!userHp1.equals("") && !userHp2.equals("") && !userHp3.equals("")) {
-			userHp = userHp1 + "-" + userHp2 + "-" + userHp3;
-		}
-		
-		dto.setUserHp(userHp);
-		
-		String userEmail1 = request.getParameter("userEmail1");
-		String userEmail2 = request.getParameter("userEmail2");
-		String userEmail = userEmail1 + "@" + userEmail2;
-		
-		dto.setUserEmail(userEmail);
-		
-		dto.setUserId(userId);
-		
-		System.out.println("dto" + dto);
-		
-		int updateCnt = dao.updateUser(dto);
-		
-		System.out.println("updateCnt : " + updateCnt);
-		model.addAttribute("updateCnt", updateCnt);
-		model.addAttribute("dto", dto);
+		if(sessionID == null || sessionID == "") {
+			request.getSession().setAttribute("sessionID", userId);
+			
+		} else {
+			
+			dto.setUserPw(request.getParameter("userPw"));
+			dto.setUserName(request.getParameter("userName"));
+			dto.setUserAddress(request.getParameter("userAddress"));
+			dto.setUserBirthday(Date.valueOf(request.getParameter("userBirthday")));
+			
+			String userHp1 = request.getParameter("userHp1");
+			String userHp2 = request.getParameter("userHp2");
+			String userHp3 = request.getParameter("userHp3");
+			String userHp = "";
+			if(!userHp1.equals("") && !userHp2.equals("") && !userHp3.equals("")) {
+				userHp = userHp1 + "-" + userHp2 + "-" + userHp3;
+			}
+			
+			dto.setUserHp(userHp);
+			
+			String userEmail1 = request.getParameter("userEmail1");
+			String userEmail2 = request.getParameter("userEmail2");
+			String userEmail = userEmail1 + "@" + userEmail2;
+			
+			dto.setUserEmail(userEmail);
+			
+			dto.setUserId(userId);
+			
+			System.out.println("dto" + dto);
+			
+			int updateCnt = dao.updateUser(dto);
+			
+			model.addAttribute("updateCnt", updateCnt);
+			model.addAttribute("dto", dto);
+			}
 	}
 	
 	// 회원정보 인증후 탈퇴 처리
