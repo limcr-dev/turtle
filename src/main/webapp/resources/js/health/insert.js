@@ -1,5 +1,5 @@
 /**
- * join.js
+ * insert.js
  */
  
 // adHealthInsert.jsp - P.T 횟수 체크
