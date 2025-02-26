@@ -32,7 +32,7 @@ public class FaqServiceImpl implements FaqService{
 			category = request.getParameter("category");
 		}
 		else {
-			category = "예약관련";
+			category = "로그인관련";
 		}
 		List<FaqDTO> list = dao.faqList(category);
 		model.addAttribute("list", list);
