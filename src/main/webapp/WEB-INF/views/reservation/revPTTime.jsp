@@ -65,7 +65,7 @@
 		
 		<!-- 평일일 때 예약 시간 출력(07:00~21:00) -->
 		<c:if test="${dayOfWeek >= 1 && dayOfWeek <= 5}">
-			<c:if test="${trainerId == 'trainer1'}">
+			<c:if test="${trainerId == 'trainer1'|| trainerId == 'trainer2' || trainerId == 'trainer3'}">
 				<label class="radioStyle">
 					<input type="radio" id="revTime7" name="revTime" value="07:00"
 						<c:if test="${fn:contains(timeArr, '07:00')}"> disabled </c:if> />
