@@ -6,27 +6,100 @@
      
 <mapper namespace="com.spring.turtle.dao.NoticeDAO">
 
-	<!--  공지사항 목록  -->
+	<!-- ========================= 관리 ========================= -->
+	<!-- 공지사항 목록 -->
 	<select id="noticeList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.NoticeDTO">
-	<![CDATA[ SELECT * FROM notice_tb WHERE noticeShow = 'Y' AND noticeNo >= #{start} AND noticeNo <= #{end} ORDER BY noticeNo DESC ]]>
+		SELECT *
+ 			  FROM (SELECT A.*,
+              			   ROWNUM AS rn
+         			FROM (SELECT * 
+               			  FROM notice_tb
+               		      WHERE 1=1
+					          <if test="noticeShow != null and noticeShow != ''">
+							      AND noticeShow = #{noticeShow}
+							  </if>
+						  ORDER BY noticeRegDate DESC
+               		     ) A  
+        			)
+		WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
-	<!--  공지사항 갯수  -->
-	<select id="noticeCnt" resultType="int"> SELECT COUNT(*) AS cnt FROM notice_tb WHERE noticeShow = 'Y' </select>
+	<!-- 공지사항 갯수 -->
+	<select id="noticeCnt" resultType="int"> 
+		SELECT COUNT(*)
+		FROM notice_tb 
+	</select>
 	
-	<!--  조회수 증가  -->
-	<update id="plusReadCnt" parameterType="int"> UPDATE notice_tb SET noticeViews = noticeViews + 1 WHERE noticeNo = #{noticeNo} </update>
+	<!-- noticeShow에 따른 공지사항 갯수 -->
+	<select id="noticeCntShow" parameterType="java.util.Map" resultType="int"> 
+		SELECT COUNT(*)
+		FROM notice_tb 
+		WHERE 1=1
+		<if test="noticeShow != null and noticeShow != ''">
+			AND noticeShow = #{noticeShow}
+		</if>
+	</select>
 	
-	<!--  공지사항 상세페이지  -->
-	<select id="getNoticeDetail" parameterType="int" resultType="com.spring.turtle.dto.NoticeDTO"> SELECT * FROM notice_tb WHERE noticeNo = #{noticeNo} </select>
+	<!-- 조회수 증가 -->
+	<update id="plusReadCnt" parameterType="int"> 
+		UPDATE notice_tb 
+		SET noticeViews = noticeViews + 1 
+		WHERE noticeNo = #{noticeNo} 
+	</update>
 	
-	<!--  공지사항 작성  -->
-	<insert id="insertNotice" parameterType="com.spring.turtle.dto.NoticeDTO"> INSERT INTO notice_tb (noticeNo, noticeWriter, noticeTitle, noticeContent) VALUES((SELECT NVL(MAX(noticeNo) + 1, 1)FROM notice_tb), #{noticeWriter}, #{noticeTitle}, #{noticeContent}) </insert>
+	<!-- 공지사항 상세페이지 -->
+	<select id="getNoticeDetail" parameterType="int" resultType="com.spring.turtle.dto.NoticeDTO"> 
+		SELECT * 
+		FROM notice_tb 
+		WHERE noticeNo = #{noticeNo} 
+	</select>
 	
-	<!--  공지사항 수정  -->
-	<update id="updateNotice" parameterType="com.spring.turtle.dto.NoticeDTO"> UPDATE notice_tb SET noticeWriter = #{noticeWriter}, noticeTitle = #{noticeTitle}, noticeContent = #{noticeContent} WHERE noticeNo = #{noticeNo} </update>
+	<!-- 공지사항 작성 -->
+	<insert id="insertNotice" parameterType="com.spring.turtle.dto.NoticeDTO"> 
+		INSERT INTO notice_tb (noticeNo, noticeWriter, noticeTitle, noticeContent) 
+		VALUES((SELECT NVL(MAX(noticeNo) + 1, 1)FROM notice_tb), #{noticeWriter}, #{noticeTitle}, #{noticeContent}) 
+	</insert>
 	
-	<!--  공지사항 삭제  -->
-	<update id="deleteNotice" parameterType="int"> UPDATE notice_tb SET noticeShow = 'N' WHERE noticeNo = #{noticeNo} </update>
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice" parameterType="com.spring.turtle.dto.NoticeDTO"> 
+		UPDATE notice_tb 
+		SET noticeWriter = #{noticeWriter},
+		 	noticeTitle = #{noticeTitle}, 
+		 	noticeContent = #{noticeContent} 
+		WHERE noticeNo = #{noticeNo} 
+	</update>
 	
-	</mapper>
+	<!-- 공지사항 삭제 -->
+	<update id="deleteNotice" parameterType="int"> 
+		UPDATE notice_tb 
+		SET noticeShow = 'N' 
+		WHERE noticeNo = #{noticeNo} 
+	</update>
+	
+	<!-- 공지사항 다중 삭제 -->
+	<update id="deleteNoticeSeveral" parameterType="ArrayList"> 
+		UPDATE notice_tb 
+		SET noticeShow = 'N' 
+		WHERE noticeNo in
+		<foreach item="noticeNo" collection="array" open="(" separator="," close=")">
+        	#{noticeNo}
+    	</foreach>
+	</update>
+	<!-- ========================= 관리 ========================= -->
+	
+	<!-- ========================= 일반 ========================= -->
+	<!-- 공지사항 목록 -->
+	<select id="noticeList1" parameterType="java.util.Map" resultType="com.spring.turtle.dto.NoticeDTO">
+		SELECT *
+ 			  FROM (SELECT A.*,
+              			   ROWNUM AS rn
+         			FROM (SELECT * 
+               			  FROM notice_tb
+               		      WHERE noticeShow = 'Y'
+						  ORDER BY noticeRegDate DESC
+               		     ) A  
+        			)
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	<!-- ========================= 일반 ========================= -->
+</mapper>

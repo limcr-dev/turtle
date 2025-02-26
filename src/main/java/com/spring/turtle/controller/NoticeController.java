@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.turtle.service.NoticeServiceImpl;
 
@@ -23,6 +24,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeServiceImpl service;
 	
+	// ========================= 관리 =========================
 	// 공지 목록
 	@RequestMapping("/adNoticeList.ad")
 	public String adNoticeList(HttpServletRequest request, HttpServletResponse response, Model model)
@@ -92,16 +94,57 @@ public class NoticeController {
 	
 	// 공지 삭제 처리
 	@RequestMapping("/adNoticeDeleteAction.ad")
-	public String adNoticeDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
+	public void adNoticeDeleteAction(HttpServletRequest request, HttpServletResponse response, Model model)
     		throws ServletException, IOException {
 		logger.info("<<< url ==>  /adNoticeDeleteAction.ad >>>");
 
-		service.noticeDelete(request, response, model);
+		service.noticeDeleteAction(request, response, model);
 		
 		String viewPage = request.getContextPath() + "/adNoticeList.ad";
 		response.sendRedirect(viewPage);
 		
-		return "admin/support/notice/adNoticeDetail";
+//		return "admin/support/notice/adNoticeList";
 	}
 	
+	// 공지 삭제 처리
+	@RequestMapping("/adNoticeDelete.ad")
+	public String adCustomerDelete(HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes)
+    		throws ServletException, IOException {
+		logger.info("<<< url ==>  /adCustomerDelete.ad >>>");
+		
+		String[] noticeMul = request.getParameter("noticeMul").split(",");
+		
+		if (noticeMul == null || noticeMul.length == 0) {
+	        return "redirect:/adNoticeList.ad";
+	    }
+		
+		service.noticeDelete(noticeMul);
+		
+		return "redirect:/adNoticeList.ad";
+	}
+	// ========================= 관리 =========================
+	
+	// ========================= 일반 =========================
+	// 공지 목록
+	@RequestMapping("/noticeList.bo")
+	public String noticeList1(HttpServletRequest request, HttpServletResponse response, Model model)
+    		throws ServletException, IOException {
+		logger.info("<<< url ==>  /noticeList.bo >>>");
+		
+		service.noticeList1(request, response, model);
+		
+		return "support/notice/noticeList";
+	}
+	
+	// 공지 상세페이지
+	@RequestMapping("/noticeDetail.bo")
+	public String noticeDetail(HttpServletRequest request, HttpServletResponse response, Model model)
+    		throws ServletException, IOException {
+		logger.info("<<< url ==>  /noticeDetail.bo >>>");
+
+		service.noticeDetail(request, response, model);
+		
+		return "support/notice/noticeDetail";
+	}
+	// ========================= 일반 =========================
 }

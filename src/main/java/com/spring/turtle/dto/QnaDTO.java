@@ -1,5 +1,4 @@
 package com.spring.turtle.dto;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class QnaDTO {
@@ -11,7 +10,7 @@ public class QnaDTO {
 	private String qnaCommentCnt;	// 댓글수
 	private int qnaViews;			// 조회수
 	private String qnaContent;		// 내용
-	private Date qnaRegdate;	// 등록일자
+	private Timestamp qnaRegdate;	// 등록일자
 	private String qnaShow;			// 삭제유무
 	private String qnaStatus;		// 처리상태
 	
@@ -69,11 +68,11 @@ public class QnaDTO {
 		this.qnaContent = qnaContent;
 	}
 
-	public Date getQnaRegdate() {
+	public Timestamp getQnaRegdate() {
 		return qnaRegdate;
 	}
 
-	public void setQnaRegdate(Date qnaRegdate) {
+	public void setQnaRegdate(Timestamp qnaRegdate) {
 		this.qnaRegdate = qnaRegdate;
 	}
 

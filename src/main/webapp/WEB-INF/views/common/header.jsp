@@ -17,9 +17,9 @@
 		
 		<!-- 상단 메뉴 -->
 		<ul class="navbar_menu">
-			<li><a href="${path}/facility.do">내부시설</a></li>
-			<li><a href="${path}/productList.do">상품</a></li>
-			<li><a href="${path}/programList.do">프로그램</a></li>
+			<li><a href="${path}/programList.do">헬스장 안내</a></li>
+			<li><a href="${path}/healthJoin.do">헬스 등록</a></li>
+			<li><a href="${path}/productList.do">식단</a></li>
 			<li><a href="${path}/reservation.do">예약</a></li>
 			<li class="dropdown">
 				<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" aria-labelledby="dropdownMenuOffset">

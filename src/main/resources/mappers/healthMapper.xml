@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+     
+<mapper namespace="com.spring.turtle.dao.HealthDAO">
+	
+	<!-- 헬스회원 등록 신청(회원용) -->
+	<insert id="healthJoin" parameterType="com.spring.turtle.dto.HealthDTO">
+		INSERT INTO health_tb(healthNo, userId, userName, userHp, ptCnt, healthStartDate, healthEndDate, healthShow, healthStatus, trainerId)
+		VALUES ((SELECT NVL(MAX(healthNo)+1, 1) FROM health_tb), #{userId}, #{userName}, #{userHp}, #{ptCnt}, #{healthStartDate}, #{healthEndDate}, 'N', #{healthStatus}, #{trainerId})
+	</insert>
+
+	<!-- 헬스회원 목록(갯수) -->
+	<select id="healthCnt" resultType="int"> 
+		SELECT COUNT(*) 
+	      FROM health_tb
+	     WHERE healthShow = 'Y'
+	</select>
+	
+	<!-- 헬스 미등록 회원 목록 -->
+	<select id="healthUnPayList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.HealthDTO">
+		SELECT * 
+			FROM (SELECT A.*, 
+						 rownum AS rn 
+					FROM (SELECT * 
+							FROM health_tb 
+							WHERE healthShow ='N'
+							<if test="statusType != ''"> 
+							  AND healthStatus = #{statusType}
+							</if>
+							ORDER BY healthNo DESC) A ) 
+			WHERE rn BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<!-- 헬스 미등록 회원 승인 -->
+	<update id="healthUnPayUpdate" parameterType="int">
+		UPDATE health_tb
+		   SET healthShow = 'Y'       
+	     WHERE healthNo = #{healthNo}      
+	</update>
+	
+	<!-- 헬스회원 목록 -->
+	<select id="healthList" parameterType="java.util.Map" resultType="com.spring.turtle.dto.HealthDTO">
+	   	 SELECT * 
+		   FROM (SELECT A.*, 
+				 rownum AS rn 
+			FROM (SELECT * 
+					FROM health_tb 
+					WHERE healthShow ='Y'
+					<if test="statusType != ''"> 
+					  AND healthStatus = #{statusType}
+					</if>
+					ORDER BY healthNo DESC) A ) 
+	WHERE rn BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<!-- 헬스회원 등록시(Id 조회) -->
+	<select id="userIdCheck" parameterType="String" resultType="com.spring.turtle.dto.UserDTO">
+		SELECT *
+	      FROM user_tb
+	     WHERE userId = #{userId}
+	</select>
+	
+	<!-- 헬스트레이너 목록 -->
+	<select id="trainerList" resultType="String">
+		SELECT userId
+		  FROM user_tb
+		 WHERE userType = 'trainer'
+	</select>
+	
+	<!-- 헬스회원 등록 -->
+	<insert id="healthInsert" parameterType="com.spring.turtle.dto.HealthDTO">
+		INSERT INTO health_tb(healthNo, userId, userName, userHp, healthImg, ptCnt, healthStartDate, healthEndDate, healthShow, healthStatus, trainerId)
+		VALUES ((SELECT NVL(MAX(healthNo)+1, 1) FROM health_tb), #{userId}, #{userName}, #{userHp}, #{healthImg}, #{ptCnt}, #{healthStartDate}, #{healthEndDate}, 'Y', #{healthStatus}, #{trainerId})
+	</insert>
+
+	<!-- 헬스회원 상세목록 -->
+	<select id="healthDetail" parameterType="int" resultType="com.spring.turtle.dto.HealthDTO">
+		SELECT *
+	      FROM health_tb
+	     WHERE healthNo = #{healthNo}
+	</select>
+
+	<!-- 헬스회원 수정 -->
+	<update id="healthUpdate" parameterType="com.spring.turtle.dto.HealthDTO">
+		UPDATE health_tb
+		   SET userName = #{userName},       
+	             userHp = #{userHp},       
+	          healthImg = #{healthImg},        
+	              ptCnt = #{ptCnt},   
+	    healthStartDate = #{healthStartDate},    
+	      healthEndDate = #{healthEndDate},           
+	       healthStatus = #{healthStatus},
+	       trainerId = #{trainerId}
+	     WHERE healthNo = #{healthNo}      
+	</update>
+
+	<!-- 헬스회원 삭제 -->
+	<delete id="healthDelete" parameterType="int">
+		DELETE FROM health_tb
+	 	 WHERE healthNo = #{healthNo}
+	</delete>
+	
+	<!-- 헬스트레이너 목록 -->
+	<select id="isInserted" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM health_tb
+		 WHERE userId = #{userId}
+		   AND healthShow = 'Y'
+	</select>
+
+</mapper>

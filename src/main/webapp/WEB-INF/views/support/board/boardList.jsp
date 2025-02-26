@@ -12,9 +12,21 @@
   		background-color:orange-500;
   	} 
 </style>
+<script type="text/javascript">
+$(function(){
+	$("#boardInsert").click(function(){
+		if(${sessionScope.sessionID == null}){
+			alert("로그인 후 이용해주세요");
+		}
+		else{
+			location.href="${path}/boardInsert.bo";
+		}
+	});
+});
+</script>
 <head>
 <meta charset="UTF-8">
-<title>Notice Page</title>
+<title>Board Page</title>
 </head>
 <body>
 	<div class="wrap">
@@ -55,69 +67,61 @@
 				<table class="table" style="width:1000px; margin:auto;">
 					<thead>
 					    <tr>
-							<th scope="col" style="width:5%">번호</th>
-					        <th scope="col" style="width:40%">제목</th>
-					        <th scope="col" style="width:15%">작성자</th>
-					        <th scope="col" style="width:15%">날짜</th>
-					        <th scope="col" style="width:10%">조회수</th>
+							<th scope="col" style="text-align:center; width:10%">번호</th>
+					        <th scope="col" style="text-align:center; width:40%">제목</th>
+					        <th scope="col" style="text-align:center; width:15%">작성자</th>
+					        <th scope="col" style="text-align:center; width:15%">날짜</th>
+					        <th scope="col" style="text-align:center; width:10%">조회수</th>
 					    </tr>
 				    </thead>
 				    <tbody>
+						<c:forEach var="dto" items="${list}">
+						    <tr>
+						        <th scope="row" style="text-align:center;">${dto.boardNo}</th>
+						        <td><a href="${path}/boardDetail.bo?boardNo=${dto.boardNo}" style="color: inherit;"> ${dto.boardTitle} <span style="color: red;">[${dto.boardCommentCnt}]</span></a></td>
+						        <td style="text-align:center">${dto.boardWriter}</td>
+						        <td style="text-align:center">${fn: substring(dto.boardRegdate,0,16)} </td>
+						        <td style="text-align:center">${dto.boardViews}</td>
+						    </tr>
+					    </c:forEach>
 					    <tr>
-					        <th scope="row" style="text-align:center;">1</th>
-					        <td><a href="${path}/boardDetail.bo" style="color: inherit;"> pt문의</a></td>
-					        <td>김태희</td>
-					        <td>2025-02-03</td>
-					        <td>0</td>
-					    </tr>
-					    <tr>
-					        <th scope="row" style="text-align:center;">2</th>
-					        <td>시설문의</td>
-					        <td>아이유</td>
-					        <td>2025-02-01</td>
-					        <td>4</td>
-					    </tr>
-					    <tr>
-					        <th scope="row" style="text-align:center;">3</th>
-					        <td>문의</td>
-					        <td>비</td>
-					        <td>2025-02-01</td>
-					        <td>532</td>
-					    </tr>
+				  		<td colspan="5" class="text-end">
+				  			 <button type="button" class="btn active" data-bs-toggle="button" aria-pressed="true" id="boardInsert">작성하기</button>
+				  		</td>
+					</tr>
 				    </tbody>
 				</table>
-			<!-- 공지글목록 시작 -->
-			
+			<br>
 			<!-- 페이지컨트롤 시작 -->
+			<c:if test="${paging.count != 0}">
 				<div style="width:1000px; margin:auto" >
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<li class="page-item">
-							    <a class="page-link" href="#" aria-label="Previous">
-							      <span aria-hidden="true">&laquo;</span>
-							    </a>
+								<c:if test="${paging.startPage > 10}">
+								    <a class="page-link" href="${path}/boardList.bo?pageNum=${paging.prev}" aria-label="Previous">
+								      <span aria-hidden="true">&laquo;</span>
+								    </a>
+							    </c:if>
 							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							
+							<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+								<li class="page-item"><a class="page-link" href="${path}/boardList.bo?pageNum=${num}">${num}</a></li>
+							</c:forEach>
+							
 							<li class="page-item">
-							    <a class="page-link" href="#" aria-label="Next">
-							      <span aria-hidden="true">&raquo;</span>
-							    </a>
+								<c:if test="${paging.endPage < paging.pageCount}">
+								    <a class="page-link" href="${path}/boardList.bo?pageNum=${paging.next}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+								    </a>
+							    </c:if>
 						    </li>
 						</ul>
 					</nav>
 				</div>
+			</c:if>
 			<!-- 페이지컨트롤 끝 -->
 		<!-- 컨텐츠 끝 -->
-		<p align="center">
-			SELECT *<br>
-				FROM board_tb<br>
-				WHERE boardNo = boardNo <br>
-				AND boardShow = 'Y' <br>
-				AND boardNo >= start <br>
-				AND boardNo <= end <br>
-		</p>
 	</div>
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

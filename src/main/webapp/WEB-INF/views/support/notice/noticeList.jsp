@@ -54,69 +54,59 @@
 		<table class="table" style="width:1000px; margin:auto;">
 			<thead>
 			    <tr>
-					<th scope="col" style="width:5%">번호</th>
-			        <th scope="col" style="width:40%">제목</th>
-			        <th scope="col" style="width:15%">작성자</th>
-			        <th scope="col" style="width:15%">날짜</th>
-			        <th scope="col" style="width:10%">조회수</th>
+					<th scope="col" style="text-align:center; width:5%">No.</th>
+			        <th scope="col" style="text-align:center; width:40%">제목</th>
+			        <th scope="col" style="text-align:center; width:15%">작성자</th>
+			        <th scope="col" style="text-align:center; width:15%">날짜</th>
+			        <th scope="col" style="text-align:center; width:10%">조회수</th>
 			    </tr>
 		    </thead>
-		    <tbody>
-			    <tr>
-			        <th scope="row" style="text-align:center;">1</th>
-			        <td><a href="${path}/noticeDetail.bo" style="color: inherit;"> pt문의</a></td>
-			        <td>김태희</td>
-			        <td>2025-02-03</td>
-			        <td>0</td>
-			    </tr>
-			    <tr>
-			        <th scope="row" style="text-align:center;">2</th>
-			        <td>시설문의</td>
-			        <td>아이유</td>
-			        <td>2025-02-01</td>
-			        <td>4</td>
-			    </tr>
-			    <tr>
-			        <th scope="row" style="text-align:center;">3</th>
-			        <td>문의</td>
-			        <td>비</td>
-			        <td>2025-02-01</td>
-			        <td>532</td>
-			    </tr>
-		    </tbody>
+		   	<tbody class="table-group-divider">
+		   	<c:set var="startNum" value="${paging.count - (paging.currentPage - 1) * paging.pageSize}" />
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<tr>
+						<td style="text-align:center;">${startNum - status.index}</td>
+						<td style="text-align:left; width:500px; vertical-align:middle;">
+							<a style="color:black;" href="${path}/noticeDetail.bo?noticeNo=${dto.noticeNo}">${dto.noticeTitle}</a>
+						</td>
+						<td style="text-align:center; width:200px; vertical-align:middle;">${dto.noticeWriter}</td>
+						<td style="text-align:center; width:300px; vertical-align:middle;">${dto.noticeRegdate}</td>
+						<td style="text-align:center; width:150px; vertical-align:middle;">${dto.noticeViews}</td>
+					</tr>
+					<input type="hidden" name="hidden_noticeNo" value="${dto.noticeNo}">
+				</c:forEach>
+			</tbody>
 		</table>
 		<!-- 공지글목록 시작 -->
-		
+		<br>
 		<!-- 페이지컨트롤 시작 -->
-		<div style="width:1000px; margin:auto" >
+		<div style="width:920px; margin:auto" >
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item">
-					    <a class="page-link" href="#" aria-label="Previous">
-					      <span aria-hidden="true">&laquo;</span>
-					    </a>
+			    	<li class="page-item">
+			        	<c:if test="${paging.startPage > 10}">
+			    			<a class="page-link" href="${path}/noticeList.bo?pageNum=${paging.prev}" aria-label="Previous">
+			      				<span aria-hidden="true">&laquo;</span>
+			    			</a>
+			 			</c:if>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
+			
+					<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+					<li class="page-item"><a class="page-link" href="${path}/noticeList.bo?pageNum=${num}">${num}</a></li>
+					</c:forEach>
+			
 					<li class="page-item">
-					    <a class="page-link" href="#" aria-label="Next">
-					      <span aria-hidden="true">&raquo;</span>
-					    </a>
-				    </li>
+			   			<c:if test="${paging.endPage < paging.pageCount}">
+			    			<a class="page-link" href="${path}/noticeList.bo?pageNum=${paging.next}" aria-label="Next">
+			      				<span aria-hidden="true">&raquo;</span>
+			    			</a>
+			 			</c:if>
+					</li>
 				</ul>
 			</nav>
 		</div>
 		<!-- 페이지컨트롤 끝 -->
 		<!-- 컨텐츠 끝 -->
-		<p align="center">
-			SELECT *<br>
-				FROM notice_tb<br>
-				WHERE noticeNo = noticeNo<br>
-				AND noticeShow = 'Y'<br>
-				AND noticeNo >= start<br>
-				AND noticeNo <= end<br>
-		</p>
 	</div>
 	<!-- footer 시작 -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

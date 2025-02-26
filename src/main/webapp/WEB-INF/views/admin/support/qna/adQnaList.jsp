@@ -31,12 +31,14 @@ function page() {
 	            <!-- 상단 중앙1 종료 -->
 	            
 				<div id="section2">
-					<!-- 좌측 메뉴 시작 -->               					
-					<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
-					<!-- 좌측메뉴 종료 -->
+					<div style="width:300px">
+						<!-- 좌측 메뉴 시작 -->
+						<%@ include file= "/WEB-INF/views/admin/common/adMainLeft.jsp" %>
+						<!-- 좌측메뉴 종료 -->
+					</div>
 					<!-- 게시글 목록 시작 -->
 					<form name ="statusForm" id="statusForm" action="${path}/adQnaList.ad" method="post" style="width:1300px">
-						<table class="table" style="width:900px; margin:auto;">
+						<table class="table" style="width:1050px; margin:auto;">
 							<thead>
 							    <tr>
 							      <th scope="col" style="width:8%; text-align:center;">번호</th>
@@ -65,7 +67,7 @@ function page() {
 										<th scope="row" style="text-align:center;">${dto.qnaNo}</th>
 								        <td style="text-align:left"><a href="${path}/adQnaDetailAction.ad?qnaNo=${dto.qnaNo}">${dto.qnaTitle}</a></td>
 								        <td>${dto.qnaWriter}</td>
-								        <td>${dto.qnaRegdate}</td>
+								        <td>${fn: substring(dto.qnaRegdate,0,19)}</td>
 								        <td>${dto.qnaStatus}</td>
 								        <td>${dto.qnaShow}</td>
 								        <td>
@@ -78,32 +80,34 @@ function page() {
 							</tbody>
 						</table>
 						<!-- 페이지컨트롤 시작 -->
-						<br>
-						<div style="width:900px; margin:auto" >
-							<nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-									<li class="page-item">
-										<c:if test="${paging.startPage > 10}">
-										    <a class="page-link" href="${path}/adQnaList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
-										      <span aria-hidden="true">&laquo;</span>
-										    </a>
-									    </c:if>
-									</li>
-									
-									<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-										<li class="page-item"><a class="page-link" href="${path}/adQnaList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
-									</c:forEach>
-									
-									<li class="page-item">
-										<c:if test="${paging.endPage < paging.pageCount}">
-										    <a class="page-link" href="${path}/adQnaList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
-										      <span aria-hidden="true">&raquo;</span>
-										    </a>
-									    </c:if>
-								    </li>
-								</ul>
-							</nav>
-						</div>
+						<c:if test="${paging.count != 0}">
+							<br>
+							<div style="width:900px; margin:auto" >
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item">
+											<c:if test="${paging.startPage > 10}">
+											    <a class="page-link" href="${path}/adQnaList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
+											      <span aria-hidden="true">&laquo;</span>
+											    </a>
+										    </c:if>
+										</li>
+										
+										<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+											<li class="page-item"><a class="page-link" href="${path}/adQnaList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
+										</c:forEach>
+										
+										<li class="page-item">
+											<c:if test="${paging.endPage < paging.pageCount}">
+											    <a class="page-link" href="${path}/adQnaList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
+											      <span aria-hidden="true">&raquo;</span>
+											    </a>
+										    </c:if>
+									    </li>
+									</ul>
+								</nav>
+							</div>
+						</c:if>
 						<!-- 페이지컨트롤 끝 -->
 					</form>
 					<!-- 게시글 목록 끝 -->
