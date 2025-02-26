@@ -72,6 +72,11 @@ function page() {
 								</tr>
 							</thead>							
 							<tbody>
+								<c:if test = "${paging.count == 0 }">
+									<tr>
+										<td align="center" colspan="6"> 미결제 회원이 존재하지 않습니다.</td>
+									</tr>
+								</c:if>
 								<c:forEach var='dto' items="${list}">
 									<tr>
 										<td style="vertical-align: middle;">${dto.healthNo}</td>
@@ -98,31 +103,34 @@ function page() {
 							</tbody>
 						</table>						
 						<br>
-						<div style="width:900px; margin:auto" >
-							<nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-									<li class="page-item">
-										<c:if test="${paging.startPage > 10}">
-										    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
-										      <span aria-hidden="true">&laquo;</span>
-										    </a>
-									    </c:if>
-									</li>
-									
-									<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
-										<li class="page-item"><a class="page-link" href="${path}/adHealthList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
-									</c:forEach>
-									
-									<li class="page-item">
-										<c:if test="${paging.endPage < paging.pageCount}">
-										    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
-										      <span aria-hidden="true">&raquo;</span>
-										    </a>
-									    </c:if>
-								    </li>
-								</ul>
-							</nav>
-						</div>
+						
+						<c:if test = "${paging.count != 0 }">
+							<div style="width:900px; margin:auto" >
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item">
+											<c:if test="${paging.startPage > 10}">
+											    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.prev}&statusType=${statusType}" aria-label="Previous">
+											      <span aria-hidden="true">&laquo;</span>
+											    </a>
+										    </c:if>
+										</li>
+										
+										<c:forEach var="num" begin="${paging.startPage}" end="${paging.endPage}">
+											<li class="page-item"><a class="page-link" href="${path}/adHealthList.ad?pageNum=${num}&statusType=${statusType}">${num}</a></li>
+										</c:forEach>
+										
+										<li class="page-item">
+											<c:if test="${paging.endPage < paging.pageCount}">
+											    <a class="page-link" href="${path}/adHealthList.ad?pageNum=${paging.next}&statusType=${statusType}" aria-label="Next">
+											      <span aria-hidden="true">&raquo;</span>
+											    </a>
+										    </c:if>
+									    </li>
+									</ul>
+								</nav>
+							</div>
+						</c:if>
 					</form>
 				</div>
 			</div>
