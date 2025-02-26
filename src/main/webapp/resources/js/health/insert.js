@@ -117,19 +117,36 @@ window.onload = function() {
   toggleInputs();
 };
 
-
+const healthStartDate = document.getElementById('healthStartDate').value;
 const healthEndDate = document.getElementById('healthEndDate').value;
-  // 현재 날짜 구하기
-  const currentDate = new Date();
+
+	// 현재 날짜 구하기
+	const currentDate = new Date();
   
-  // healthEndDate를 Date 객체로 변환
-  const endDate = new Date(healthEndDate);
+	// 시작일과 종료일을 Date 객체로 변환
+	const startDate = new Date(healthStartDate);
+	const endDate = new Date(healthEndDate);
   
-  // 두 날짜의 차이 계산 (밀리초 단위)
-  const timeDifference = endDate - currentDate;
-  
-  // 차이를 일수로 변환
-  const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-  
-  // 남은 일수를 페이지에 출력
-  document.getElementById('dateDifference').textContent = daysRemaining;
+	 // 시작일까지 남은 일수 계산
+	const startDateDifference = startDate - currentDate;
+	const daysUntilStart = Math.ceil(startDateDifference / (1000 * 60 * 60 * 24));
+	
+	// 종료일까지 남은 일수 계산
+	const timeDifference = endDate - currentDate;
+	const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+	
+	// 결과 출력
+	let resultMessage = '';
+	
+	if (daysUntilStart > 0) {
+	  // 시작일이 아직 오지 않았을 경우
+	  resultMessage = `시작일까지 ${daysUntilStart}일 남았습니다.`;
+	} else if (daysUntilStart <= 0 && daysRemaining > 0) {
+	  // 시작일은 지났고 종료일까지 남았을 경우
+	  resultMessage = `남은 일수: ${daysRemaining}일`;
+	} else if (daysRemaining <= 0) {
+	  // 기간이 끝났을 경우
+	  resultMessage = "기간 만료";
+	}
+	
+	document.getElementById('dateDifference').textContent = resultMessage;
