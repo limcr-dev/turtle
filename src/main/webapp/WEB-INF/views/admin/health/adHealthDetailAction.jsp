@@ -38,7 +38,7 @@
 						</div>
 						<br>
 						<div class="col-md-5" align="center">
-						<img src = "${dto.healthImg}" style="width:200px"><br>
+							<img src = "${dto.healthImg}" style="width:200px" alt="이미지를 등록해주세요"><br>
 						</div>
 					</div>
 					
@@ -51,7 +51,7 @@
 							<p class="fs-4">${dto.userId}</p>
 						</div>
 						<div class="col-md-5">
-						 <p align="center">남은 일수: <span class="fs-4" id="dateDifference"></span></p>
+						 <p align="center"><span id="dateDifference"></span></p>
 						</div>
 					</div>
 					<br>
