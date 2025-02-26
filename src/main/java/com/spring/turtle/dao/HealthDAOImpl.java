@@ -26,13 +26,14 @@ public class HealthDAOImpl implements HealthDAO{
 	
 	//헬스 회원 목록(갯수)
 	@Override
-	public int healthCnt() {
+	public int healthCnt(Map<String, Object> map) {
 		System.out.println("HealthDAOImpl - healthCnt");
 		
-		int total =sqlSession.selectOne("com.spring.turtle.dao.HealthDAO.healthCnt");
+		int total =sqlSession.selectOne("com.spring.turtle.dao.HealthDAO.healthCnt", map);
 		
 		return total;
 	}
+	
 	// 헬스회원 목록
 	@Override
 	public List<HealthDTO> healthList(Map<String, Object> map) {
@@ -41,7 +42,16 @@ public class HealthDAOImpl implements HealthDAO{
 		List<HealthDTO> list = sqlSession.selectList("com.spring.turtle.dao.HealthDAO.healthList", map);
 		
 		return list;
-
+	}
+	
+	//헬스 회원 목록(갯수)
+	@Override
+	public int healthUnPayCnt(Map<String, Object> map) {
+		System.out.println("HealthDAOImpl - healthCnt");
+		
+		int total =sqlSession.selectOne("com.spring.turtle.dao.HealthDAO.healthUnPayCnt", map);
+		
+		return total;
 	}
 	
 	// 헬스 미결제회원 목록
