@@ -88,25 +88,25 @@ public class HealthServiceImpl implements HealthService{
          String pageNum = request.getParameter("pageNum");
       
          Paging10 paging = new Paging10(pageNum);
-         int total = dao.healthCnt();
-         paging.setTotalCount(total);
-         
-         int start = paging.getStartRow();
-         int end = paging.getEndRow();
-         
-         Map<String, Object> map = new HashMap<String, Object>();
-         map.put("start", start);
-         map.put("end", end);
          
          String statusType = "";
          if(request.getParameter("statusType") != null) {
             statusType = request.getParameter("statusType");
          }
+         
+         Map<String, Object> map = new HashMap<String, Object>();
          map.put("statusType", statusType);
          
-         List<HealthDTO> list = dao.healthList(map);
+         int total = dao.healthCnt(map);
+         paging.setTotalCount(total);
          
-         System.out.println("list(Service)" + list);
+         int start = paging.getStartRow();
+         int end = paging.getEndRow();
+         
+         map.put("start", start);
+         map.put("end", end);
+         
+         List<HealthDTO> list = dao.healthList(map);
          
          model.addAttribute("statusType", statusType);
          model.addAttribute("list", list);
@@ -123,21 +123,21 @@ public class HealthServiceImpl implements HealthService{
       String pageNum = request.getParameter("pageNum");
       
       Paging10 paging = new Paging10(pageNum);
-      int total = dao.healthCnt();
+      String statusType = "";
+      if(request.getParameter("statusType") != null) {
+         statusType = request.getParameter("statusType");
+      }
+      Map<String, Object> map = new HashMap<String, Object>();
+      map.put("statusType", statusType);
+      
+      int total = dao.healthUnPayCnt(map);
       paging.setTotalCount(total);
       
       int start = paging.getStartRow();
       int end = paging.getEndRow();
       
-      Map<String, Object> map = new HashMap<String, Object>();
       map.put("start", start);
       map.put("end", end);
-      
-      String statusType = "";
-      if(request.getParameter("statusType") != null) {
-         statusType = request.getParameter("statusType");
-      }
-      map.put("statusType", statusType);
       
       List<HealthDTO> list = dao.healthUnPayList(map);
       
@@ -331,8 +331,6 @@ public class HealthServiceImpl implements HealthService{
 
          dto.setUserHp(userHp);
          dto.setHealthImg(hm_Img);
-         
-         
          
          dto.setPtCnt(Integer.parseInt(request.getParameter("ptCnt")));
          dto.setHealthStartDate(Date.valueOf(request.getParameter("healthStartDate")));
