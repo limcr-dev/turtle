@@ -173,8 +173,11 @@ public class UserServiceImpl implements UserService {
 		String userId = request.getParameter("hiddenUserId");
 		String sessionID = (String)request.getSession().getAttribute("sessionID");
 		
+		// 주소 api 세션 끊김 현상 해결
 		if(sessionID == null || sessionID == "") {
 			request.getSession().setAttribute("sessionID", userId);
+			String userType = dao.getUserType(userId);
+			request.getSession().setAttribute("sessionType", userType);
 			
 		} else {
 			
@@ -236,9 +239,5 @@ public class UserServiceImpl implements UserService {
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("deleteCnt", deleteCnt);
 	}
-
-
-
-	
 
 }
